@@ -1,0 +1,80 @@
+( Datei :  IBM/PC.TXT )
+
+COMPUTER-MESSWERT-ERFASSUNGS-SYSTEM:     (IBM PC-XT kompatible)
+====================================
+
+Hardware-Konfiguration:
+-----------------------
+
+
+Rechner:
+ 
+ * PC-XT Hauptplatine 256 KByte-DRAM ( 4.77 / 7.0 MHz Taktfrequenz)
+ * Multifunktions-Karte 384 KByte-DRAM
+       ( Parallel-/Serielle-Schnittstelle, Gameport, RT-Clock )
+ * Hercules Graphik-Karte ( Aufl.: 720x348 )
+ * Floppy-Disk Kontroller (2 x 360 KB)
+ * DTC Hard-Disk Kontroller
+ * NEC 5.1/4-Floppy Disk 360 KB (slimline)
+ * NEC 5.1/4-Hard Disk 10MB (slimline)
+ * I/O-Platine (WIRE-WRAP): 4 x 8255 PPI (Parallel), 8251 SIO (Serial)
+                             2 x 8254 Timer (10Mhz), 8259 Interrupt-Contr.
+ * Monochrom-Monitor (EIZO)
+ * CHERRY-IBM Tastatur
+ * 8087 (8Mhz) Coprozessor
+ * 150 Watt Netzteil
+                             
+
+Interface: (obige I/O-Platine, Eigenentwicklung)
+ 
+ * gemultiplexte SCHOMANDL-Dekadensteuerung 
+   ( 4 DATA, 4 ADDRESS, 2 ADR-/DATA-Valid )
+ * Zaehlratenzaehler ( MESS- und EICH-Resonanz)
+ * ERROR-Signal Verarbeitung ==> per Interrupt !!!
+   ( Synchriminatoren, e-Ofen, Magnetfeldregelung )
+
+
+Interface-Bus Konvention:           ( Stand vom 14.01.1986 )
+-------------------------
+
+Die Interface-Karten des neuen IBM-PC Messwert-Erfassungssystems (MES) 
+sollen mit dem bestehenden Z80-MES austauschbar sein. Hierzu wurde folgende
+Konvention getroffen: 
+ 
+        * DATA OUT : 16 Bit          
+        * DATA IN  : 16 Bit 
+        * ADDRESS  :  8 Bit  ( Card-select fuer 256 Interface-Karten )
+        * CONTROL  :  8 Bit  ( Latch 1/2, Enable Counter Decimal 1/2/3, 
+                               Clear Counter 1/2, Counter enable 1/2, etc.)
+
+P.A. Dietrich:  Adr: Bit 0, 1 belegt
+                2 Karten:   - Zaehlerkarte  ( 2x 24 Bit Zaehler )
+                            - A/D-Wandler Karte ( 12 Bit )
+
+T. Fabula:      2 Karten:   - Zaehlerkarte (dito)
+                            - Frequenz-Dekadentreiber ;
+
+
+      I/O-Bus :    IBM-PC , Z80    ( 64poliger DIN-Stecker )
+      =========
+
+                 c    a    
+                 ______
+   ---------- 1 !      ! 1  ----------------
+              . !      ! .
+              . !      ! .      CONTROL-Bus
+              . !      ! .
+   DATA OUT   8 !      ! 8  ----------------
+              . !      ! 9   Gnd
+              . !      ! -   Gnd
+             15 !      ! -   Gnd
+   --------- 16 !      ! -   Gnd
+              . !      ! -   Gnd
+              . !      ! -   + 5 V 
+              . !      ! -   + 15 V
+    DATA IN   . !      ! -   - 15 V
+              . !      ! 24  Gnd
+              . !      ! 25 ---------------
+              . !      ! .      ADDRESS-Bus
+   --------- 32 !______! 32 ---------------
+                
