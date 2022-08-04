@@ -1,0 +1,174 @@
+             ********************************
+             ***                          ***
+             ***   Datei : DRAWINGS.DOC   ***
+             ***                          ***
+             ********************************
+
+
+
+Gesamtschaltbilder:
+-------------------
+
+MES.DWG       <->   Meßwert-Erfassungs-System ( Prinzipschaltbild )
+
+IOBOX.DWG     <->   Interface-Box             ( Prinzipschaltbild )
+
+EINSCHUB.DWG  <->   Z80-ECB Subcomputer       ( 19"-Einschub-Rack )
+
+TOOLS.DWG     <->   Entwicklungsumgebung      ( Hard- & Software )
+
+TURBO.DWG     <->   Speicheraufteilung Pascal ( Memorymap )
+
+
+
+
+Timerkarte:
+-----------
+
+TIMERK.DWG    <->   Bestückungsplan
+
+TIMERPLN.DWG  <->   Gesamtschaltplan
+
+TIMERCTC.DWG  <->   CTC-Beschaltung & Timerkarten-Ausgänge
+
+
+
+
+PC-I/O-Wrap Karte:
+------------------
+
+PCWRAP1.DWG   <->   Bestückungsplan
+
+PCWRAP2.DWG   <->   Gesamtschaltplan
+
+PCWRAP3.DWG   <->   PPI-Reset-Save-Logic
+
+
+
+
+FIFO-Karte:
+-----------
+
+FIFO1.DWG     <->   Bestückungsplan
+
+FIFO2.DWG     <->   Gesamtschaltplan
+
+
+FIFO3.DWG     <->   Steckerbelegung FIFO-Karte
+
+FIFO4.DWG     <->   Rechnerkopplungsschema ( IBM PC XT <-> Z80-ECB )
+
+FIFO5.DWG     <->   Treiberbeschaltung BUS-IN
+
+FIFO6.DWG     <->   Treiberbeschaltung BUS-OUT
+
+Z8038FIO.DWG  <->   FIFO-Bauteil für Bibliothek ( Pinbelegung )
+
+
+
+FIFO-Treiberkarte:
+------------------
+
+FIFODRV1.DWG   <->   Bestückungsplan
+
+FIFODRV2.DWG   <->   Gesamtschaltplan
+
+
+
+
+PIO-Treiberkarte (IOB):
+-----------------------
+
+PIODRV1.DWG    <->   Bestückungsplan
+
+PIODRV2.DWG    <->   Gesamtschaltplan
+
+
+
+
+
+VFC-Wandlerkarte:
+-----------------
+
+VFC1.DWG       <->   Bestückungsplan
+
+VFC2.DWG       <->   Schaltplan eines VFC's ( OpAmp-VFC )
+
+VFC3.DWG       <->   Schaltplan Stromversorgung
+
+
+
+
+Zählerkarte:
+------------
+
+COUNTER1.DWG   <->   Bestückungsplan TTL-Zähler
+
+COUNTER2.DWG   <->   Gesamtschaltplan TTL-Zähler
+
+COUNTER3.DWG   <->   Bestückungsplan ECL-Zähler
+
+TIMCOUNT.DWG    <->  Timingdiagramm der Zähleransteuerung
+
+
+
+Frequenz-Dekaden Interface:
+---------------------------
+
+FREQU1.DWG    <->   computerseitiger Schaltplan ( alter I/O-Bus )
+
+FREQU2.DWG    <->   Dekadenseitiger Schaltplan
+
+FREQU3.DWG    <->   Frequenz-Dekadeninterface ( Prinzipschaltbild )
+
+FREQU4.DWG    <->   Frequenz-Dekadeninterface ( Bestückungsplan )
+
+TIMFREQU.DWG    <->  Timingdiagramm der HF-Dekadenansteuerung
+
+
+
+
+Testmeßprogramm FLUOTEST:
+-------------------------
+
+FLOWFLUO.DWG    <->  Flußdiagramm FLUOTEST
+
+TIMFLUO.DWG     <->  Timingdiagramm FLUOTEST
+
+ZUSTFLUO.DWG    <->  Zustandsdiagramm FLUOTEST
+
+
+
+
+Simulationsprogramm SPEKTRUM:
+-----------------------------
+
+FLOWSPK1.DWG    <->  Flußdiagramm SPEKTRUM
+
+FLOWSPK2.DWG    <->  Flußdiagramm SPEKTRUM
+
+FLOWSPK3.DWG    <->  Flußdiagramm SPEKTRUM
+
+
+
+
+Verschiedene:
+-------------
+
+LASER.DWG       <->  Experimentaufbau : Optogalvanik
+
+POLSPEC.DWG     <->  Experimentaufbau : Polarisationsspektroskopie
+
+RECHNKOP.DWG    <->  Arten der Rechnerkopplungen
+                     (Seriell, Parallel, Dual-Port-RAM, FIFO)
+
+SIGNAL.DWG      <->  Prinzip der "Dual-Line-Übertragung"
+                     (Gerichteter Zustandsgraph, Subgraph)Š
+Z80MAP.DWG      <->  Speicherbelegung des Z80-Subrechners
+
+REALTIM1.DWG    <->  Bisherige Scanverfahren
+
+REALTIM2.DWG    <->  Neues Scanverfahren (mit "Echtzeit"-ANALYSE)
+
+
+
