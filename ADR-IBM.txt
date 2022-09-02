@@ -1,0 +1,75 @@
+**********************************
+***                            ***
+***    DATEI:  ADR.IBM         ***
+***                            ***
+**********************************
+
+Adressenbelegung des IBM-PC XT:
+-------------------------------
+
+Adressen: (Hex)            Belegung:
+
+----------------------------------------------------------------------- 
+000 - 00F                  DMA   (8237)
+020 - 021                  Interrupt-Controller (8259)
+040 - 043                  Timer (8253)
+060 - 063                  PPI   (8255)
+080 - 083                  DMA Page Register
+0Ax                        NMI Mask Register
+0Cx                        Reserved
+0Ex                        Reserved
+
+
+200 - 20F                  Game Control
+210 - 217                  Expansion Unit
+220 - 24F                  Reserved
+278 - 27F                  Reserved
+2F0 - 2F7                  Reserved
+2F8 - 2FF                  Asynchron Comm. (ACIA, secondary) 
+
+300 - 31F                  Prototype Card
+320 - 32F                  Fixed Disk
+378 - 37F                  Parallel Printer
+380 - 38F                  SDLC Comm.
+3A0 - 3AF                  Reserved
+3B0 - 3BF                  IBM Monochr. Display/Printer
+3C0 - 3CF                  Reserved
+3D0 - 3DF                  Color/Graphics
+3E0 - 3EF                  Reserved
+3F0 - 3F7                  Diskette
+3F8 - 3FF                  Asynchron Comm. (ACIA, primary) 
+
+
+Der PC I/O-Bereich umfaßt 32 Adressen (0300-031Fh)
+auf der Wire Wrap Prototypenkarte.
+
+Baustein-Adressenbelegungen auf der PC-I/O-Karte:
+
+           Port-A        Port-B       Port-C     Control-Word  
+ PPI1   :   $300          $301         $302          $303
+ PPI2   :   $304          $305         $306          $307
+ PPI3   :   $308          $309         $30A          $30B
+ PPI4   :   $30C          $30D         $30E          $30F
+
+           Timer0        Timer1       Timer2     Control-Word-Reg 
+ Timer1 :   $310          $311         $312          $313
+ Timer2 :   $314          $315         $316          $317
+
+ Frei   :   $318 ... $31F  =  8 Adressen
+
+
+ Belegung der PPI-Ports:
+ =======================
+
+ PPI1 :  Port-A <-> Data-In  :  DI0..DI7
+         Port-C <-> Handshake   (mode 1)
+
+         Port-B <-> Datctrl  :  DC0..DC7
+         Port-C <-> Handshake   (mode 1)
+
+ PPI2 :  Port-A <-> Data-Out :  DO0..DO7
+         Port-C <-> Handshake   (mode 1)
+
+         Port-B <-> Control  :  I/O
+         Port-C <-> I/O
+
