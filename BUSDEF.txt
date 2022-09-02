@@ -1,0 +1,116 @@
+!-------------------------------------------------------------------------
+!
+!    Datei:        BUSDEF.IOB
+!    ------
+!                  Busdefinition der Interface-Box des IBM-PC
+!                  Messwert-Erfassungs-Systems (MES)
+!
+!                  ...weitgehend kompatibel mit der Z80-I/O-
+!                  Busdefinition von P.A.Dietrich.
+!
+!    Aenderungen :
+!    -------------
+!           Wer  : Th. Fabula
+!           Wann : 26.06.1986   
+!           Was  : folgende Pin-Belegungen :
+!
+!                  Pin  1 a-c :  +5 V        Versorgungsspannung
+!                  Pin 13  a  :  +18V
+!                  Pin 15  a  :  Gnd(+/-18V) Masse für +/- 18 V
+!                  Pin 17  a  :  -18V
+!                  Pin 20  a  :  DataIN-0    ( vorher Pin  1 c )
+!                  Pin 21  a  :  DataOUT-15  ( vorher Pin 32 c )
+!                  Pin 32 a-c :  Gnd         Masse für Digital-
+!                                            leitungen
+!
+!           Grund :
+!           -------
+!           Da allgemein in Computersystemen mit EuroCard-Bus (ECB)
+!           Pin 1 a-c und Pin 32 a-c mit  der  Versorgungsspannung
+!           bzw.  Masse (Gnd) belegt  sind,  wurde  hier  dieses
+!           weiterhin beibehalten.
+!           Um allerdings eine weitestgehende Kompatibilität mit
+!           dem bereits vorhandenem I/O-Bussystem des Z80-MES
+!           beizubehalten, wurden die betroffenen Leitungen auf
+!           freie Pins gelegt. Somit ist eine nachträgliche
+!           Aenderung der Z80-Karten leichter möglich, falls diese
+!           im IBM-PC MES eingesetzt werden sollen, bzw. umgekehrt.
+!
++------------------------------------------------------------------------
+
+Im folgendem handelt es sich um einen 64-poligen (DIN 41612)
+I/O-Bus zur Meßwerterfassung für beliebige Rechnersysteme.
+Voraussetzung ist, daß der Rechner 16 Daten-Outputleitungen
+und 16 Daten-Inputleitungen hat, die TTL kompatibel sind.
+
+Außerdem kommen noch 8 Controlleitungen hinzu, die nach Wahl
+als In- bzw. Outleitungen beschaltet werden können.
+
+Im Folgenden sind sie meistens als Out-Leitungen geschaltet,
+und bedienen z.B. die Zähler (Gate, Enable, Latch) und die
+Frequenzdekadenansteuerung (Data-, Adressvalid).
+
+Im Gegensatz zum Z80-Bus sind alle Leitungen mit unidirektio-
+nalen Buffern (74LS244) getrieben, sodaß ca. 60 LS-TTL Lasten
+pro Leitung betrieben werden können.
+
+Der 8-Bit Adreßbus ist gemultiplext, sodaß maximal 256 Interface
+Karten parallel betrieben werden können. Die Adreßdekodierung
+erfolgt auf jeder einzelnen Karte mittels Adreßkomparatoren. 
+uf dem Bus sind folgende Spannungen vorhanden +5,+18,-18 V.
+Diese +/-18V dienen als "Rohspannungen" für OP's und VFC's.
+Um einen möglichst "sauberen", von Störeinflüßen verschonten Bus
+zu bekommen, sind mehrere Masseleitungen realisiert worden:
+
+  Gnd            :  Masse für die Digitalleitungen,
+  Gnd (+/-18V)   :  Masse für die OP und VFC Versorgungsspannungen,
+ (Signal-Gnd     :  Masse für die externen Signalleitungen.)
+
++---------------------------------------------------------------------+
+
+Belegung des Busses:
+--------------------
+
+Pin                          Reihe
+           a               b                 c
+ 1    + 5V                              + 5V
+ 2    ADR 0 ;                           DATAin  1 ;
+ 3    ADR 1 :                           DATAin  2 :
+ 4     .    Address                        .      :
+ 5     .    Bus                            .      :
+ 6     .    :                              .      :
+ 7     .    :                              .      :
+ 8     .    :                              .      :
+ 9    ADR 7 <                              .      Data IN
+10     -                                   .      Bus
+11     -                                   .      :
+12     -                                   .      :
+13    +18V                                 .      :
+14     -                                   .      :
+15    Gnd(+/-18V)                       DATAin 14 :
+16     -                                DATAin 15 <
+17    -18V                              DATAout 0 ;
+18     -                                DATAout 1 :
+19     -                                   .      :
+20    DATAin   0                           .      :
+21    DATAout 15                           .      :
+22     -                                   .      :
+23     -                                   .      DataOUT
+24    CTRL 0 ;                             .      Bus
+25    CTRL 1 :                             .      :
+26      .    :                             .      :
+27      .    Controll                      .      :
+28      .    Bus                           .      :
+29      .    :                          DATAout 12:
+30      .    :                          DATAout 13:
+31    CTRL 7 <                          DATAout 14<
+32    Gnd(5V)                           Gnd(5V)
+
+
+ Anzahl der Pins  !   Farbe     !  Signal
+------------------!-------------!--------------
+     16           !   gelb      !  Data IN
+     16           !   blau      !  Data OUT
+      8           !   orange    !  Address
+      8           !   grau      !  Control
+------------------!-------------!-------------- 
