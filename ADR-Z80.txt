@@ -1,0 +1,40 @@
+**********************************
+***                            ***
+***    DATEI:  ADR.Z80         ***
+***                            ***
+**********************************
+
+Adressenbelegung des Z80 Sub-Rechners:
+--------------------------------------
+
+Adressen: (Hex)            Belegung:                  Karte:
+
+-----------------------------------------------------------------------
+
+0000 - 7FFF                EPROM (32 KB, 1x27256)     Memory auf der
+8000 - FFFF                SRAM  (32 KB, 4x 6264)     CPU-IV Karte
+
+030 - 033                  CTC 1                      Timerkarte
+034 - 037                  CTC 2
+038 - 03B                  CTC 3
+03C - 03F                  CTC 4
+
+040                        FIO 1                      FIFO-Karte
+041                        FIO 2
+042                        FIO 3
+
+060 - 063                  PIO 1                      PIO-Karte
+064 - 067                  PIO 2
+068 - 06B                  PIO 3
+06C - 06F                  PIO 4
+
+07C - 07F                  CTC   (Channel 0..3)	      SIO-Karte
+070 - 073                  SIO 1                      
+074 - 077                  SIO 2
+078 - 07B                  SIO 3
+
+0E0 - 0E3                  CTC   (Channel 0..3)       CPU-IV Karte
+0E4 - 0E7                  PIO 1 (IC 24)
+0E8 - 0EB                  PIO 2 (IC 25)
+0EC - 0EF                  Reserved
+
