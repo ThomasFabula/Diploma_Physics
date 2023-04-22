@@ -1,0 +1,239 @@
+4. Beschreibung der Software:
+
+Dieses Kapitel beschreibt die Software-Organisation des Meßwerterfassungssystems. Der umfangreiche Quelltext (Sourcecode) wurde der Arbeit ausgegliedert. 
+Für detailliertere Informationen sei auf die Programm-Bibliothek MES /27/ verwiesen, welche die gesamten Programmtexte enthält, die zum Betrieb des MES 
+erforderlich sind.
+
+
+Dieses sind die folgenden Programme:
+
+KERNEL	: FORTH-Betriebssystem für den Subrechner
+TERMINAL	: FORTH-Kommunikationsprogramm für den PC-Rechner
+FLUOTEST	: FORTH-Testmeßprogramm für den Subrechner       
+
+
+Auswerteprogramm:
+
+SPEKTRUM	: Turbo-Pascal Hfs-Simulationsprogramm
+
+4.1  Software Programm-Organisation
+
+Eine elementare Forderung an das Softwarekonzept war, das Meßwerterfassungssystem möglichst flexibel zu halten.
+Die Auswahl der Programmiersprachen fiel auf FORTH und Turbo-Pascal.
+Das PC-FORTH der Firma Laboratory-Microsystems-Incorporated /28/ bietet eine Vielfalt von Programmiermöglichkeiten. Neben einem eingebauten Editor, 
+Assembler und Debugger stehen dem Benutzer Grafikbefehle und Massenspeicherverwaltung zur Verfügung. Eine Koprozessorunterstützung erlaubt schnellste
+und hochgenaue (32 Bit) Berechnungen.
+
+Im Gegensatz zu Assembler /29/ ist FORTH zu den Hochsprachen zu rechnen, sodaß sich die Programmerstellung besonders verständlich und strukturierbar 
+gestaltet, sofern man alle Stackoperationen genaustens dokumentiert. Die meisten Probleme lassen sich innerhalb eines Screens (1 kB) in FORTH lösen. Die 
+Tatsache, daß es sich beim PC und dem Subsystem um die gleiche FORTH Version (LMI) handelt, wirkt sich ebenfalls positiv auf die Softwareentwicklung aus. 
+Im Terminalbetrieb wird auf PC-Seite das Programm in FORTH erstellt, mit einem Metacompiler in Z80-Objektcode umgewandelt und als ausführbarer Code zum 
+Subrechner übertragen. In der Testphase geschah dies mit Hilfe des Z80-Emulators.
+
+Als eines der wichtigsten Entwicklungswerkzeuge stellte sich hierbei der Z80-Metacompiler /30/ heraus, mit dem man in der Lage ist, Z80-Objektcode auf dem
+8088-Mikroprozessor zu entwickeln. Hiermit war es möglich, FORTH- und Assemblerroutinen auf dem Subrechner schnell zu implementieren.
+Der Subrechner ist in der Lage, Meßprogramme von den PC-Massenspeichern direkt in seinen Arbeitsspeicher zu laden und seinen FORTH-Wortschatz zu erweitern. 
+Diese Art der Programmübertragung erweist sich im Laborbetrieb als sehr flexibel, sodaß lediglich die Primitivroutinen wie das Bedienen des Interface-Busses, 
+Auslesen der Zähler, Initialisieren der Timerkarte und die Schnittstellenkommunikation (FIFO's, COM2) in den Festwertspeicher (EPROM) abgelegt werden müssen.
+Sind die Programme nach der Testphase vollständig und fehlerfrei, so läßt sich der übersetzte Z80-Code in ein EPROM 'brennen', um ihn danach beim Einschalten 
+des Subrechners jederzeit zur Verfügung zu haben.
+
+Für anfallende Auswertungen bzw. der Vorabreduktion der Meßdaten erwies sich Pascal gegenüber FORTH als vorteilhafter. Aufgrund seiner mathematisch-formelmäßigen 
+Struktur erleichtert Pascal dem Programmierer das Umsetzen der Algorithmen in 'Computercode', sodaß das Simulationsprogramm (SPEKTRUM), zur Berechnung des
+Hfs-Spektrums eines zu untersuchenden Elementes in Pascal realisiert wurde. Da es sich hierbei um ein begrenztes Problem handelte erschien es günstig Turbo-Pascal 
+einzusetzen, das sich außerdem durch eine besonders schnelle Programmübersetzung auszeichnet. Dies wirkte sich besonders positiv auf die Programmentwicklungszeit 
+aus. Eine genaue Beschreibung der Sprache Turbo-Pascal ist in den Handbüchern /31, 32/ zu finden.
+
+Das Konzept und die Beschreibung der Computersprache FORTH ist im Buch von R. Zech /33/ ausführlich beschrieben. Im Falle des Betriebssystems PC-DOS sei 
+auf eine genaue Beschreibung in /34, 35, 36/ verwiesen.
+
+4.2  Subrechner Betriebssystem (KERNEL)
+		
+Das Betriebssystem des Z80-Subrechners (KERNEL) ist in LMI-FORTH (Ver. 3.1) geschrieben und wurde uns in dieser Version von K.D. Krause /21/ freundlicherweise 
+zur Verfügung gestellt.
+Es befindet sich im unteren Adreßbereich (0000-7FFFh) in einem 32 kB großen EPROM. Es enthält die Primitivroutinen (Wörter) des FORTH und ist in seinen
+Ein-/Ausgabebefehlen auf die Kommunikation mit dem PC-Rechner angepaßt. Der PC-Rechner dient hierbei dem Z80-Subrechner lediglich als Terminal. Folgende 
+Befehle des FORTH-Kerns wurden umgeschrieben:
+
+( i.)  Ausgabe:  
+
+EMIT  ( char -- )
+
+Der Subrechner gibt ein Zeichen (Charakter), das auf dem Stack (Stapelregister) liegt, über die serielle Schnittstelle (COM2) an den PC-Rechner aus.
+
+
+FORTH-Definition von EMIT:
+
+ASSEMBLER          ( Einschalten des Assembler-Dictionary )
+
+( char -- )
+
+CODE emit
+	HL			POP		( Zeichen vom Stack holen   )
+ 1$: A,	SIO_CTRL	IN		( Lese SIO-Statuswort ein   )
+	2	A		BIT		( Bit Nummer 2 gesetzt ?    )
+	Z	1$		JR		( Falls Null, springe zu 1$ )
+	A,	L		LD		( Lade Zeichen in den Akku  )
+	SIO_DATA   A	OUT		( Ausgabe des Zeichens      )
+	NEXT,				( Rücksprung ins FORTH	   )
+END-CODE
+
+(ii.)  Eingabe:  
+
+
+KEY   ( -- char )
+
+Der Subrechner liest in einer Schleife laufend das Statusregister der seriellen Schnittstelle ein. Ist ein Zeichen angekommen, so wird die Schleife 
+abgebrochen, das Zeichen eingelesen und auf den Stack abgelegt.
+
+
+FORTH-Definition von KEY:
+
+CODE KEY
+
+ 1$: A,	SIO_CTRL	IN		( Lese SIO-Statuswort ein   )
+	0	A		BIT		( Bit Nummer 0 gesetzt ?    )
+	Z	1$		JR		( Falls Null, springe zu 1$ )
+	A,	SIO_DATA	IN		( Lese Zeichen von SIO ein  )
+	HL,	# 0		LD		( Lösche oberes Byte von HL ) 	L,	A		LD		( Lade Akku ins Register L  )
+	HL			PUSH		( Lege Zeichen auf Stack    )
+	NEXT,				( Rücksprung ins FORTH	   )
+
+END-CODE	
+
+
+
+?TERMINAL  ( -- flag )
+
+Dieser Befehl gleicht in der Funktion dem KEY-Befehl: Hat eine Übertragung vom PC-Rechner stattgefunden, so wird statt dem ankommenden Zeichen ein 
+'TRUE'-Flag (0) auf den Stack gelegt. Hat keine Übertragung stattgefunden, so wird ein 'FALSE'-Flag (-1) auf den Stack gelegt. Dieser Befehl ermöglicht 
+FORTH, auf Benutzereingaben zu reagieren, ohne ständig die Schnittstelle abfragen zu müssen.
+
+FORTH-Definition von ?TERMINAL:
+
+CODE ?TERMINAL
+
+  A,	SIO_CTRL	IN		( Lese SIO-Statuswort ein   )
+  0	A		BIT		( Bit Nummer 0 gesetzt ?    )
+  HL,	# 0		LD		( Lösche oberes Byte von HL )
+	Z	1$		JR		( Falls Zeichen ---> 1$     )
+	L			DEC		( erzeuge:   -1 = 'FALSE'   )
+  1$:	HL			PUSH		( Lege FLAG auf den Stack   )
+	NEXT,				( Rücksprung ins FORTH	   )
+
+END-CODE	
+
+Der FORTH-Interpreter des Subsystems erwartet alle Ein- und Ausgaben über die serielle Schnittstelle. Im Terminalbetrieb kommuniziert der Benutzer vom 
+PC-Rechner aus mit dem Subsystem, in dem er die Befehle an den Interpreter von der Tastatur aus eingibt. Da das Massenspeicherkonzept von FORTH voll auf 
+dem Subsystem implementiert ist, können  auch Programmdateien direkt von Laufwerk bzw. Festplatte geladen werden:
+
+- USING : Veranlaßt das Subsystem eine FORTH-Datei vom Massenspeicher zu benutzen.  
+- LOAD  : Veranlaßt den FORTH-Interpreter die durch USING angemeldete Datei zu laden, und die Worte zum Dictionary zu compilieren.
+	
+Der Abb. 20 ist die Aufteilung des Z80-Speichers zu entnehmen. Im oberen Speicherbereich (8000-FFFFh) ist der RAM-Speicher, der für das Massenspeicherkonzept 
+einen Disketten- und Ringpuffer, von jeweils 2 kB Kapazität bereithält. Diese beiden Speicherbereiche dienen dem Subsystem als Kommunikationspuffer zum 
+PC-Rechner. Einzelne Screens (bzw. ganze Dateien) können über diese beiden Puffer geladen werden.
+
+Primitives:
+Das FORTH-Betriebssystem des Subrechners enthält folgende weitere Routinen:
+
+	* PIO-Routinen   (Interfacebus initialisieren)
+	* FIFO-Routinen  (Meßdaten transferieren)
+	* IOB-Routinen   (Zähler steuern)
+	* CTC-Routinen   (Timersteuerung)
+
+Eine genaue Beschreibung der Routinen ist in der Programm-Bibliothek MES /27/ enthalten.
+
+Die Größe des Betriebssystemkerns beträgt etwa 12 kB übersetzten Z80-Code. Das EPROM bietet ca. die dreifache Kapazität für zusätzliche FORTH-Erweiterungen,
+sodaß der Benutzer genügend Speicherplatz zur Reserve hat.
+
+Abb. 20:  Speicherbelegung des Subrechners
+
+4.3  PC-Terminalprogramm (TERMINAL)
+
+Das hier beschriebene Terminalprogramm (TERMINAL) erlaubt es dem Benutzer, den Subrechner vom PC aus zu bedienen. Der Programmablauf läßt sich mit Hilfe von 
+Zustandsdiagrammen /37/ am besten darstellen. Die hierzu verwendeten Graphen gehorchen einfachen Regeln. Tritt ein bestimmtes Ereignis E ein, so wird die 
+Aktion A ausgeführt und das System wird vom anfänglichen Zustand Z1 in den Zustand Z2 überführt. Der entsprechend 'gerichtete Graph' ist in Abb. 21 a dargestellt. 
+Die Graphen können ihrerseits Subgraphen enthalten, wenn komplexere Aktionen ausgelöst werden, die wiederum Zustandsänderungen zur Folge haben können (Abb. 21 b). 
+Das Zustandsdiagramm für das Terminalprogramm ist in Abb. 22 zu sehen.
+
+Es handelt sich hierbei um ein FORTH-Programm /21/, das zwei Zustände besitzt. Im Zustand 0 (PC-Host) befindet man sich im FORTH-Interpreter des PC-Rechners, 
+im Zustand 1 (Slave) wird der FORTH-Interpreter des Subsystems bedient. Der Übergang von einem zum anderen Zustand wird durch die F1-Funktionstaste ausgelöst. 
+Diese Taste versetzt den Benutzer in die Lage, jederzeit das System zu wechseln, unabhängig davon, welche Aktion gerade vom betreffenden FORTH-Interpreter 
+ausgeführt wird. Auf PC-Seite entspricht die F1-Taste dem FORTH-Wort TERMINAL, das auf den Subrechner umschaltet und alle Ein-/Ausgaben über die serielle 
+Schnittstelle mit dem PC-Rechner abwickelt. Beim Subsystem entspricht die F1-Taste dem FORTH-Wort MASTER, durch das man wieder in den FORTH-Interpreter des 
+PC-Rechners zurück gelangt.
+
+Abb. 21:  a.) Gerichteter Graph,  b.) Subgraph
+
+Abb. 22:  Zustandsdiagramm des PC-Terminalprogramms
+
+Im Zustand 1 (Slave) wird die Messung (MESSEN) und der Meßdatentransfer (TRANSFER) zum PC-Hostsystem durchgeführt, was durch einen Subgraphen angedeutet ist.
+Ist kein FORTH-Wort auf dem Subsystem aktiviert, so läuft das Subsystem in einer Warteschleife und fragt die Schnittstelle zum PC laufend ab. Im Zustand 0 
+(PC-Host) wird auf PC-Seite die Meßdaten Ein-/Ausgabe verwaltet, d.h. die Schnittstellen zum Subsystem (FIFO, SIO) abgefragt und die im Meßbetrieb anfallenden 
+Daten angezeigt und abgespeichert. Tritt ein Fehler in einem der beiden Systeme auf, so kehrt der FORTH-Interpreter in die Kaltstartroutine (COLD) zurück und 
+initialisiert (INIT) das System wieder neu. Das Terminalprogramm ist nur PC-seitig durch den Befehl BYE zu verlassen, was den Benutzer wieder auf die
+DOS-Betriebssystemebene zurückführt. Hierbei kann sich das Subsystem in einem beliebigen Zustand befinden; es kann insbesondere auch den Meßbetrieb weiter 
+fortführen, sofern die Zwischenspeicherung der anfallenden Meßdaten gesichert ist. Auch ein Aus- und erneutes Einschalten des PC-Hostsystems läßt das Subsystem 
+unabhängig davon weiterarbeiten.
+
+4.4  PC-Testmeßprogramm (FLUOTEST)
+
+Nachdem alle Hardware- und Softwarekomponenten des neuen Meßwerterfassungssystems einzeln auf ihre Funktionstüchtigkeit hin überprüft wurden, sollte eine 
+unter Laborbedingungen durchgeführte Messung Aufschluß über die Leistungsfähigkeit des Gesamtsystems geben.
+
+Im Rahmen der polarisationsspektroskopischen Messungen an Zirkon sollte eine Testversion eines optischen Meßprogramms implementiert werden.
+Das entwickelte Meßprogramm FLUOTEST stellt im wesentlichen eine Testversion des von W.Kress geschriebenen FLUO1-Programms /1/ dar.
+
+
+
+FLUOTEST:
+
+Das Testprogramm FLUOTEST sollte in seiner Grundversion folgende Möglichkeiten bieten:
+
+1.)	Durchstimmen des Lasers im gesamten Frequenzbereich von 30 GHz. Hierzu sollte das notwendige Timing für das Z80-Laserinterface (NMI-Eingang) 
+generiert werden, um den Laser in diskreten Frequenzschritten durchstimmen zu können.
+
+2.)	Aufnahme des Fluoreszenzsignals für eine Zeitdauer im 	Bereich 100 - 300 ms in Frequenzschritten von 2 MHz.
+
+3.)	optional: Möglichkeit der Aufnahme von Eichmarken für eine Zeitdauer von 10 ms in Frequenzschritten von 0.5 MHz zur Skalierung der Frequenzachse.
+
+Aus diesen Forderungen ergibt sich das zur Steuerung des Experimentes notwendige Impulsmuster (Abb. 23).
+Hierbei besteht ein Meßzyklus aus der Erfassung von vier
+
+Abb. 23:  Timingdiagramm FLUOTEST
+
+Eichmarken und einer zugehörigen Fluoreszenzzählrate. Die Gesamtzeit tz, die hierfür notwendig ist, ergibt sich zu:
+		tz = tF + 4 * tE + 5 * t0
+
+wobei:
+    tF : Meßzeit für das Fluoreszenzsignal
+		tE : Meßzeit für das Eichmarkensignal
+		t0 : Auslesen und Abspeichern der Zählraten
+
+Das reale Timing wurde anhand eines Speicheroszilloskops (TEKTRONIX, Modell 2230) überprüft und ist in Abb. 24 und Abb. 25 zu sehen. Die NMI-Pulse für d
+ie Ansteuerung des Z80-Laserinterface haben hierbei eine Pulslänge von ca. 5 μs. Die Gate-Öffnungszeiten für die beiden Zähler sind fest vorgegeben (tF, tE). 
+In Abb. 24 sieht man die zeitliche Abfolge der NMI-Signale und des Gate-Öffnungssignals für die Eichmarken. Das erste NMI-Signal veranlaßt den Laser, 0.5 MHz 
+in der Frequenz hochzufahren, das zweite NMI-Signal stoppt den Laser. Anschließend wird der Zähler ausgelesen, die Zählrate zwischengespeichert und der 
+Zähler für die nächste Zählrate gelöscht. Dieser Vorgang wiederholt sich viermal, sodaß der Laser jetzt um 2 MHz vorgefahren ist. Anschließend wird das 
+Fluoreszenzsignal aufgenommen und ausgelesen. Damit ist der Meßzyklus tZ beendet und der folgende beginnt erneut mit der Aufnahme der Eichmarken. Das 
+Flußdiagramm des Testprogramms FLUOTEST ist in Abb. 26 dargestellt.
+
+Bemerkung:
+Da es sich beim FLUOTEST-Programm lediglich um eine Testversion handelt, wurde die Aufnahme der Eichmarken im Timingdiagramm zwar berücksichtigt, im realen 
+Testlauf aber weggelassen. Dies geschah aus folgenden Gründen:
+
+---	Die Aufnahme der Eichmarken stellt ein hohes Datenauf	kommen dar (Transfer zum PC) und ist nur für die 	quantitative Auswertung der Spektren wichtig.
+---	Für die qualitative Beurteilung der gemessenen 	Spektren sollte ein Vergleich mit dem parallel laufen	den Z80-MES genügen.
+
+Abb. 24:  a.) Gemessenes Timingdiagramm NMI (invertiert)
+
+Abb. 24:  b.) Gemessenes Timingdiagramm EICH-Gate
+
+Das zeitliche Verhalten des Öffnens des Gate für das Eichmarkensignal und des Fluoreszenzsignals zeigt Abb. 25. Zwischen jeder Fluoreszenzpunktaufnahme 
+(hier tF = 100 ms) liegen jeweils vier Eichmarkenaufnahmen mit einer Meßzeit von tE = 10 ms.
+
+
+Abb. 25:  Gemessenes Timingdiagramm FLUO-Gate
+
+Abb. 26:  Flußdiagramm FLUOTEST
