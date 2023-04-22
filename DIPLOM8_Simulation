@@ -4,11 +4,11 @@ Das Programm SPEKTRUM berechnet und zeichnet das Hyperfeinstrukturspektrum eines
 die Bezeichnung des Elementes, die Drehimpulsquantenzahlen (I, Ju, Jo) sowie die Hfs-Konstanten (A-, und B-Faktor) der beiden Feinstrukturzustände. 
 Folgende Parameter sind dem Programm vom Benutzer in dieser Reihenfolge einzugeben (Gültigkeitsbereiche der Parameter):
 
-1.)	Ao	:	A-Faktor für den oberen Zustand 			  ( 0 - 9999 [MHz] )
+1.)	Ao	:	A-Faktor für den oberen Zustand 			( 0 - 9999 [MHz] )
 
 2.)	Au	:	A-Faktor für den unteren Zustand		  	( 0 - 9999 [MHz] )
 
-3.)	Bo	:	B-Faktor für den oberen Zustand	  		( 0 - 9999 [MHz] )
+3.)	Bo	:	B-Faktor für den oberen Zustand	  			( 0 - 9999 [MHz] )
 
 4.)	Bu	:	B-Faktor für den unteren Zustand		  	( 0 - 9999 [MHz] )
 
@@ -16,16 +16,17 @@ Folgende Parameter sind dem Programm vom Benutzer in dieser Reihenfolge einzugeb
 
 6.)	Ju	:	Hüllendrehimpuls des unteren Zust.		  	( 0.5 - 99 [h] )
 
-7.)	I	:	Kernspin des Atoms ( 0.5  - 99 [h] )
+7.)	I	:	Kernspin des Atoms 					( 0.5  - 99 [h] )
 				
-8.)	Untrgnd  :  Untergrund  ( 0 - 999 )
+8.)	Untrgnd  :  Untergrund  						( 0 - 999 )
 
-9.)	FWHM     :  Halbwertsbreite der Hfs-Linien  ( 1 - 999.99 [MHz] )
+9.)	FWHM     :  Halbwertsbreite der Hfs-Linien 				( 1 - 999.99 [MHz] )
 
-10.) Auflsng  :  Grafische Auflösung der Frequenzachse	( 100 - 500 )
+10.) Auflsng  :  Grafische Auflösung der Frequenzachse				( 100 - 500 )
         
 Für die Kennzeichnung einer Simulation lassen sich ferner noch der Name des Elementes und die spektroskopischen Bezeichnungen des unteren sowie oberen 
 Zustandes eingeben.
+
 Um unnötige Fehlerquellen auszuschließen und die Benutzerfreundlichkeit des Programms zu erhöhen, werden alle obigen Parameter in temporären Dateien 
 (SPEKTRUM.PAR, SPROFIL.PAR) zwischengespeichert und bei Programmbeginn automatisch eingelesen. Beim ordnungsgemäßen Verlassen des Programms werden die 
 jeweils letztgültigen Parameter für den nächsten Programmlauf gesichert, sodaß das Programm ohne zeitaufwendige Neueingabe der Parameter wieder 
