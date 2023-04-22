@@ -1,0 +1,26 @@
+Aufbau und Entwicklung eines PC-Meßwerterfassungssystems für die Hochfrequenz- und Laserspektroskopie
+
+- Diplomarbeit -
+
+Thomas Fabula
+Bonn 1987
+
+ausgeführt am
+
+Institut für Angewandte Physik
+der Rheinischen Friedrich-Wilhelms-Universität Bonn
+
+
+
+Zusammenfassung:
+
+Im Rahmen dieser Arbeit wurde ein Meßwerterfassungssystem (MES) für den Einsatz in der Hochfrequenz- und Laserspektroskopie entwickelt.
+
+Es wurde ein Zwei-Prozessor-Rechnersystem auf der Basis eines IBM PC-XT kompatiblen Personal Computers in Verbindung mit einem ECB-Z80-System aufgebaut, 
+die für die Rechnerkopplung notwendige Hardware entwickelt und ein leistungsfähiges Terminalprogramm (TERMINAL) für die Rechnerkommunikation implementiert.
+
+Das Gesamtsystem wurde mit einer Testmessung eines ZrI-Spektrums mit der Methode der Polarisationsspektroskopie getestet und auf seine Leistungsfähigkeit 
+hin überprüft.
+
+Zur Interpretation der gemessenen Hfs-Spektren wurde ein Simulationsprogramm (SPEKTRUM) geschrieben, welches die Zuordnung der Hfs-Komponenten zu den 
+Linien des aufgenommenen Spektrums erleichtern helfen soll.
