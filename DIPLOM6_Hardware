@@ -1,0 +1,410 @@
+3. Beschreibung der Hardware:
+
+3.1  Hardware-Organisation
+
+Das Gesamtmeßwerterfassungssystem (Abb. 5) untergliedert sich in drei Funktionsgruppen:
+	* PC - Rechner
+	* Z80 - Subrechner
+	* Interface für Meßeinschübe.
+  
+Der IBM PC-XT kompatible Hostrechner stellt im Meßwerterfassungssystem die 'Schnittstelle' zum Benutzer (Experimentator) dar. Er übernimmt die Benutzerführung 
+und übergibt die zur Steuerung des Experimentes notwendigen Parameter an den Z80-Subrechner. Neben der Benutzerführung ist der PC-Rechner auch für die Sicherung 
+aller im Experiment anfallenden Daten auf externe Datenträger verantwortlich. Im 'Online'-Betrieb (Echtzeitverarbeitung der Meßsignale) werden die Daten gleichzeitig 
+zur Erfassung auf dem Bildschirm dargestellt. Bei zusätzlich anfallenden Auswertungen kann der PC-Rechner mit seiner hohen Verarbeitungsgeschwindigkeit sinnvoll 
+eingesetzt werden. Unter Verwendung der parallelen PC-Subrechner Schnittstellenkarte sowie der seriellen Terminal-Schnittstelle ist der Betrieb des MES auch an 
+einem Rechner der AT-Klasse gewährleistet. Der Einsatz eines PC-AT Rechners erlaubt eine etwa 2 bis 3 fache Steigerung der Rechenleistung, bei unveränderter 
+Hardware- und Softwarestruktur.
+
+Um eine Entlastung des PC-Rechners bei zeitkritischen Messungen zu gestatten, wurde das Prinzip des Subrechners eingeführt. Der Subrechner soll den PC entlasten 
+und für die unmittelbare Steuerung des Experiments über den Interface-Bus zur Verfügung stehen. Das Betriebssystem (PC-DOS) des PC-Rechners stellt für den 
+interruptgetriebenen Meßbetrieb keine ideale Grundlage dar, da das Betriebssystem selbst systeminterne Routinen über Interrupts bedient. Das Auffrischen des 
+dynamischen Arbeitsspeichers (DRAM) und die Bedienung der Hardwareuhr erfordern jeweils einen Interrupt (IRQ0 bzw. IRQ1), die im System höchste Priorität haben. 
+Dadurch wird die Reaktionszeit des Systems begrenzt. Diesem Nachteil kann man begegnen, wenn man auf ein komplexes Betriebssystem verzichtet und sich auf 
+Maschinenebene begibt. Beim Subsystem, das auf der Grundlage des Z80-Mikroprozessors basiert, ist das Betriebsystem durch ein FORTH-Programm ersetzt worden. 
+Da FORTH selbst ein Betriebssystem darstellt und nur die Verwaltung der Schnittstellen und der Zeitgenerierung (Timer/Zähler) übernehmen muß, eignet es sich 
+besonders gut für das Subsystem.
+
+Das FIFO-Konzept erlaubt eine asynchrone Datenübertragung, indem jeder der beiden Rechner unabhängig voneinander arbeiten kann. Im dynamischen Betrieb variiert 
+die Anzahl der Daten im FIFO, sodaß sich das FIFO als Pufferzone zwischen PC und Subsystem auswirkt. Durch ein definiertes Kommunikationsprotokoll wird 
+gewährleistet, das kein Zeichen in das FIFO geschrieben wird, wenn es bereits voll ist, bzw. kein Zeichen gelesen wird, wenn das FIFO bereits leer ist. 
+Das FIFO-Konzept garantiert somit eine schnelle Meßdatenübertragung zwischen Subsystem und PC, während die zeitunkritische Kommunikation (Parameterübergabe, 
+Programmentwicklung) in umgekehrter Richtung über die serielle Schnittstelle (COM2) im Terminalbetrieb erfolgen kann.
+
+Abb. 5 : Gesamtmeßwerterfassungssystem (MES)
+
+Schnittstellenvergleich:
+
+Ein Vergleich der Standardschnittstellen /10/ mit der im Input/Output-Bus (IOB) verwendeten Schnittstelle sowie der aufgebauten Rechnerkopplung (FIFO) gibt 
+einen ersten Eindruck der Leistungsfähigkeit der Datenübertragung:
+
+
+1.)  V.24:
+	Art		 :	seriell (1-2 Leitungen)
+	Pegel	 	 :	'0' = 3..15 V, '1' = -3..-15 V
+	Baudrate	 :	2 ̈ 104 [Bit / s]
+	Stationen	 :	1
+	max. Länge :	ca. 30 m
+	Übertragung:	asynchron
+	Anwendung	 :	Rechnerperipherie
+
+
+2.)  CENTRONICS:
+	Art		 :	parallel (8 Bit, unidirektional)
+	Pegel	 :	TTL
+	Baudrate	 :	106 [Bit / s]
+	Stationen	 :	1
+	max. Länge :	ca. 2 m
+	Übertragung:	-
+	Anwendung	 :	Druckerschnittstelle
+
+
+3.)  IEEE-488:
+	Art		 :	parallel (8 Bit)
+	Pegel	 :	'0' = 5 V, '1' = 0 V
+	Baudrate	 :	2 ̈ 106 [Bit / s]
+	Stationen	 :	15
+	max. Länge :	2..20 m
+	Übertragung:	asynchron
+	Anwendung	 :	Laborautomatisierung
+
+
+4.)  IOB:
+	Art		 :	parallel (16 Bit Input, 16 Bit Output)
+	Pegel	 :	TTL
+	Baudrate	 :	ca. 4 ̈ 105 [Bit / s]
+	Stationen	 :	256
+	max. Länge :	¾ 10 m
+	Übertragung:	synchron
+	Anwendung	 :	Meßwerterfassung
+
+
+5.)  FIFO:
+	Art		 :	parallel (16 Bit Input, 8 Bit Output)
+	Pegel	 :	TTL
+	Baudrate	 :	ca. 4 ̈ 106 [Bit / s]
+	Stationen	 :	1
+	max. Länge :	¾ 2 m
+	Übertragung:	asynchron
+	Anwendung	 :	Rechnerkopplung
+
+Die Schnittstelle zum physikalischen Experiment ist ein universaler Input/Output-Bus (IOB). Es wurde eine einheitliche Busstruktur realisiert, an die 
+unterschiedliche Meßeinschübe angeschlossen werden können. Dieser Bus wird unter der Kontrolle des Z80-Subsystems verwaltet, der das Zusammenspiel der 
+Meßwertaufnehmer organisiert. Ein stabilisiertes Netzteil ( mit den Spannungen:  5 V / 6 A, 12 V / 1 A, 2 x 18 V / 2 A ) versorgt sowohl das ECB-Subsystem 
+als auch den Interface-Bus. Die beiden 18 V Leitungen dienen als Rohspannung, die auf den jeweiligen Karten dezentral auf ± 15 V stabilisiert werden, um 
+unnötige Störeffekt zu minimieren.
+
+Im Folgenden werden die Einzelbaugruppen des MES kurz in ihrer Funktion beschrieben. Für detailliertere Informationen zu den selbstentwickelten und 
+aufgebauten Hardwarekomponenten sei auf die Technische Dokumentation MES /11/ verwiesen. Die PC- und ECB-Systemkomponenten sind ausführlich in den 
+technischen Beschreibungen /12, 5/ der Hersteller dokumentiert.
+
+3.2  PC-XT Hostrechnersystem
+
+3.2.1  Systemeinheit
+
+Hierbei handelt es sich um einen IBM PC-XT kompatiblen Rechner mit einem INTEL-8088 Mikroprozessor, der sowohl mit 4.77 MHz als auch mit 8.0 MHz Systemtakt 
+betrieben werden kann. Der 8088-Mikroprozessor stellt die 8-Bit Version der 8086/80x86 Familie dar und besitzt eine interne 16-Bit Registerarchitektur. 
+Die Systemtaktumschaltung, welches einem Faktor 1.7 an Zuwachs der Rechengeschwindigkeit entspricht, kann softwaremäßig vom Betriebssystem aus veranlaßt werden. 
+Die minimale Befehlszykluszeit beträgt bei höchster Taktrate (8 MHz)  ca. tz = 0.25 μs, sodaß sich I/O-Routinen auf Assemblerebene im μs-Bereich realisieren lassen.
+
+Desweiteren ist der Rechner mit 640 kByte (RAM) Arbeitspeicher sowie 32 kByte (EPROM) Festspeicher für das BIOS-Betriebssystem  ausgestattet.
+
+Ein zum 8088-Hauptprozessor parallel geschalteter numerischer Koprozessor (8087/8 MHz) erlaubt es, Gleitkommaoperationen mit erhöhter Geschwindigkeit auszuführen. 
+Der Koprozessor erhöht die Rechengeschwindigkeit bei komplexen numerischen Berechnungen beträchtlich. Abhängig von der Art der Maschinenbefehle vermag der 
+parallelgeschaltete 8087-Koprozessor eine Geschwindigkeitserhöhung um einen Faktor 10 bis 100 zu gewährleisten.
+
+
+3.2.2  Grafik
+
+Eine hochauflösende monochrome HERCULES-kompatible Grafikkarte mit einer Auflösung von 720 x 348 Bildpunkten im Grafikmodus und einer 25 Zeilen á 80 Zeichen 
+Textdarstellung steuert einen 12" EIZO-Monitor (20 MHz Bandbreite) an. Neben einem 64 kB großen dynamischen Bildschirmspeicher enthält die Karte zusätzlich 
+eine parallele 8-Bit CENTRONICS-Schnittstelle (LPT1), an die der EPSON FX-100 Drucker angeschlossen ist. Der große Bildschirmspeicher erlaubt es, zwei 
+Grafikseiten sowie eine Textseite gleichzeitig zu verwalten, was sich bei der Programmierung als sehr vorteilhaft erweist, wenn z.B. verschiedene Spektren 
+eingeblendet und miteinander verglichen werden sollen.
+
+
+3.2.3  Massenspeicher
+
+Als Massenspeicher stehen dem System ein Festplattenlaufwerk des Typs NEC 5126 mit einer Gesamtkapazität von 32 MByte (mittlere Zugriffsdauer ¾ 80 ms), das 
+aufgrund der Verwendung eines RLL-Controllers eine erhöhte Speicherdichte des Laufwerks unterstützt, sowie zwei 5 1/4 Zoll Diskettenlaufwerke des Typs 
+NEC FD 1255 (1.2 MB Speicherkapazität) und des Typs NEC FD 1205 (360 kB Speicherkapazität) zur Verfügung.
+
+
+3.2.4  Multifunktionskarte
+
+Damit der Rechner mit externen Peripheriegeräten kommunizieren kann, ist es notwendig, zusätzliche Schnittstellen bereit zu stellen. Dies geschieht mit Hilfe 
+der Multifunktionskarte, die zwei serielle Schnittstellen (COM1 und COM2), eine zusätzliche parallele Schnittstelle (LPT2) sowie drei analoge Eingänge (Gameport) 
+besitzt.
+Hinzu kommt eine gepufferte Echtzeituhr, die vom Betriebssystem abgefragt werden kann und beim Abspeichern der Dateien automatisch das Datum und die Uhrzeit 
+protokolliert.
+Mit Hilfe der beiden seriellen Schnittstellen nach RS-232-Norm lassen sich Standard-Peripheriegeräte wie Plotter (HP 7475A) und Eingabemedium "Maus" 
+(Microsoft-kompatibel) anschließen. Im Meßbetrieb wird an diese Schnittstellen das Z80-Laserinterface /1/, welches den Coherent Farbstofflaser (COM1) 
+ansteuert, und der ECB-Subrechner (COM2) angeschlossen.
+
+3.2.5  Subsystem Interfacekarte
+
+Die für hohe Geschwindigkeiten ausgelegte Datenverbindung vom PC zum Z80-Rechner erfolgt über eine asynchrone parallele Datenübertragung mittels 
+Hardware-FIFO's /13/.
+Im Gegensatz zu den anderen PC-Erweiterungskarten ist diese Schnittstelle vollständig selbst entwickelt und aufgebaut worden. Als Grundlage dient eine 
+Prototyp-Karte (Wire-Wrap) der Firma IBM, auf welcher die wichtigsten PC-Bussignale bereits herausgeführt sind. Alle Daten- und Adreßleitungen sind gepuffert, 
+sodaß sie mehrere I/O-Bausteine treiben können. Eine Vordekodierung der Adressen (300-31Fh) ist seitens IBM bereits vorgenommen worden, damit eigene 
+Hardwareentwicklungen im I/O-Bereich nicht mit anderen Hardwarekomponenten bzw. dem Betriebssystem in Konflikt geraten. Die Karte enthält vier parallele 
+I/O-Bausteine (8255 PPI) mit insgesamt 96 I/O-Leitungen, sowie zwei Timerbausteine (8253 bzw. 8254) mit insgesamt 6 x 16 Bit Timer/Zählern, die eine 
+maximale Clockfrequenz von 5 bzw. 10 MHz ermöglichen /14/. Um eine möglichst störunanfällige Signalübertragung zum Z80-System zu gewährleisten, sind 
+alle Leitungen über "Dual-Line" Treiber bzw. Empfänger /15/ geführt (Abb. 6), sodaß sich Störeinflüsse, die sich auf beide Leitungen während der
+Übertragungsstrecke gleichsinnig überlagern, am Ende der Leitung kompensieren.
+
+
+Abb. 6:  Prinzip der "Dual-Line" Signalübertragung
+
+Die Kommunikation erfolgt über zwei Hauptkanäle jeweils unidirektional, damit größtmögliche Geschwindigkeiten ermöglicht werden:
+
+BUS-IN:
+stellt die Verbindung vom Z80- zum PC-System dar, auf dem die Meßdaten im Experiment empfangen werden. Wegen des hohen Datenaufkommens ist dieser Kanal 
+16 Bit breit ausgelegt. Da zusätzliche Kontroll-Leitungen hinzukommen, ist der BUS-IN 50-polig ausgelegt und wird über Flachbandkabel (max. 2 Meter) 
+zum PC-System geführt.
+
+BUS-OUT:
+stellt die Verbindung vom PC- zum Z80-System dar, auf dem z.B. die Kommandos und Anfangsparameter, die vom Benutzer eingegeben werden, zum Subrechner 
+gesendet werden. Da dieser Teil der Kommunikation zeitunkritisch ist, wurde dieser Kanal nur 8 Bit breit ausgelegt. Auch hier werden zusätzliche 
+Kontroll-Leitungen benötigt, sodaß der BUS-OUT 34 Pole benötigt, die wie oben über Flachbandkabel geführt sind.
+
+Um die Störunempfindlichkeit ggf. weiter zu erhöhen, lassen sich die preiswerten Flachbandkabel gegen teurere "Twisted-Pairs"-Kabel austauschen, die 
+eine bessere Abschirmung gewährleisten. Die Ein- und Ausgänge der beiden Timer sind auf der Wire-Wrap-Karte an Wrapsockel angeschlossen und am hinteren 
+Rechnergehäuse herausgeführt. Die Programmierung der I/O-Bausteine und Timer kann sowohl in 8088-Assembler als auch direkt in einer Hochsprache 
+(z.B. Turbo-Pascal, FORTH, C) erfolgen.
+
+Auf der folgenden Seite (Abb. 7) ist der Aufbau der parallelen PC-Subrechner Schnittstellenkarte zu sehen.
+
+Abb. 7:  Subrechner Interfacekarte
+
+3.2.6  IEEE-488 Karte
+
+Neuere kommerzielle Meßgeräte besitzen bereits oftmals eine Schnittstelle zum Anschluß an ein Computersystem. Hierbei handelt es sich um die genormte 
+8 Bit parallele IEEE-488 Standardschnittstelle, die es erlaubt, mehrere Meßgeräte an einem Bus zu betreiben. Die Anzahl der Gegenstationen ist auf 15 begrenzt. 
+Jedes Gerät besitzt eine Adresse und kommuniziert über "3-Wire-Handshake" /16/ mit dem Rechner. Man unterscheidet zwischen folgenden Möglichkeiten ein 
+Meßgeräte anzuschließen:
+
+  * LISTENER : erhält Informationen vom Rechner
+	* TALKER   : versorgt den Rechner mit Informationen
+	* LISTENER & TALKER : bidirektionaler Informationsaustausch mit dem angeschlossenen Rechner
+
+Bei der IEEE-488 Karte handelt es sich um eine HP-IB-Schnittstellenkarte der Firma Hewlett-Packard /16/. Mit Hilfe dieser Karte ist es möglich, z.B. 
+folgende Meßgeräte unter PC-Rechnerkontrolle zu steuern:
+
+	- TEKTRONIX-Speicheroszilloskop,
+	- EG&G Lock-In Amplifier,
+	- FLUKE-Digitalvoltmeter,
+	- etc.
+
+Die Geräte lassen sich mit Hilfe der mitgelieferten Bibliotheken (Libraries) unter BASIC, Pascal oder C programmieren. Das kommerzielle Programmpaket 
+zur Meßdatenerfassung ASYST /17/ erlaubt ebenfalls eine komfortable und benutzerfreundliche Bedienung der an den IEEE-488 Bus angeschlossenen Geräte, 
+da IEEE-Steuerprogramme (FORTH-Worte) bereits existieren.
+
+Die in Kapitel 5 mit dem Speicheroszilloskop (TEKTRONIX, Modell 2230) aufgenommenen Impulsdiagramme des Meßprogramms FLUOTEST wurden mit Hilfe der IEEE-488 
+Karte unter ASYST ausgelesen. Mit Hilfe eines von C. Schwarzwald /18/ entwickelten Plotprogramms wurden die Abbildungen Abb. 24 und Abb. 25 auf einem 
+HP-7475A Plotter erstellt.
+
+Abb. 8:  IEEE-488 Meßgeräte-Buskonzept (aus /16/)
+
+3.3  Z80-ECB Subrechnersystem
+
+3.3.1  CPU-IV Karte
+
+Die im Laborbetrieb zum Einsatz kommende Hauptrechnerkarte ist die CPU-IV Karte der Firma Janich & Klass. Der eingesetzte Z80-A NMOS-Mikroprozessor (4 MHz) 
+kann durch einen CMOS-Typ ersetzt werden, der sich besonders durch seine geringe Stromaufnahme für den Einsatz in einem Subrechnersystem eignet. Damit 
+Timingprobleme, bedingt durch das Auffrischen (Refresh) der dynamischen Speicher (DRAM) nicht auftreten, enthält die Karte 32 kB an statischem Arbeitsspeicher 
+(4 x 6264 SRAM, 150 ns Zugriffszeit). Der eigentliche FORTH-Betriebssystemkern befindet sich in einem ebenfalls 32 kB großen Festspeicher (27256 EPROM). 
+Als zusätzliche I/O-Bausteine enthält die Karte zwei parallele Schnittstellen (Z80-PIO) mit insgesamt vier 8 Bit Ports, sowie einen Timer/Zähler (Z80-CTC) 
+mit jeweils vier 8 Bit Zählern. Eine gepufferte Echtzeituhr (RTC), die über einen Port der parallelen Bausteine angesprochen werden kann, erlaubt es, die 
+Uhrzeit auf dem Subsystem unabhängig vom PC-Rechner bei Bedarf abzufragen. Die Programmierung der Z80-Peripheriebausteine ist in den Datenblättern /13, 19/ 
+ausführlich beschrieben.
+
+
+3.3.2  Slave CPU-Karte
+
+In der Testphase des MES wurde der Subrechner mit der Slave-Prozessorkarte SUB-S der Firma Oettle & Reichler /20/ betrieben. In dieser Testphase wurde 
+das in der Elektronikwerkstatt von K.D. Krause /21/ entwickelte FORTH-Betriebssystem implementiert und ausgetestet. Die Kommunikation zum PC erfolgte 
+über eine bidirektionale serielle Schnittstelle (RS-232), sodaß Kommandos vom PC zum Z80 und umgekehrt über diese Verbindung geschickt wurden. Die 
+Datentransferrate betrug hierbei max. 9600 Baud (ca. 1000 Zeichen pro Sekunde).
+
+Diese CPU-Karte enthält im Gegensatz zur CPU-IV statt zwei parallelen I/O-Bausteinen (Z80-PIO) einen seriellen Baustein (Z80-SIO) sowie einen 
+Timer/Zähler-Baustein (Z80-CTC). Der Timer wird für die Baudrategenerierung und "Watchdog"-Schaltung eingesetzt. Die "Watchdog"-Schaltung sorgt 
+für den fehlerfreien Betrieb der Prozessorkarte, indem sie periodisch einen Kanal des Timers zurücksetzt. Sollte dieses Zurücksetzen ausbleiben, 
+so löst der Baustein beim Mikroprozessor einen nichtmaskierbaren Interrupt (NMI) aus, und das System wird neu initialisiert. Der in CMOS-Technik 
+gefertigte Z80-Mikroprozessor wird mit einer Taktrate von 3.99 MHz betrieben, und garantiert somit eine hohe Verarbeitungsgeschwindigkeit. Die 
+Speicherauslegung (32 kB SRAM, 32 kB EPROM) und die Organisation des FORTH-Betriebssystems entsprachen ansonsten der bei der CPU-IV Karte, was 
+anschließend eine schnelle Implementation erlaubte.
+
+
+3.3.3  Serielle Schnittstellenkarte
+
+Um den einfachen Terminalbetrieb zwischen PC-Rechner und Subsystem zu ermöglichen, war es notwendig, den Subrechner mit mindestens einer seriellen 
+Schnittstelle (RS-232) auszurüsten. Eine zweite serielle Schnittstelle sollte ebenfalls vorhanden sein, da es für zukünftige Meßprogramme durchaus 
+sinnvoll erschien, das intelligente Laserinterface /1/ direkt vom Z80-Subsystem aus anzusteuern. Die serielle Schnittstellenkarte SIC 2.0 der Firma E-LAB /22/ 
+mit insgesamt drei Serielbausteinen (Z80-SIO bzw. Z80-DART) wurde hierfür ausgewählt. Ein Z80-CTC-Baustein sorgt für das Taktsignal der benötigten Baudrate 
+von 9600. Die insgesamt sechs Kanäle der drei SIO-Bausteine sind auf neunpolige Stecker (DSUB) am vorderen Interfacegehäuse herausgeführt. Die Anzahl der 
+RS-232 Verbindungsleitungen zum Hostsystem ist minimal gehalten worden. Neben der Signalmasse (Gnd) existieren lediglich eine Leitung für das Senden (TxD)
+und für das Empfangen (RxD) von Daten.
+
+3.3.4  Timerkarte
+
+Die Timerkarte entspricht in ihrer Auslegung und dem Aufbau der Timerkarte des alten Z80-MES. Es wurde bewußt eine vollständige Kompatibilität angestrebt, 
+um sie einerseits in der Testphase im Z80-CP/M-Rechner austesten zu können, andererseits bei Ausfall einer der Karten im Laborbetrieb direkten Ersatz zu 
+gewährleisten (Basisadresse : 30h). Für eine genaue Beschreibung der Timerkarte sei auf die Arbeit von U. Urmoneit /2/ verwiesen.
+
+Die Aufgabe, die dieser Karte im Meßbetrieb zukommt, ist die exakte zeitliche Steuerung des Experimentablaufs, die durch priorisierte Vektorinterrupts /5/ 
+der vier Zähler-Bausteine (Z80-CTC) ermöglicht wird. Diese Zähler öffnen und schließen nach einem genauen Zeitschema, abhängig vom jeweiligen Meßprogramm, 
+die Zähler (Gate) für die aufzunehmenden Signale (z.B. Fluoreszenz- und Eichmarkensignal) und veranlassen das intelligente Z80-Laserinterface, den Farbstofflaser 
+im Scanbetrieb in diskreten Schritten durchzustimmen. Die vier hintereinander geschalteten Timerbausteine erlauben die Generierung von Zeitintervallen in  
+einem Bereich von 4 μs bis ca. 2̈105 d. Das Zeitschema der Messung im Testprogramm FLUOTEST wird in Kapitel 4 ausführlich erklärt.
+
+
+3.3.5  FIFO-Karte
+
+Die FIFO-Karte des Subrechnersystems enthält die FIFO's und die zu deren Ansteuerung nötigen Logikbausteine. Die FIFO-Bausteine (Zilog Z8038FIO, /23/) 
+besitzen einen acht Bit breiten und 128 Byte tiefen Datenpuffer und ermöglichen eine asynchrone Rechnerkopplung (Abb. 9) zwischen PC-Hostrechner und 
+Z80-Subrechner. Im Z80-System werden die FIFO's über den systeminternen Datenbus direkt wie I/O-Bausteine angesprochen, auf PC-Seite kommunizieren sie mit
+jeweils zwei Parallelbausteinen (8255 PPI) der PC-Wrapkarte über jeweils zwei "Handshake"-Leitungen. Während der BUS-IN-Kanal, wie bereits erwähnt, wegen 
+der hohen Datenrate 16 Bit breit ausgelegt ist und somit zwei FIFO-Bausteine (FIO1 und FIO2) benötigt, ist der BUS-OUT-Kanal auf acht Bit (FIO3) Breite 
+beschränkt. Die Kontrolle der FIFO's übernehmen jeweils die Parallelbausteine der beiden Systeme. Nachdem die FIFO's bei Z80-Systemstart automatisch 
+zurückgesetzt (RESET) wurden, müssen sie initialisiert und in den richtigen Betriebsmodus programmiert werden. Unter Softwarekontrolle ist es jederzeit 
+möglich, ihren Datenpuffer zu löschen (CLEAR) und abzufragen, ob ihr Datenpuffer leer (EMPTY) bzw. voll (FULL) ist. Die maximale Datentransferrate der 
+FIFO-Bausteine beträgt 1 MHz (=106 Worte/s). Die Zeit, die ein Wort benötigt, um durch den Datenpuffer hindurchzugelangen, beträgt etwa tr = 250 ns. 
+Die FIFO-Bausteine sind in der Lage, sieben verschieden priorisierte Z80-Vektorinterrupts auszulösen, und bieten somit eine Vielzahl von Betriebsmöglichkeiten. 
+Nähere Einzelheiten zur Programmierung dieses Bausteins sind dem Zilog-Datenblatt /23/ zu entnehmen.
+
+Abb. 9:  FIFO-Rechnerkopplung (PC <-> Subrechner)
+
+3.3.6  FIFO-Treiberkarte
+
+Das Gegenstück zur PC-Parallelkarte (Prototyp Wire-Wrap) bildet im Z80-Subsystem die FIFO-Treiberkarte. Aus Platzgründen und um eine bessere Wärmeabfuhr zu 
+gewährleisten, wurden die Leitungstreiber und -empfänger /15/ auf einer eigenen Karte untergebracht. Auf dieser Karte werden die beiden Flachbandkabel BUS-IN 
+und BUS-OUT vom PC-Rechnersystem eingespeist und über die fünf Widerstandsarrays Wi (100 Û) gegen Signalreflexionen kurzgeschlossen (Abb. 6). Die Karte enthält 
+insgesamt sechs Leitungstreiber (SN75172) sowie vier Leitungsempfänger (SN75173). Über ein 50-poliges Flachbandkabel werden alle Signale vom PC-System auf 
+die FIFO-Karte geführt.
+
+
+3.3.7  PIO-Karte
+
+Die Verbindung vom Subrechner zum Interface-Bus (IOB) geschieht mittels der PIO-Karte der Firma Janich & Klass /5/. Auch diese Karte entspricht in ihrem
+Aufbau der PIO-Wrap-Karte des alten Z80-Meßwerterfassungssystems, und ist in der Adreßbelegung identisch (Basisadresse : 60h), sodaß sie im Laborbetrieb 
+direkt gegeneinander ausgetauscht werden können. Über vier parallele I/O-Bausteine (Z80-PIO) werden der Datenstrom vom Experiment zum MES (16 DATA-IN) 
+und vom MES zum Experiment (16 DATA-OUT), sowie alle acht Kontrollsignale (CONTROL) und die acht Adreßsignale (ADDRESS) zu den Meßmodulen geführt.
+
+Da alle acht Adreßleitungen dekodiert werden können, ist es möglich, maximal 256 Meßmodule anzusprechen. Da dies z.Zt. im Laborbetrieb nicht nötig ist, 
+sind nur die vier oberen Bits (ADR4 bis ADR7) dekodiert, sodaß sich jetzt 16 unterschiedliche Meßmodule adressieren lassen.
+
+3.3.8  PIO-Treiberkarte
+
+Damit der Interfacebus durch die angeschlossenen Meßmodule nicht überlastet wird und sie auch fehlerfrei ansteuern kann, muß er gepuffert werden. 
+Unidirektionale Pufferbausteine (74LS244) gewährleisten, daß bis zu 60 TTL-Lasten an einem Ausgang sicher betrieben werden können. Alle Signale vom 
+Subrechner zum Experiment (DATA-OUT, CONTROL, ADDRESS) werden über diese Karte verstärkt. Der DATA-IN Kanal wird auf jeder entsprechenden Karte getrieben, 
+auf der das Signal aufgenommen wird, sofern dieses erforderlich ist. Bei den beiden eingesetzten Zählerkarten übernehmen Latches (74HC374) die Pufferung 
+der Signale. Die PIO-Treiberkarte, die sich auf dem Interfacebus befindet, wird über jeweils vier 26-polige Flachbandkabel im Gehäuseinnern mit der 
+PIO-Karte verbunden.
+
+3.4  Interfacesystem
+
+Gemäß den Anforderungen erlaubt das Interfacesystem durch seine universelle Auslegung, verschiedene Meßmodule und Interfacekarten anzuschließen.
+Der Interface-Bus (IOB) ist auf einer 64-poligen VG-Leistenwand im oberen Gehäuseteil herausgeführt, auf dem sich 25 Steckplätze befinden. Der 
+Bus gliedert sich in folgende logische Hauptgruppen:
+
+	-  DATA-IN  Bus  (16 Leitungen : DI0...DI15)
+	-  DATA-OUT Bus  (16 Leitungen : DO0...DO15)
+	-  ADDRESS  Bus  (8 Leitungen : ADR0...ADR7)
+	-  CONTROL  Bus  (8 Leitungen : CTRL0...CTRL7)
+	-  Spannungsversorgungen:  + 5 V (6A), ± 18 V (2A)
+
+Diese Definition des Busses ist mit der Buserweiterung des alten Z80-Meßwerterfassungssystems, wie sie in /3/ beschrieben wird, identisch und erlaubt 
+somit eine gleichzeitige Verwendung aller Meßmodule und Interfacekarten an beiden Systemen.
+
+Auf der folgenden Seite ist die schematische Abbildung (Abb. 10) der Interface-Einheit zu sehen, die in Ein- (BUS-IN) und Ausgabekanäle (BUS-OUT) 
+untergliedert ist. Der Datenfluß wird durch den Kontrollbus (CONTROL) gesteuert, die Auswahl der Meßmodule wird durch den Adreßbus (ADDRESS) vorgenommen.
+Eine Busterminierung des DATA-IN Busses zieht über Widerstandsarrays (2.2 kÛ) alle 16 Leitungen auf Masse, sodaß definierte Eingangspegel gewährleistet werden.
+
+Abb. 10:  Subrechnersystem und Interface-Bus (IOB)
+
+3.4.1  VFC-Karte
+
+Da sich das Prinzip der Spannungs/Frequenzumsetzung im Laborbetrieb bestens bewährt hat, wurde hier auf das  gleiche Prinzip wie bereits beim alten Z80-MES 
+zurückgegriffen.
+
+Die VFC-Karte (Voltage-to-Frequency-Converter) ermöglicht es, analoge Eingangsgrößen in digitale Signalgrößen umzuwandeln. Hierbei wird die analoge 
+Eingangsspannung in eine entsprechende Frequenz (TTL-Pegel) umgewandelt. Diese Umwandlung erfolgt im Arbeitsbereich des VFC's (Kennlinie) linear. Die 
+Beschaltung des Spannungs/Frequenz-Wandlers ist der Abb. 11 zu entnehmen. Über einen als invertierenden Verstärker geschalteten Operationsverstärker (OP) 
+erhält der VFC seine negative Eingangsspannung. Über zwei Potentiometer lassen sich am Operationsverstärker der Offset (P1) und die Verstärkung (P2) extern 
+einstellen. Die VFC-Karte enthält zwei getrennte Kanäle, einen für das Fluoreszenzsignal (Uin = 0..10 V), den anderen für das Eichmarkensignal (Uin = 0..2 V). 
+Die externe Beschaltung der VFC's ist auf eine maximale Ausgangsfrequenz fout von 1 MHz ausgelegt. In Abb. 12 und Abb. 13 ist der lineare Verlauf der 
+Kennlinien (Abhängigkeit der Ausgangsfrequenz fout von der Eingangsspannung Uin) der beiden Kanäle deutlich zu erkennen.
+
+Die Abb. 14 zeigt den Frequenzhub ⌂f = fmax - fmin des Eichmarkenkanals in Abhängigkeit der am Potentiometer P2 eingestellten Verstärkung. Bei einem fest 
+eingestellten Offsetwert von P1 = 9.7 [Skt] ergibt sich für die Verstärkung P2 = 5.0 [Skt] ein maximaler Frequenzhub ⌂f von ca. 221 [kHz]. Die Eingangsspannung 
+wurde hierbei auf Uin = 2 V konstant gehalten. Um die empfindlichen VFC-Analogbauteile von äußeren Störeinflüssen weitgehend abzuschirmen, wurde der Aufbau 
+auf einer "Ground-Plane"-Platine (durchgehende Massefläche auf der Oberseite der Platine) vorgenommen.
+
+Das Erzeugen der ± 15 V Versorgungsspannungen für die OP's und VFC's wurde direkt auf der Karte vorgenommen, um die interfacebusseitigen Rohspannungen ± 18 V 
+durch externe Störeinwirkungen weitgehend unbeeinflußt zu lassen.
+
+Nähere Schaltungshinweise und Betriebsparameter sind aus den Datenblättern der Firma Burr-Brown /24/ zu entnehmen.
+
+Abb. 11:  Schaltplan VFC-Karte
+
+Abb. 12:  VFC-Kennlinie Fluoreszenzeingang
+
+Abb. 13:  VFC-Kennlinie Eichmarkeneingang
+
+Abb. 14:  VFC-Frequenzhub des Eichmarkeneingangs
+
+3.4.2  TTL-Zählerkarte
+
+Die Zählerkarte enthält jeweils zwei Zählerkanäle (á 32 Bit), die es ermöglichen, Zählraten bis maximal 232-1 (=4.294.967.295) aufzunehmen. Das Eingangssignal
+wird über ein UND-Gatter (74LS08) mit dem Gate-Signal verknüpft, um die Zähler für fest definierte Zeitspannen zu aktivieren. Die vier hintereinander geschalteten 
+Zählerbausteine (74HC393, High-Speed CMOS) erlauben eine maximale Eingangsfrequenz von 100 MHz. Über die vier Latches (74HC374) werden die Zählraten parallel 
+ausgelesen und an den DATA-IN Bus weitergeleitet.
+
+Abhängig vom benutzten Meßprogramm werden das Gate-Signal des Fluoreszenzkanals (GATE1) und das Gate-Signal des Eichmarkenkanals (GATE2) vom Subrechner gesetzt 
+bzw. gelöscht. Die Übernahme der Zählraten in die Latch- Zwischenspeicher lösen die beiden Latch-Signale (LATCH1, LATCH2) aus. Da der Input-Datenbus (DATA-IN) 
+lediglich auf 16 Bit Breite ausgelegt ist, müssen zwei Zugriffe erfolgen, um eine 32 Bit Zählrate einzulesen. Die Adressierung des niederen Wertes (LOW) erfolgt 
+mit dem Enable-LOW-Signal, die des höheren Wertes (HIGH) mit dem Enable-HIGH-Signal. Die Adressierung der Zählerkarte auf dem IOB-Bus wird durch eine 
+Komparatorschaltung (74LS85) vorgenommen. Hierbei werden die am oberen IOB-Bus anliegenden vier Adreßbits (A4, A5, A6, A7) mit der Einstellung von vier 
+'DIP-Switch'-Schaltern verglichen. Bei Gleichheit ermöglichen die unteren Adreßbits A0 und A1 das Ansprechen des LOW bzw. HIGH Wertes der Zähler.
+
+Bei dieser Karte ist die Basisadresse auf 10h eingestellt. Nachdem die Zählraten gelesen wurden, löschen die Clear-Signale (CLEAR1, CLEAR2) die entsprechenden 
+Zählerkanäle und bereiten den Zähler für die Aufnahme der nächsten Daten vor. Das zum Aufnehmen von Zählraten notwendige Timing der Kontrollsignale ist auf 
+der folgenden Seite der Abb. 15 zu entnehmen. Der Schaltplan der Zählerkarte ist in Abb. 16 zu sehen.
+
+Abb. 15:  Timingdiagramm der Zählerkarten
+
+Abb. 16:  Schaltplan TTL-Zählerkarte
+
+3.4.3  ECL-Zählerkarte
+
+Die ECL-Zählerkarte gleicht in ihrem prinzipiellen Aufbau der eben beschriebenen TTL-Zählerkarte. Im Gegensatz zu dieser ist die erste Zählstufe in ECL-Technik 
+(Emitter-Coupled-Logic) ausgeführt, um auch Zählereignisse mit sehr kurzen zeitlichen Abständen (bis ca. 10 ns) noch auflösen zu   können. Mit Hilfe dieser
+Karte ist es möglich, die über einen Diskriminator zu Normimpulsen aufbereiteten Pulse des Photomultipliers, aufzunehmen (Photoncounting). ECL-Schaltungen 
+zeichnen sich durch sehr kurze Gatterlaufzeiten ( ¾ 5 ns) aus, besitzen aber andere Logikpegel als TTL-Bausteine. Deshalb ist es notwendig, die beiden 
+TTL-Eingangssignale mit Hilfe eines TTL/ECL-Konverters (MC10124) für die erste Zählerstufe (MC10154) aufzubereiten. Für die anschließend folgenden TTL-Zähler 
+ist eine erneute Pegelumwandlung nötig. Dies geschieht mit Hilfe des ECL/TTL-Konverters (MC10125). Das Timingdiagramm entspricht dem der TTL-Zählerkarte 
+(Abb. 15). Die Basisadresse des ECL-Zählers beträgt 20h. In Abb. 16 ist der Aufbau der ECL-Zählerkarte zu sehen.
+
+Abb. 17:  Aufbau ECL-Zählerkarte
+
+3.4.4  Hochfrequenz-Dekadeninterface
+
+Es wurde ein Modul zur Ansteuerung der in der Hochfrequenz-Spektroskopie /25/ verwendeten SCHOMANDL Frequenzdekade /26/ entworfen und aufgebaut. Hierbei 
+wurde die Möglichkeit der externen Ansteuerung der einzelnen Stellen der Dekade im BCD-Code ausgenutzt. Um einen Frequenzwert der Dekade über den Rechner 
+mitzuteilen, müssen die zehn Dekadenstellen einzeln übergeben werden. Bei zehn Stellen benötigt man unter der Verwendung der BCD-Codierung insgesamt 40 Leitungen.
+Um Steuerleitungen einzusparen wurde das Multiplexprinzip angewandt. Mit vier Datenleitungen (DATA0 - DATA3) werden die Ziffern 0 bis 9 und mit vier Adreßleitungen
+(ADR0 - ADR3) die jeweils 10 Dekadenstellen dekodiert. Ein Zwischenspeicher (Register A) erlaubt es, die Stellen nacheinander aufzufüllen, und anschließend 
+geschlossen an die Frequenzdekade (Register B) zu übergeben. Die beiden Kontrollsignale ADR-Valid und DATA-Valid ermöglichen die Übergabe der einzelnen 
+Ziffern bzw. des vollständigen Frequenzwertes an die Dekade. Die Ansteuerung erfolgt mit TTL-Pegel in negativer Logik. Befindet sich die Frequenzdekade 
+im Remote-Modus, so hält sie den Frequenzwert, der im Register B enthalten ist. Damit sich Dekade und Rechner im Labor nicht in unmittelbarer Nähe befinden 
+müssen, wurde eine ca. 5 Meter lange 50 Û Koaxial-Leitung über Leitungstreiber aufgebaut. Dieses erlaubt eine störunempfindliche Datenübertragung zwischen 
+Meßwerterfassungssystem und Experiment.
+
+Der zeitliche Verlauf der Eingangssignale am Dekadeninterface für die Übertragung eines vollständigen Frequenzwertes ist in Abb. 18 zu sehen. In Abb. 19 
+ist das Blockschaltbild des Hochfrequenzdekaden-Interface zu sehen.
+
+Abb. 18:  Timingdiagramm der Dekadenansteuerung
+
+Abb. 19:  Blockschaltbild Hochfrequenz-Dekadeninterface
