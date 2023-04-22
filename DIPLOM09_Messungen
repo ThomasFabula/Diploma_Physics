@@ -26,11 +26,11 @@ Die Messungen wurden mit folgenden Parametereinstellungen aufgenommen:
 
 Entladungsparameter:	
 Strom: 		200 mA
-Spannung:		700 - 800  V
+Spannung:	700 - 800  V
 Druck:		1 - 1.5 mbar
 
 Lock-In-Verstärker:
-Zeitkonstante:	  100 ms
+Zeitkonstante:	 100 ms
 Signalamplitude: 400 - 500 mV
 
 
