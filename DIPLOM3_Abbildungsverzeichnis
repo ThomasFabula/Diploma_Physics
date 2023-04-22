@@ -1,0 +1,43 @@
+Abbildungsverzeichnis:
+
+     							 		    Seite    
+                          
+Abb.  1  :  Serielle Rechnerkopplung				 12
+Abb.  2  :  Parallele Rechnerkopplung				 13
+Abb.  3  :  Dual-Port-RAM Rechnerkopplung 			 14
+Abb.  4  :  FIFO Rechnerkopplung 					 16
+Abb.  5  :  Gesamtmeßwerterfassungssystem (MES)         19
+Abb.  6  :  Prinzip der "Dual-Line" Signalübertragung	 24
+Abb.  7  :  Subrechner Interfacekarte			 	 26
+Abb.  8  :  IEEE-488 Meßgeräte-Buskonzept			 28
+Abb.  9  :  FIFO-Rechnerkopplung (PC <-> Subrechner)	 33
+Abb. 10  :  Subrechnersystem und Interface-Bus (IOB)	 37
+Abb. 11  :  Schaltplan VFC-Karte					 39
+Abb. 12  :  VFC-Kennlinie Fluoreszenzeingang			 40
+Abb. 13  :  VFC-Kennlinie Eichmarkeneingang			 40
+Abb. 14  :  VFC-Frequenzhub des Eichmarkeneingangs	 41
+Abb. 15  :  Timingdiagramm der Zählerkarten			 43
+Abb. 16  :  Schaltplan TTL-Zählerkarte				 44
+Abb. 17  :  Aufbau ECL-Zählerkarte					 46
+Abb. 18  :  Timingdiagramm der Dekadenansteuerung		 48
+Abb. 19  :  Blockschaltbild HF-Dekadeninterface		 49
+Abb. 20  :  Speicherbelegung des Subrechners			 57
+Abb. 21  :  Zustandsgraph 
+              a.) Gerichteter Graph		 58
+		  			  b.) Subgraph			 	 58
+Abb. 22  :  Zustandsdiagramm des PC-Terminalprogramms	 59
+Abb. 23  :  Timingdiagramm FLUOTEST				 62
+Abb. 24  :  a.) Gemessenes Timingdiagramm NMI		 64
+   		      b.) Gemessenes Timingdiagramm EICH-Gate	 64
+Abb. 25  :  Gemessenes Timingdiagramm FLUO-Gate		 65
+Abb. 26  :  Flußdiagramm FLUOTEST					 66
+Abb. 27  :  Flußdiagramm SPEKTRUM			 	   70-72
+Abb. 28  :  Gemessenes Zirkon-Spektrum	 	   		 76
+Abb. 29  :  Simuliertes Zirkon-Spektrum 			 77
+Abb. 30  :  Experimenteller Aufbau					 79
+Abb. 31  :  Gemessenes Zr-Spektrum 				 81
+Abb. 32  :  Vergleichs-Zr-Spektrum 				 82
+Abb. 33  :  Übergänge zwischen Taskzuständen			 86
+Abb. 34  :  Prozessorzuteilung bei Multitasksystemen	 87
+Abb. 35  :  Prinzip der bisherigen Scanverfahren		 91
+Abb. 36  :  Prinzip des neuen Scanverfahrens			 93
