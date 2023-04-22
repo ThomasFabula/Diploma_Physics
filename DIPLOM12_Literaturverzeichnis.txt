@@ -1,7 +1,6 @@
 Literaturverzeichnis:
 
 
-
 /1/  :   Wolfram Kress, Diplomarbeit, Univ. Bonn 1985, (unveröffentlicht)
 
 /2/  :   Uwe Urmoneit, Diplomarbeit, Univ. Bonn 1985, (unveröffentlicht)
@@ -95,4 +94,3 @@ Literaturverzeichnis:
 /44/ :   Jens Zander, Event driven multitasking - a syntax, EuroFORML Conferences 1985, USA
 
 /45/ :   Michael Mertes, Diplomarbeit, Univ. Bonn 1987 (unveröffentlicht)
-
