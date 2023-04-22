@@ -33,12 +33,12 @@ Taskzustand:
     │
     ├── wartend (WAIT)   : Task ist 'rechenwillig',
     │				   aber blockiert
-	  │     
-	  ├── laufend (START)  : Task ist aktiv, diesen  Zustand 	
+    │     
+    ├── laufend (START)  : Task ist aktiv, diesen  Zustand 	
     │				   kann jeweils nur ein Task
-	  │				   annehmen
-	  │
-	  └── defekt  (FAIL)   : Task ist in einen fehlerhaften Zustand gelaufen.
+    │				   annehmen
+    │
+    └── defekt  (FAIL)   : Task ist in einen fehlerhaften Zustand gelaufen.
     
 Die untenstehende Abbildung verdeutlicht die Übergänge zwischen den einzelnen Taskzuständen.
 
