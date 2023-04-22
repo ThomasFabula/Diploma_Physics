@@ -1,0 +1,65 @@
+5. Messungen:
+		
+5.1  Experimenteller Aufbau
+
+Das Meßwerterfassungssystem wurde mit Messungen an Zirkon getestet. Hierbei handelte es sich um die Methode der Polarisationsspektroskopie, deren Aufbau in 
+der Arbeit von Ch. Bourauel /40/ ausführlich beschrieben wird.
+
+Zu Kontrollzwecken wurde das alte Z80-Meßwerterfassungssystem parallel zum neuen PC-Meßwerterfassungssystem betrieben, um das von beiden Systemen aufgenommene 
+Fluoreszenzsignal qualitativ vergleichen zu können.
+
+In Abb. 30 ist der Gesamtaufbau des Experimentes zu sehen.
+
+Abb. 30:  Experimenteller Aufbau
+
+5.2  Test des neuen Meßwerterfassungssystems
+
+Das neue PC-Meßwerterfassungssystem wurde anhand der Aufnahme des Übergangs vom Zustand  a 3F3  in den Zustand  z 3F3  von Zirkon mit einer Wellenlänge 
+von 6143.20 Å getestet. Es wurden insgesamt 10 Scans mit verschiedenen Scanweiten aufgenommen. In Abb. 31 ist das Zr-Spektrum für eine Scanweite von 4 GHz 
+zu sehen. Die Scandauer betrug hierbei ca. 6 min. Zum Vergleich ist in Abb. 32 ein bereits ausgewertetes (korrigierte Rechnerskala) vom Z80-System aufgenommenes
+Spektrum /39/ zu sehen. Deutlich sieht man die vier geradzahligen Zirkon-Isotope (90Zr, 92Zr, 94Zr und 96Zr) und einige schwach ausgeprägte Hfs-Komponenten.
+
+Zusätzlich wurden mehrere Scans mit einer Scanweite von 800 MHz im Bereich der geraden Isotope aufgenommen. Hierbei betrug die Scandauer ca. 1.2 min. 
+Im Anhang C sind jeweils zum Vergleich die Aufnahmen des neuen bzw. alten Meßwerterfassungssystems zu sehen.
+
+Die Messungen wurden mit folgenden Parametereinstellungen aufgenommen:
+
+Entladungsparameter:	
+Strom: 		200 mA
+Spannung:		700 - 800  V
+Druck:		1 - 1.5 mbar
+
+Lock-In-Verstärker:
+Zeitkonstante:	  100 ms
+Signalamplitude: 400 - 500 mV
+
+
+Abb. 31:  Gemessenes Zr-Spektrum
+
+Abb. 32:  Vergleichs-Zr-Spektrum ( aus /39/)
+
+
+6. Schlußbemerkung:
+
+Im Vergleich zum alten Z80-Meßwerterfassungssystem zeichnet sich das neue Meßwerterfassungssystem durch eine verminderte Störanfälligkeit im Meßbetrieb aus. 
+Eindeutig war eine Verminderung der 'Ausreißer' im Fluoreszenzspektrum festzustellen, was nicht zuletzt auf den sorgfältigen Aufbau und eine ausreichende 
+Abschirmung der Einzelkomponenten zurückzuführen ist.
+
+Aufgrund des Zwei-Rechnersystem-Konzeptes und der damit verbundenen Trennung der Aufgaben im Meßbetrieb ergaben sich ebenfalls bedeutende Vorteile:
+
+Das Subsystem steht der Meßwerterfassung in Echtzeit voll zur Verfügung. Da im Vergleich zum alten Z80-System kein 'High-Level'-Betriebssystem wie CP/M 
+vorhanden ist und auch die Refreshsignalgenerierung für die dynamischen Speicherbausteine (DRAM) entfällt, ist dem Programmierer eine absolute Kontrolle 
+über das Subsystem gegeben. Im Rahmen des Z80-FORTH-Betriebssystems kann der Programmierer die gesamte Leistungsfähigkeit des Subsystems ausnutzen.
+
+Im Meßbetrieb zeichnete sich das neue Meßwerterfassungssystem durch seine Flexibilität aus. Vorhandene Programmfehler oder Änderungen der Programmroutinen 
+erforderten lediglich ein Umschalten auf den PC (F1-Funktionstaste), ein Editieren der Programmquelldatei und ein anschließendes Laden (LOAD) vom Subsystem aus. 
+Die verschiedenen Programmabschnitte ließen sich anschließend einzeln austesten und auf ihre Funktionstüchtigkeit hin überprüfen. Diese Programmentwicklungs- 
+und Testphase benötigte auf dem alten Z80-Rechnersystem bedeutend mehr Zeit. In dieser Form stellt das neue Zwei-Rechnersystem eine ideale
+Programmentwicklungsumgebung dar.
+
+Die Implementierung von interruptgetriebenen Meßroutinen kann zum Teil ganz entfallen (siehe FLUOTEST), soweit nicht auf unvorhergesehene Ereignisse 
+reagiert werden soll, sondern ein gleichförmiges Scanschema gefahren wird. Dies wird dadurch erst gewährleistet, daß der Z80-Mikroprozessor voll dem 
+FORTH-Interpreter untergeordnet ist und sonst keine weiteren Aufgaben mehr zu erledigen hat.
+
+Auf PC-Seite bieten sich noch einige weitere Verbesserungsmöglichkeiten bezüglich der Steuer- und Meßprogramme an, die in Kapitel 7 abschließend diskutiert werden.
+
