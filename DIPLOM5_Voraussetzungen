@@ -1,0 +1,360 @@
+2. Voraussetzungen für die Arbeit:
+
+2.1  Bisherige Meßwerterfassungssysteme
+
+Die bisher verwendeten Meßwerterfassungssysteme (MES) zeichneten sich einerseits durch ihre relativ geringe Rechenleistung, andererseits durch eine
+begrenzte Erweiterbarkeit in bezug auf ihre Interface- und Hardwarestruktur aus.
+
+
+PDP-8:
+
+Im Falle der PDP-8 von Digital Research Corporation (1968) hatte man es mit einem im Laufe der Zeit veralteten Rechnersystem zu tun, bei dem eine 
+nachträgliche Hardwareerweiterung immer mit einem erheblichen Aufwand an Eigenentwicklung verbunden war.
+Die PDP-8 Rechnerhardware /4/ stellte einen in sich geschlossenen Komplex dar. Die angeschlossene Interfaceeinheit zeichnete sich durch eine schlechte 
+Erweiterbarkeit aus, da sie nicht modular und busorientiert aufgebaut war.
+Auf der Softwareseite standen aufgrund des Teletype-Terminals und einer Lochstreifen-Leser-/Stanzeranlage als externem Massenspeicher ebenfalls keine 
+zeitgemäßen Entwicklungswerkzeuge zur Verfügung. Das Editieren und Erstellen von Programmen erwies sich mit Lochstreifen als Speichermedium als sehr 
+umständlich und fehleranfällig.
+
+
+
+Z80:
+
+Eine erhebliche Verbesserung in Bezug auf Modularisierung im Hardwarebereich stellte die Einführung eines genormten ECB-Mehrplatinenrechners auf der 
+Grundlage des Z80-Mikroprozessors /5/ dar. Als Industriestandard garantierte das ECB-System eine Vielzahl von Hardwarekomponenten für spätere Erweiterungen. 
+Die Möglichkeit des Anschlußes von externen Massenspeichern (1 MB Laufwerke, 8") und die Verwendung des Betriebssystems CP/M 3.0, mit den hier zur Verfügung 
+stehenden Sprachen und Programmen, schafften eine gute Software-Entwicklungsumgebung. Besonders in der Rechenleistung übertraf das Z80-System die PDP-8 
+um einiges: konnten vorher in den optischen Messungen lediglich 256 Meßpunkte pro Scan aufgenommen werden /6/, so steigerte sich die Zahl beim neuen 
+System auf über 30000. Außerdem konnten gleichzeitig über einen zweiten Zählerkanal Eichmarkensignale aufgenommen werden. Die anschließende Auswertung 
+der Messungen kennzeichnete sich durch einen hohen Benutzerkomfort aus, da sie maschinell mittels Datenträger automatisiert wurde. Somit ließ sich die 
+Anzahl der manuell bedingten Fehlerquellen erheblich mindern.
+
+Einige Einschränkungen bei der Programmierung und der Anwendung im Labor ergaben sich beim Z80-System jedoch aufgrund seiner inzwischen überholten Architektur 
+(8 Bit CPU), seines verhältnismäßig niedrigen Arbeitstaktes (1 μs min. Befehlszyklus bei 4 MHz), sowie der geringen Speicheradressierbarkeit (64 kB) der CPU. 
+Zwar ließ sich die Speicherkapazität im Rechner per "Bankswitching" (umschalten auf andere 64 kB-Bereiche) erhöhen, stellte aber im Meßprozeß erhebliche 
+Probleme dar. Der Programmierer war gezwungen, das Betriebssystem CP/M 3.0 zu umgehen, um interruptgetriebene Prozeßsteuerungen auf Assemblerebene realisieren 
+zu können. Das bestehende Experimentinterface ließ sich ebenfalls nur mit beträchtlichen Aufwand erweitern, da es keine definierte Busstruktur aufwies.
+Eine ausführliche Beschreibung des Systems ist in den Arbeiten von W. Kress /1/ und U. Urmoneit /2/ zu finden.
+
+Systemvergleich:
+
+Ein kurze Gegenüberstellung der Rechnersysteme soll einen Überblick über deren Leistungsfähigkeit geben:
+
+
+1.)  PDP-8 Rechnersystem:
+
+	Modell:		 1968
+	Firma:			 Digital Research Corporation
+	Speicher: 		 4 k Worte á 12 Bit
+	CPU:			 12 Bit
+	Takt:		 	ca. 1 MHz
+	Befehlszyklus:  	ca. 1.5 - 3 μs
+	Technik:  	 	diskreter Aufbau (DTL-Technik)
+	Betriebssystem: 	-
+	Bussystem:		 -
+	Massenspeicher: 	Lochstreifen
+	Terminal:		Teletype (110 Baud)
+
+
+
+2.)  ECB Rechnersystem:
+
+	Modell:		 1980
+	Firma:			 Janich & Klass
+	Speicher:		 64 kB RAM
+	CPU:			 8 Bit (Z80)
+	Takt:			 4 MHz
+	Befehlszyklus: 	 ca. 1 - 1.6 μs
+	Technik:		 TTL, LSI
+	Betriebssystem:	 CP/M 3.0
+	Bussystem:	 	ECB (Europa-Card-Bus)
+	Massenspeicher:	 Disketten (1 MB, 8")
+	Terminal:		 Bildschirm u. Tastatur
+				 (max. 9600 Baud)
+				 Grafikbildschirm (750 x 256 Pixel)
+
+3.)  PC-XT Hostrechnersystem:
+
+	Modell:		 1985
+	Firma:			 IBM PC-XT kompatibel
+	Speicher:		 640 kB RAM
+	CPU:			 8 Bit (8088) - intern 16 Bit	
+	Takt:			 umschaltbar  4.77 / 8 MHz
+	Befehlszyklus:	  0.4 / 0.25 μs
+	Technik:		 TTL, VLSI, SMD
+	Betriebssystem:	 PC-DOS 3.x
+	Bussystem:		 IBM PC-Bus
+	Massenspeicher: 	Disketten  (1.2 MB, 360 kB, 5¼")
+				 Festplatte (32 MB)
+	Terminal:		 grafikfähiger Bildschirm
+				 (Grafikauflösung: 720 x 348 Pixel)
+
+
+
+	ECB Subrechnersystem:
+
+	Modell:		 1985
+	Firma:			 Janich & Klass  (CPU-IV)
+	Speicher:		 64 kB SRAM
+	CPU:			 8 Bit (Z80-kompatibel)
+	Takt:			 4 MHz
+	Befehlszyklus: 	 ca. 1 μs (siehe oben)
+	Technik:		 CMOS, TTL, LSI
+	Betriebssystem: 	LMI Z80-FORTH
+	Bussystem:		 ECB (Europa-Card-Bus)
+	Massenspeicher: 	entfällt
+	Terminal:		 entfällt
+
+2.2  Anforderungen an das neue Meßwerterfassungssystem
+
+Die Aufgabe der Arbeit bestand darin, ein vollständiges Meßwerterfassungssystem auf der Basis eines PC-kompatiblen Rechners für die Hochfrequenz- 
+und optische Laserspektroskopie aufzubauen und im Laborbetrieb zu testen. Dieses umfaßte die Erstellung von Programmen für die Kommunikation der 
+beiden Rechner, sowie eines Testmeßprogramms zur Steuerung eines Experiments.
+
+Im Einzelnen umfaßte die Planung folgende Punkte:
+
+
+  -	Analyse des Experimentes:
+
+	* Welche Größen sollen gemessen werden ?
+	* Welche Parameter sollen gesteuert werden ?
+	* Welche Reaktionszeiten bedingen das Experiment ?
+
+
+  - 	Rechnerkonzipierung:
+
+	* Wie weit soll der Rechner ausgebaut sein ?
+	* Soll eine 'Online/Offline'-Steuerung erfolgen ?
+	* Speicherkapazität, Rechengeschwindigkeit ?
+	* Verwendung normierter Systeme
+	  (19"-Rack, ECB, PC-Bus, etc.)
+
+
+  -	Interface-Elektronik:
+
+	* Störsicherheit der Meßwertaufnehmer
+	* Genauigkeit der Meßwerterfassung
+	* Geschwindigkeit der Meßwerterfassung
+	* Externes Subsystem oder interne Steckkarte ?
+	* Verfügbarkeit von Hardware-Entwicklungswerkzeugen ?
+	* Diskussion der Vor-/Nachteile der Wraptechnik
+
+  -	Softwarekonzipierung:
+
+	* Auswahl der Programmiersprache 	
+	* Umgehung des Betriebssystems notwendig oder nicht ?
+	* Interrupt- oder Polling-Verfahren ?
+	* Vorabreduktion der Daten erforderlich/möglich ?
+	* Verfügbarkeit von Software-Entwicklungswerkzeugen ?
+	* Wartbarkeit und Erweiterbarkeit der Programme
+
+
+  -	Systemkosten:
+
+	* Gesamtsystemkosten sollten minimal gehalten werden
+	* Vergleich der auf dem Markt befindlichen MES
+	* Entscheidung: Eigenentwicklung / Standardlösung
+
+2.2.1  Hardware-Anforderungen
+
+Im Folgenden sind die wichtigsten Gesichtspunkte aufgeführt, durch die sich das Meßwerterfassungssystem in der Entwicklung und im Laborbetrieb auszeichnen muß.
+
+
+-	Schnelle Reaktion auf Meßabläufe und eine hohe 	Ausführungsgeschwindigkeit bei Berechnungen:
+		* Auflösung im 10 - 1000 ms Bereich (Online)
+		* μs-Bereich im 'Offline'-Betrieb
+ 
+-    Hohe Sicherheit gegen äußere Störeinflüsse bei der 	Signalübertragung und Spannungsversorgung:
+		* Netzfilter bei der Primärspannungsversorgung
+		* Starkes, stabilisiertes Sekundärnetzteil
+		* Gute Wärmeableitung im gesamten MES
+
+-	Möglichkeit der Erfassung folgender Signale:
+		* Lock-In Verstärker
+		* Photomultiplier
+		* etc.
+
+-	Modularisierung der Meßeinschübe und eine daraus 	resultierende Definition eines Interface-Busses:
+		* analoge VFC - Zählermodule
+		  (Voltage-to-Frequency-Converter)
+		* schneller ECL - Zähler (Photoncounting)
+		* Frequenzdekadenansteuerung		
+
+		( in Planung:
+			* Single Bit Ein-/Ausgabe (digital)
+			* A/D-Wandlermodule
+			* D/A-Wandlermodule
+			* etc. )
+
+-	Entlastung des Hauptrechners (Host) durch ein autonomes Subsystem:
+		* Datenerfassung in Echtzeit möglich
+		* Umgehung des PC DOS-Betriebssystems
+		* Programmierung auf Maschinenebene
+		* wählbare 'On-/Offline' Datenerfassung
+
+-	Mechanische Stabilität des Gesamtaufbaus
+
+-	Verwendung normierter Systeme:
+		* Rechner - Bus (PC, ECB)
+		* 19" - Gehäusetechnik
+
+-	Verwendung der Wraptechnik bei Prototypentwicklung:
+		* Schnelle Schaltungsänderungen möglich
+		* Hohe mechanische Stabilität
+		* Saubere Verarbeitung
+
+-	Möglichkeit der Verwendung eines In-Circuit-Emulators:
+		* Testen der Z80-Prozessorkarte
+		* Testen der ECB-Subsystemkomponenten
+
+-	Option zur späteren Erweiterung auf allen Ebenen:
+		* Hostrechner (16 bzw. 32 Bit Technologie)
+		* Subsystem (ECB-Erweiterungskarten)
+		* Anschluß zusätzlicher 'Stand-alone'-Systeme
+		  (Laserregelung, Wellenlängenmesser, etc.)
+		* Interfaceeinheit (IOB-Normierung)	
+
+2.2.2  Software-Anforderungen
+
+
+Da die Funktion des Meßwerterfassungssystems im Wesentlichen durch die Software bestimmt werden soll, müssen hier besondere Anforderungen berücksichtigt werden:
+
+
+-	Modularität der Programmteile und Unterprogramme, um 	ein sukzessives Austesten zu gewährleisten:
+		* FORTH  (Worte)
+		* Pascal (procedure, function)
+		
+-	Ausreichende Dokumentation aller Programmteile für 	nachfolgende Erweiterungen durch andere Programmierer
+
+-	Definierte Software-Schnittstellen:
+		* Aufrufkonvention bei Pascal
+		* Parameterübergabe (Stack) bei FORTH
+
+-	Variabilität des MES durch Software realisieren
+
+-	FORTH-Betriebssystem erweiterbar gestalten
+
+-	Meßprogramme sollten ins RAM geladen werden
+	(Programmtransfer über PC-Rechner)
+
+-	Grundlegende Routinen sollten im EPROM enthalten sein
+
+-	Interruptverarbeitung auf PC-Seite minimieren
+	(Ein Systemzusammenbruch während der Messung muß auf jeden Fall vermieden werden.) 	
+
+-	Sichere Benutzerführung auf allen Ebenen:
+		* Programmebene
+		* PC-DOS Betriebssystem
+		* Batchbetrieb
+
+-	Sichere Verwaltung des Datenaufkommens
+
+-	Auswahl der Programmiersprache:
+		* FORTH mit Assembler für maschinennahe Routinen
+		* Turbo-Pascal als Hochsprache (num. Auswertung)
+
+-	Verwendung von Softwareentwicklungswerkzeugen:
+		* Debugger, Tracer
+		* Emulatoren (ICE)
+		* Metacompiler
+		* FORTH-Interpreter
+		* etc.
+
+-	Ergonomische Gestaltung der Benutzeroberfläche bei
+	Programmen:
+		* Größtmögliche Reduzierung aller Eingaben
+		* Vermeidung von Falscheingaben
+		* Ausführliche Hilfs- und Fehlermeldungen
+
+2.3  Rechnerkopplung
+
+Das Problem der Echtzeitverarbeitung führte schnell zu der Notwendigkeit, zwei unabhängige Rechnersysteme einzusetzen. Die beiden verwendeten Systeme 
+stellen jeweils einen 'Industriestandard' (IBM-PC und ECB) dar. Schwieriger gestaltete sich jedoch die Lösung des Kommunikationsproblems der beiden Systeme. 
+Ein Vergleich der allgemein eingesetzten Rechnerkopplungen /7/ soll die Entscheidung für das hier verwendete Konzept verdeutlichen.
+Im folgenden sollen die wichtigsten prinzipiellen Möglichkeiten der Kopplung zweier Rechner vorgestellt und miteinander verglichen werden. In Kapitel 3 
+wird auf technische Einzelheiten der entsprechenden Schnittstellen weiter eingegangen.
+
+Serielle Rechnerkopplung:
+Die serielle Rechnerkopplung (RS-232 Norm) stellt die verbreitetste Art dar, Rechner untereinander bzw. Rechner mit Peripheriegeräten zu verbinden. 
+Die Kommunikation erfolgt über jeweils eine Leitungsverbindung pro Datenrichtung.
+
+Vorteile:  
+	* Lange Übertragungsstrecken möglich
+	* Nur eine Leitungsverbindung nötig
+
+Nachteile:
+	* Langsamste aller Datenkommunikationen, da seriell
+	* Handshake (Hard- und/oder Software) erforderlich,
+	  sodaß beide Rechner während der Kommunikation für
+	  Echtzeit-Meßabläufe blockiert sind
+	* Rechner sind nicht unabhängig voneinander
+
+Abb. 1:  Serielle Rechnerkopplung
+
+Parallele Rechnerkopplung:
+
+Die parallele Rechnerkopplung stellt eine einfache Art dar, zwei Systeme miteinander zu verbinden. Der Parallel-I/O-Baustein (PIO), der direkt an 
+den Rechnerbus angeschlossen wird, kommuniziert mit Hilfe der "Handshake"-Leitungen mit dem anderen System. Das READY-Signal kündigt die Bereitschaft 
+zum Empfang von Daten an, das STROBE-Signal teilt die Übergabeabsicht der Daten mit. Dieses Verfahren verdeutlich besonders, daß beide Rechner voneinander 
+abhängig sind und für die Kommunikation synchronisiert werden müssen.
+
+Vorteile:  
+	* Schnelle Datenübertragung, da parallel (8-Bit)
+	* Einfache Programmierung des PIO-Bausteins
+
+Nachteile:
+	* zeitaufwendiger Handshake (Hard- und Software)
+	  erforderlich
+	* Beide Rechner sind während der Kommunikation für
+	  Echtzeit-Meßabläufe blockiert
+ 	* Rechner sind nicht unabhängig voneinander
+
+
+Abb. 2:  Parallele Rechnerkopplung
+
+Dual-Port-RAM (DPR) Rechnerkopplung:
+
+Die Rechnerkopplung erfolgt über einen Zweitor-Speicher, der an beide Datenbusse direkt angeschlossen ist. Beide Rechner können unabhängig voneinander 
+direkt schreibend und lesend auf die Speicherzellen des RAM zugreifen. Diese Speicherzugriffe können gleichzeitig erfolgen, sofern nicht die gleiche 
+Speicherstelle gemeint ist. Es muß eine eindeutige Speicherzuteilung erfolgen. Dieses übernimmt eine Arbitrierungslogik /8/, die ausschließt, daß nicht 
+gleichzeitig beide Rechner auf die gleiche (phys.) Speicherstelle schreibend zugreifen.
+
+Vorteile:  
+	* Datenübertragungsrate sehr hoch (parallel)
+	* Asynchrone Kommunikation möglich
+
+Nachteile:
+	* Direkter Busanschluß an PC und Z80 schwierig	
+	* Kommunikationsprotokoll muß gleichzeitigen Schreib-
+	  und Lesezugriff ggf. ausschließen
+	* teurer als Seriell- und Parallelbausteine	
+
+
+Abb. 3:  Dual-Port-RAM Rechnerkopplung
+
+FIFO Rechnerkopplung:
+
+Hier erfolgt die Rechnerkopplung über einen Pufferspeicher, der die zeitliche Reihenfolge der ankommenden Daten bewahrt. Im Prinzip entspricht der 
+Datenpuffer einem Zweitor-Speicher, bei dem jedoch das FIFO (First-In-First-Out) selbst die Arbitrierung vornimmt.
+Eine zusätzliche FIFO-Logik erlaubt es, den Inhalt des Datenpuffers jederzeit zu lesen, zu löschen, u.a. verschieden bedingte Interrupts zu generieren. 
+Im dynamischen Betrieb erlaubt das FIFO eine Pufferung der Daten und entlastet somit die Schnittstellenkommunikation. Beide Rechner können gleichzeitig s
+chreibend und lesend auf den Datenpuffer zugreifen. Eine Rechnerkopplung mit den Zilog FIFO's ist inzwischen zu einem Standardverfahren geworden (siehe z.B. /9/).
+
+Vorteile:  
+	* Datenübertragungsrate sehr hoch (parallel)
+	* Asynchrone Rechnerkommunikation möglich
+	* Zeitliche Entkopplung der Rechnersysteme während der
+	  Kommunikation, sodaß beide Rechner voneinander
+	  unabhängig sind
+	* Direkter Busanschluß beim Z80-System möglich
+	* Zeitliche Reihenfolge der Daten bleibt erhalten
+	* Dynamischer Pufferbetrieb
+	
+Nachteile:
+	* Programmierung des Bausteins aufgrund der Vielzahl
+	  von Möglichkeiten relativ aufwendig
+	* teurer als Seriell- und Parallelbausteine	
+
+
+Abb. 4:  FIFO Rechnerkopplung
+
