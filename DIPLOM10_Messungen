@@ -1,0 +1,161 @@
+7. Ausblick:
+
+7.1 Interface-Erweiterungen
+
+Das Interfacebus-Konzept (IOB) bietet flexible Möglichkeiten für die Erweiterung der physikalischen Schnittstellen zum Experiment.
+
+Aufgrund seiner Busstruktur können z.B. externe A/D- bzw. D/A-Wandler direkt an den DATA-IN bzw. DATA-OUT Bus angeschlossen werden. Die zur Steuerung 
+nötigen Kontrollsignale lassen sich mit Hilfe des 8 Bit breiten Kontroll-Bus generieren. Eine spätere zusätzliche Dekodierung der vier unteren Adreßbits
+(A0...A3) erlaubt es nötigenfalls bis zu 256 Meßmodule und Interfacekarten anzuschließen.
+
+Um auch direkt digitale Signale (TTL-Pegel) verarbeiten zu können, bietet sich der Einsatz von Latches (z.B. 74xx374) an. Im einzelnen sei hier auf 
+Standardinterfaceschaltungen, wie in /41/ beschrieben, bzw. auf die im Rahmen der Z80-MES-Erweiterung entwickelten Interfacekarten (A/D-Wandlerkarte, 
+Single-Bit I/O) und deren Beschreibung in /3/ verwiesen.
+
+Zusätzlich bieten viele Hersteller (Janich & Klass, Oettle & Reichler, etc.) preiswerte I/O-Karten mit komplexen, programmierbaren Bausteinen (CIO, STI, etc.) 
+auf ECB-Einsteckkarten an, sodaß man sich hier zeitaufwendige Eigenentwicklungen sparen kann.
+
+
+7.2  Multitasking-System
+
+Auf Softwareebene läßt sich das Meßwerterfassungssystem in Bezug auf seine Echtzeitfähigkeit erheblich erweitern, wenn man zur (quasi) Parallelverarbeitung 
+übergeht.
+
+Unter dem verwendeten LMI-FORTH (Version 3.x) ist es möglich, ein Multitaskingsystem zu implementieren. Hierbei versteht man unter einem Task ein 
+Anwenderprogramm, das unter Kontrolle des Betriebssystems (in diesem Fall FORTH) läuft /42, 43, 44/. Ein Task, der einem bestimmten Rechenprozeß entspricht, 
+besitzt hierbei eine bestimmte Priorität und Speicherzuweisung. Abhängig von der Arbeitsspeichergröße des Rechners (PC-DOS : 640 kB) werden den einzelnen 
+Tasks verschieden große Adreßräume zugeordnet. Jeder Task besitzt seinen eigenen Parameter- und Returnstack. Eine Kommunikation zwischen den Tasks (Austausch 
+von Daten) geschieht über gemeinsame Datenfelder ('Shared-Data'). Während des Programmablaufs können die Tasks verschiedene Zustände einnehmen:
+
+Taskzustand:
+    │    
+    ├── inaktiv (STOP)   : Task ist beendet
+    │
+    ├── wartend (WAIT)   : Task ist 'rechenwillig',
+    │				   aber blockiert
+	  │     
+	  ├── laufend (START)  : Task ist aktiv, diesen  Zustand 	
+    │				   kann jeweils nur ein Task
+	  │				   annehmen
+	  │
+	  └── defekt  (FAIL)   : Task ist in einen fehlerhaften Zustand gelaufen.
+    
+Die untenstehende Abbildung verdeutlicht die Übergänge zwischen den einzelnen Taskzuständen.
+
+
+
+Abb. 33:  Übergänge zwischen Taskzuständen (nach /7/)
+
+Tasks, die ihrerseits sequentiell ablaufen, werden unter FORTH parallel abgearbeitet. Sie werden im sog. 'Time-Sharing'-Verfahren behandelt, d.h. 
+ein bestimmtes Zeitintervall wird in so viele Zeitscheiben eingeteilt, wie Tasks vorhanden sind. Hierbei erhalten alle Tasks die gleiche Priorität.
+Die Prozessorzuteilung für die Tasks erfolgt im Umlaufverfahren (Abb. 34)
+
+
+Abb. 34:  Prozessorzuteilung bei Multitasking ( nach /7/)
+
+
+Struktur eines parallelen Meßprogramms:
+
+Aufgrund der gleichzeitig anfallenden Aufgaben wie Datenaufnahme und Vorauswertung (siehe hierzu Kapitel 7.3) bedarf es hier parallel konkurrierender
+Tasks. Eine mögliche Implementierung eines solchen Meßprogramms im LMI-FORTH Multitasker zeigt folgendes Beispiel:
+
+TASKER		( Aktivieren des Multitaskers )
+					( wird nur einmal aufgerufen. )
+          (Erzeugen der Task-Control-Blocks)
+PSD1 RSD1 BUILD  GET&SAVE_DATA    
+PSD2 RSD2 BUILD  ANALYZE_DATA     
+					( PSD = Parameter-Stack-Tiefe    )
+					( RSD = Return-Stack-Tiefe	   )
+
+: GET&SAVE ... ; ( FORTH-Worte: * Schnittstelle abfragen  )
+				( 			 * Datensicherung	  )
+				(			 * Dateiverwaltung	  )
+: ANALYZE ... ; ( FORTH-Worte: * Prüfen der Gütekriterien )
+				( 			 * Berechnungen	   )
+				(			 * Interpolationen 	   )
+				(			 * Grafische Darstell. )
+				(			 * etc.			   )
+
+( ANALYZE-Task wird deaktiviert )
+: STOP_ANALYZE  ANALYZE_DATA  SLEEP ;
+
+( ANALYZE-Task wird erneut aktiviert )
+: RESTART_ANALYZE  ANALYZE_DATA  ACTIVE ;
+
+( GET&SAVE-Task wird deaktiviert )
+: STOP_GET&SAVE  GET&SAVE_DATA  SLEEP ;
+
+( Hauptroutine )
+: MAIN						
+        GET&SAVE_DATA   START		( Task starten )
+	   BEGIN					( Schleifenbeginn )
+		...
+		DATA?				( Daten vorhanden ? )
+	 	IF
+			STOP_ANALYZE   	( ANALYZE-Task beenden )
+			@DATA			( Daten einlesen )
+			SAVE				( Daten sichern  )
+		ELSE RESTART_ANALYZE 	( Analyse fortsetzen)
+		THEN	PAUSE  	( GET&SAVE-Task unterbrechen )
+	   AGAIN  ;
+
+( ...das eigentliche Meßprogramm )
+: MESSUNG
+		...
+		ANALYZE_DATA  START	( Start der Datenanalyse )
+						( als Hintergrund-Task	)   
+		MAIN				( Abfrage der Meßdaten-	)
+						( Schnittstelle		)
+		STOP_ANALYZE		( Deaktiviere den Hinter-)
+						( grund-Task ANALYZE	)
+		GET&SAVE_DATA STOP	( Deaktiviere den Vorder-)
+					     ( grund-Task GET&SAVE_DATA )
+		...
+;
+
+Die obige 'Polling'-Abfrage, ob Daten vom Subsystem bereit stehen, sollte für zeitkritische Anwendungen durch einen Interruptbetrieb ersetzt werden, 
+denn Hardwareinterrupts garantieren schnellste Verarbeitungsgeschwindigkeiten bis hinunter in den μs-Bereich.
+
+7.3  Neue Scanverfahren
+
+Mit Hilfe des neuen Rechnerkonzeptes ist es möglich rechenintensivere Meßalgorithmen als bisher zu verwenden. Wie bereits vorher schon angedeutet,
+kann durch eine geeignet gewählte Meßaufgabenverteilung das in Echtzeit arbeitende Subsystem den Auswerterechner weitgehend entlasten. Hierbei kann 
+er PC-Rechner für die Vorauswertung und Beurteilung der Meßdaten bereits während des Experiments herangezogen werden.
+
+
+Optische Messungen:
+
+Bei den Laserfluoreszenzmessungen ergibt sich das Problem der Aufnahme des Signals des Eichmarkeninterferometers /45/. Im bisherigen Laborbetrieb zeichnet 
+sich das Eichmarkenspektrum bei einem freien Spektralbereich (FSR) von ca. 60.67 MHz durch zufällige Schwerpunktsverschiebungen und Amplitudenschwankungen 
+der Eichmarken aus. Anstatt wie bisher die 'schlechten' Eichmarken bei der Datenauswertung mitzufitten bzw. vollkommen wegzulassen, wäre es mit dem neuen 
+System möglich, gezielt einen neuen Scan vorzunehmen. Das auf dem PC-System ablaufende Datenreduktionsprogramm könnte anhand von vorher definierten 
+Gütekriterien das Weiterverarbeiten der experimentell gewonnenen Daten direkt beeinflussen. Geeignete Gütekriterien könnten z.B. eine Festlegung der 
+zu erwartenden Eichmarkenabstände (FSR) und Halbwertsbreiten (Õ ̧ 8 ± 2 MHz) sein. 'Ausreißer' bei den Fluoreszenzzählraten, bedingt durch äußere 
+Störeinflüsse auf die Interface-Elektronik, könnten ebenfalls unter Softwarekontrolle behoben werden.
+
+Die direkte Rückkopplung des Meßwerterfassungssystems aufgrund der sofort einsetzenden Meßdatenanalyse würde die Güte der aufgenommenen Spektren 
+erheblich erhöhen und  wesentlich zur Reduktion der Meßdaten beitragen.
+
+Abb. 35:  Prinzip der bisherigen Scanverfahren
+
+Hochfrequenz Messungen:
+
+Im Gegensatz zu den optischen Messungen läßt sich die dem Experiment eingespeiste Frequenz genau einstellen. Die Frequenzdekaden lassen sich unter
+Rechnerkontrolle auf 0.1 Hz genau justieren. Dieses ermöglicht "punktuelle" Messungen bei unterschiedlichsten Frequenzwerten. Störungen, die sich
+niederfrequent auf den Atomstrahl (rotierendes Target) auswirken, könnten durch eine geeignet ausgewählte aber zufällige Frequenzverteilung (random)
+behoben werden, sofern diese gleichverteilt ist.
+
+Der Langzeitdrift der Apparatur tritt allerdings aufgrund des nicht beliebig lang konstant gehaltenen Magnetfeldes auf. Eine in Echtzeit geführte 
+Verarbeitung des Kontrollsignals (Vergleich von Soll- und Istwert) der neu entwickelten Magnetfeldregelung /25/ könnte dem Steuerprogramm das notwendige 
+Gütekriterium zur Datenauswahl liefern.
+
+
+Abschließend kann man festhalten, daß Unzulänglichkeiten, die durch Meßapparatur und Experiment bedingt sind, durch eine geeignete Auswahl von 
+Meßdatenreduktionsprogrammen und entsprechenden Gütekriterien softwaremäßig begegnet werden kann.
+
+Eine Voraussetzung hierfür ist die notwendige Rechnerleistung und sinnvolle Aufgabenverteilung während der Experimentsteuerung. 
+Das hier beschriebene Zwei-Rechnersystem erfüllt diese Bedingungen und eröffnet neue Möglichkeiten für komplexere Scanverfahren.
+
+Abb. 36:  Prinzip des neuen Scanverfahrens
+
+
