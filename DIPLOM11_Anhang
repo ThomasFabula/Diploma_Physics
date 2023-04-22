@@ -1,0 +1,58 @@
+Anhang
+
+A.  Blockschaltbilder / Schaltpläne
+B.  Bestückungspläne / Anschlußbelegungen
+C.  Gemessene Spektren
+D.  Auswerteprogramme
+
+
+Anhang A:   Blockschaltbilder / Schaltpläne
+
+Anhang B:   Bestückungspläne / Anschlußbelegungen
+
+Anhang C:   Gemessene Spektren
+
+Anhang D:  Auswerteprogramme
+
+Für die Auswertung von Hfs-Messungen stehen folgende Programme auf dem PC zur Verfügung:
+
+HFSFIT:  
+Dieses Programm stellt die PC-Version des auf der IBM3081 bereits erfolgreich eingesetzten HFSFIT-Programms dar. Unter der Voraussetzung, 
+daß den gemessenen Linien (Ei, ⌂Ei) die entsprechenden Übergänge (Fu, Fo) bereits zugeordnet wurden, berechnet das Programm die A- und B-Faktoren 
+für den entsprechenden FS-Übergang. Das Programm erzeugt Parameterdateien (*.PAR) für die anschließende Spektrensimulation mit den Programmen HFSSPEK 
+bzw. SPEKTRUM.
+
+( Batchdatei : HF.BAT )
+
+HFSSPEK:
+Dieses Programm berechnet das Hfs-Spektrum eines ungeradzahligen Isotops (z.B.: 51V).
+( Batchdatei : HSPEK.BAT )
+
+SPEKTRUM:
+Dieses Programm berechnet das Spektrum eines ungeradzahligen Isotops (z.B.: 91Zr) und max. sechs weiterer gerader Isotope (z.B.: 90Zr, 92Zr, 94Zr und 96Zr).
+( Batchdatei : SPEK.BAT )
+
+ISOTOP:
+Dieses Programm berechnet das Hfs-Spektrum zweier ungeradzahliger Isotope (Hfs-Aufspaltung beider Isotope).
+( Batchdatei : ISO.BAT )
+
+ISOTOPG:
+Dieses Programm berechnet das Spektrum zweier ungeradzahliger Isotope (z.B.: 95Mo, 97Mo) und max. sechs weiterer gerader Isotope 
+(z.B.: 92Mo, 94Mo, 96Mo, 98Mo und 100Mo).
+( Batchdatei : ISOG.BAT )
+
+
+Eine ausführliche Beschreibung der Programmbedienungen sowie die Quelldateien aller zur Funktion obiger Programme nötigen Module ist in /38/ zu finden.
+
+
+Danksagung
+
+Herrn Prof. Dr. S. Penselin danke ich für die Möglichkeit, diese Arbeit am Institut für Angewandte Physik ausführen zu können.
+
+Herrn Prof. Dr. S. Büttgenbach sei für das interessante Thema der Arbeit gedankt.
+
+Zu besonderem Dank bin ich Herrn Dipl.-Phys. W. Rupprecht, Herrn Dipl.-Phys. T. Brenner und Herrn W. Gutsch für die fortwährende Hilfe bei 
+der Durchführung der Arbeit sowie für die zahlreichen anregenden Diskussionen verpflichtet.
+
+Danken möchte ich auch den Mitarbeitern der Elektronik-Werkstatt, vor allem Herrn Dipl.-Ing. K.D. Krause für die überaus hilfreiche Unterstützung 
+bei der MES-Entwicklung, insbesondere bei der Implementation der FORTH-Systeme.
