@@ -43,48 +43,48 @@ einen ersten Eindruck der Leistungsfähigkeit der Datenübertragung:
 	Pegel	 	 :	'0' = 3..15 V, '1' = -3..-15 V
 	Baudrate	 :	2 ̈ 104 [Bit / s]
 	Stationen	 :	1
-	max. Länge :	ca. 30 m
-	Übertragung:	asynchron
+	max. Länge 	 :	ca. 30 m
+	Übertragung	 :	asynchron
 	Anwendung	 :	Rechnerperipherie
 
 
 2.)  CENTRONICS:
 	Art		 :	parallel (8 Bit, unidirektional)
-	Pegel	 :	TTL
+	Pegel	 	 :	TTL
 	Baudrate	 :	106 [Bit / s]
 	Stationen	 :	1
-	max. Länge :	ca. 2 m
-	Übertragung:	-
+	max. Länge 	 :	ca. 2 m
+	Übertragung	 :	-
 	Anwendung	 :	Druckerschnittstelle
 
 
 3.)  IEEE-488:
 	Art		 :	parallel (8 Bit)
-	Pegel	 :	'0' = 5 V, '1' = 0 V
+	Pegel	 	 :	'0' = 5 V, '1' = 0 V
 	Baudrate	 :	2 ̈ 106 [Bit / s]
 	Stationen	 :	15
-	max. Länge :	2..20 m
-	Übertragung:	asynchron
+	max. Länge	 :	2..20 m
+	Übertragung	 :	asynchron
 	Anwendung	 :	Laborautomatisierung
 
 
 4.)  IOB:
 	Art		 :	parallel (16 Bit Input, 16 Bit Output)
-	Pegel	 :	TTL
+	Pegel	 	 :	TTL
 	Baudrate	 :	ca. 4 ̈ 105 [Bit / s]
 	Stationen	 :	256
-	max. Länge :	¾ 10 m
-	Übertragung:	synchron
+	max. Länge	 :	¾ 10 m
+	Übertragung	 :	synchron
 	Anwendung	 :	Meßwerterfassung
 
 
 5.)  FIFO:
 	Art		 :	parallel (16 Bit Input, 8 Bit Output)
-	Pegel	 :	TTL
+	Pegel	 	 :	TTL
 	Baudrate	 :	ca. 4 ̈ 106 [Bit / s]
 	Stationen	 :	1
-	max. Länge :	¾ 2 m
-	Übertragung:	asynchron
+	max. Länge 	 :	¾ 2 m
+	Übertragung	 :	asynchron
 	Anwendung	 :	Rechnerkopplung
 
 Die Schnittstelle zum physikalischen Experiment ist ein universaler Input/Output-Bus (IOB). Es wurde eine einheitliche Busstruktur realisiert, an die 
@@ -134,8 +134,10 @@ NEC FD 1255 (1.2 MB Speicherkapazität) und des Typs NEC FD 1205 (360 kB Speiche
 Damit der Rechner mit externen Peripheriegeräten kommunizieren kann, ist es notwendig, zusätzliche Schnittstellen bereit zu stellen. Dies geschieht mit Hilfe 
 der Multifunktionskarte, die zwei serielle Schnittstellen (COM1 und COM2), eine zusätzliche parallele Schnittstelle (LPT2) sowie drei analoge Eingänge (Gameport) 
 besitzt.
+
 Hinzu kommt eine gepufferte Echtzeituhr, die vom Betriebssystem abgefragt werden kann und beim Abspeichern der Dateien automatisch das Datum und die Uhrzeit 
 protokolliert.
+
 Mit Hilfe der beiden seriellen Schnittstellen nach RS-232-Norm lassen sich Standard-Peripheriegeräte wie Plotter (HP 7475A) und Eingabemedium "Maus" 
 (Microsoft-kompatibel) anschließen. Im Meßbetrieb wird an diese Schnittstellen das Z80-Laserinterface /1/, welches den Coherent Farbstofflaser (COM1) 
 ansteuert, und der ECB-Subrechner (COM2) angeschlossen.
