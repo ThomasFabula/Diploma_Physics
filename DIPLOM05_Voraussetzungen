@@ -43,15 +43,15 @@ Ein kurze Gegenüberstellung der Rechnersysteme soll einen Überblick über dere
 
 1.)  PDP-8 Rechnersystem:
 
-	Modell:		 1968
-	Firma:			 Digital Research Corporation
-	Speicher: 		 4 k Worte á 12 Bit
-	CPU:			 12 Bit
+	Modell:		 	1968
+	Firma:			Digital Research Corporation
+	Speicher: 		4 k Worte á 12 Bit
+	CPU:			12 Bit
 	Takt:		 	ca. 1 MHz
 	Befehlszyklus:  	ca. 1.5 - 3 μs
 	Technik:  	 	diskreter Aufbau (DTL-Technik)
 	Betriebssystem: 	-
-	Bussystem:		 -
+	Bussystem:		-
 	Massenspeicher: 	Lochstreifen
 	Terminal:		Teletype (110 Baud)
 
@@ -59,51 +59,51 @@ Ein kurze Gegenüberstellung der Rechnersysteme soll einen Überblick über dere
 
 2.)  ECB Rechnersystem:
 
-	Modell:		 1980
-	Firma:			 Janich & Klass
-	Speicher:		 64 kB RAM
-	CPU:			 8 Bit (Z80)
-	Takt:			 4 MHz
-	Befehlszyklus: 	 ca. 1 - 1.6 μs
-	Technik:		 TTL, LSI
-	Betriebssystem:	 CP/M 3.0
+	Modell:		 	1980
+	Firma:			Janich & Klass
+	Speicher:		64 kB RAM
+	CPU:			8 Bit (Z80)
+	Takt:			4 MHz
+	Befehlszyklus: 		ca. 1 - 1.6 μs
+	Technik:		TTL, LSI
+	Betriebssystem:	 	CP/M 3.0
 	Bussystem:	 	ECB (Europa-Card-Bus)
-	Massenspeicher:	 Disketten (1 MB, 8")
-	Terminal:		 Bildschirm u. Tastatur
-				 (max. 9600 Baud)
-				 Grafikbildschirm (750 x 256 Pixel)
+	Massenspeicher:	 	Disketten (1 MB, 8")
+	Terminal:		Bildschirm u. Tastatur
+				(max. 9600 Baud)
+				Grafikbildschirm (750 x 256 Pixel)
 
 3.)  PC-XT Hostrechnersystem:
 
-	Modell:		 1985
-	Firma:			 IBM PC-XT kompatibel
-	Speicher:		 640 kB RAM
-	CPU:			 8 Bit (8088) - intern 16 Bit	
-	Takt:			 umschaltbar  4.77 / 8 MHz
-	Befehlszyklus:	  0.4 / 0.25 μs
-	Technik:		 TTL, VLSI, SMD
-	Betriebssystem:	 PC-DOS 3.x
-	Bussystem:		 IBM PC-Bus
+	Modell:			1985
+	Firma:			IBM PC-XT kompatibel
+	Speicher:		640 kB RAM
+	CPU:			8 Bit (8088) - intern 16 Bit	
+	Takt:			umschaltbar  4.77 / 8 MHz
+	Befehlszyklus:	  	0.4 / 0.25 μs
+	Technik:		TTL, VLSI, SMD
+	Betriebssystem:	 	PC-DOS 3.x
+	Bussystem:		IBM PC-Bus
 	Massenspeicher: 	Disketten  (1.2 MB, 360 kB, 5¼")
-				 Festplatte (32 MB)
-	Terminal:		 grafikfähiger Bildschirm
-				 (Grafikauflösung: 720 x 348 Pixel)
+				Festplatte (32 MB)
+	Terminal:		grafikfähiger Bildschirm
+				(Grafikauflösung: 720 x 348 Pixel)
 
 
 
 	ECB Subrechnersystem:
 
-	Modell:		 1985
-	Firma:			 Janich & Klass  (CPU-IV)
-	Speicher:		 64 kB SRAM
-	CPU:			 8 Bit (Z80-kompatibel)
-	Takt:			 4 MHz
-	Befehlszyklus: 	 ca. 1 μs (siehe oben)
-	Technik:		 CMOS, TTL, LSI
+	Modell:		 	1985
+	Firma:			Janich & Klass  (CPU-IV)
+	Speicher:		64 kB SRAM
+	CPU:			8 Bit (Z80-kompatibel)
+	Takt:			4 MHz
+	Befehlszyklus: 	 	ca. 1 μs (siehe oben)
+	Technik:		CMOS, TTL, LSI
 	Betriebssystem: 	LMI Z80-FORTH
-	Bussystem:		 ECB (Europa-Card-Bus)
+	Bussystem:		ECB (Europa-Card-Bus)
 	Massenspeicher: 	entfällt
-	Terminal:		 entfällt
+	Terminal:		entfällt
 
 2.2  Anforderungen an das neue Meßwerterfassungssystem
 
@@ -160,11 +160,11 @@ Im Einzelnen umfaßte die Planung folgende Punkte:
 Im Folgenden sind die wichtigsten Gesichtspunkte aufgeführt, durch die sich das Meßwerterfassungssystem in der Entwicklung und im Laborbetrieb auszeichnen muß.
 
 
--	Schnelle Reaktion auf Meßabläufe und eine hohe 	Ausführungsgeschwindigkeit bei Berechnungen:
+-	Schnelle Reaktion auf Meßabläufe und eine hohe Ausführungsgeschwindigkeit bei Berechnungen:
 		* Auflösung im 10 - 1000 ms Bereich (Online)
 		* μs-Bereich im 'Offline'-Betrieb
  
--    Hohe Sicherheit gegen äußere Störeinflüsse bei der 	Signalübertragung und Spannungsversorgung:
+-    Hohe Sicherheit gegen äußere Störeinflüsse bei der Signalübertragung und Spannungsversorgung:
 		* Netzfilter bei der Primärspannungsversorgung
 		* Starkes, stabilisiertes Sekundärnetzteil
 		* Gute Wärmeableitung im gesamten MES
@@ -174,7 +174,7 @@ Im Folgenden sind die wichtigsten Gesichtspunkte aufgeführt, durch die sich das
 		* Photomultiplier
 		* etc.
 
--	Modularisierung der Meßeinschübe und eine daraus 	resultierende Definition eines Interface-Busses:
+-	Modularisierung der Meßeinschübe und eine daraus resultierende Definition eines Interface-Busses:
 		* analoge VFC - Zählermodule
 		  (Voltage-to-Frequency-Converter)
 		* schneller ECL - Zähler (Photoncounting)
@@ -220,11 +220,11 @@ Im Folgenden sind die wichtigsten Gesichtspunkte aufgeführt, durch die sich das
 Da die Funktion des Meßwerterfassungssystems im Wesentlichen durch die Software bestimmt werden soll, müssen hier besondere Anforderungen berücksichtigt werden:
 
 
--	Modularität der Programmteile und Unterprogramme, um 	ein sukzessives Austesten zu gewährleisten:
+-	Modularität der Programmteile und Unterprogramme, um ein sukzessives Austesten zu gewährleisten:
 		* FORTH  (Worte)
 		* Pascal (procedure, function)
 		
--	Ausreichende Dokumentation aller Programmteile für 	nachfolgende Erweiterungen durch andere Programmierer
+-	Ausreichende Dokumentation aller Programmteile für nachfolgende Erweiterungen durch andere Programmierer
 
 -	Definierte Software-Schnittstellen:
 		* Aufrufkonvention bei Pascal
@@ -336,6 +336,7 @@ FIFO Rechnerkopplung:
 
 Hier erfolgt die Rechnerkopplung über einen Pufferspeicher, der die zeitliche Reihenfolge der ankommenden Daten bewahrt. Im Prinzip entspricht der 
 Datenpuffer einem Zweitor-Speicher, bei dem jedoch das FIFO (First-In-First-Out) selbst die Arbitrierung vornimmt.
+
 Eine zusätzliche FIFO-Logik erlaubt es, den Inhalt des Datenpuffers jederzeit zu lesen, zu löschen, u.a. verschieden bedingte Interrupts zu generieren. 
 Im dynamischen Betrieb erlaubt das FIFO eine Pufferung der Daten und entlastet somit die Schnittstellenkommunikation. Beide Rechner können gleichzeitig s
 chreibend und lesend auf den Datenpuffer zugreifen. Eine Rechnerkopplung mit den Zilog FIFO's ist inzwischen zu einem Standardverfahren geworden (siehe z.B. /9/).
