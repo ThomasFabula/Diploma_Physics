@@ -7,7 +7,7 @@ erforderlich sind.
 
 Dieses sind die folgenden Programme:
 
-KERNEL	: FORTH-Betriebssystem für den Subrechner
+KERNEL		: FORTH-Betriebssystem für den Subrechner
 TERMINAL	: FORTH-Kommunikationsprogramm für den PC-Rechner
 FLUOTEST	: FORTH-Testmeßprogramm für den Subrechner       
 
@@ -207,7 +207,7 @@ Eichmarken und einer zugehörigen Fluoreszenzzählrate. Die Gesamtzeit tz, die h
 		tz = tF + 4 * tE + 5 * t0
 
 wobei:
-    tF : Meßzeit für das Fluoreszenzsignal
+   		tF : Meßzeit für das Fluoreszenzsignal
 		tE : Meßzeit für das Eichmarkensignal
 		t0 : Auslesen und Abspeichern der Zählraten
 
@@ -220,6 +220,7 @@ Fluoreszenzsignal aufgenommen und ausgelesen. Damit ist der Meßzyklus tZ beende
 Flußdiagramm des Testprogramms FLUOTEST ist in Abb. 26 dargestellt.
 
 Bemerkung:
+
 Da es sich beim FLUOTEST-Programm lediglich um eine Testversion handelt, wurde die Aufnahme der Eichmarken im Timingdiagramm zwar berücksichtigt, im realen 
 Testlauf aber weggelassen. Dies geschah aus folgenden Gründen:
 
