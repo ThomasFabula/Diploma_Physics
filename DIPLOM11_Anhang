@@ -12,7 +12,7 @@ Anhang B:   Bestückungspläne / Anschlußbelegungen
 
 Anhang C:   Gemessene Spektren
 
-Anhang D:  Auswerteprogramme
+Anhang D:   Auswerteprogramme
 
 Für die Auswertung von Hfs-Messungen stehen folgende Programme auf dem PC zur Verfügung:
 
@@ -21,7 +21,6 @@ Dieses Programm stellt die PC-Version des auf der IBM3081 bereits erfolgreich ei
 daß den gemessenen Linien (Ei, ⌂Ei) die entsprechenden Übergänge (Fu, Fo) bereits zugeordnet wurden, berechnet das Programm die A- und B-Faktoren 
 für den entsprechenden FS-Übergang. Das Programm erzeugt Parameterdateien (*.PAR) für die anschließende Spektrensimulation mit den Programmen HFSSPEK 
 bzw. SPEKTRUM.
-
 ( Batchdatei : HF.BAT )
 
 HFSSPEK:
@@ -43,6 +42,7 @@ Dieses Programm berechnet das Spektrum zweier ungeradzahliger Isotope (z.B.: 95M
 
 
 Eine ausführliche Beschreibung der Programmbedienungen sowie die Quelldateien aller zur Funktion obiger Programme nötigen Module ist in /38/ zu finden.
+
 
 
 Danksagung
