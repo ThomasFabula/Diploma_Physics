@@ -28,7 +28,7 @@
         Subsystem
 
   (iii) Zeitlich asynchrone Rechnerkopplung von Host- und
-        Subsystem ber 16-Bit-IN/8-Bit-OUT Hardware-FIFOs
+        Subsystem über 16-Bit-IN/8-Bit-OUT Hardware-FIFOs
 
   (iv)  Highspeed I/O-Bus (IOB) mit der Anschlußmöglichkeit
         von bis zu 256 Mess-Modulen
@@ -54,20 +54,20 @@
 Hostcomputersystem :
 --------------------
 
- Der IBM-PC-kompatible Rechner stellt als Hostsystem das Kernstck
+Der IBM-PC-kompatible Rechner stellt als Hostsystem das Kernstck
 des MES dar.
 
- Aufgrund seiner hohen Rechengeschwindigkeit (8 MHz getaktete CPU),
+Aufgrund seiner hohen Rechengeschwindigkeit (8 MHz getaktete CPU),
 großen Speicherkapazität (640 KB RAM / 120 ns) sowie erhöhter
 Rechengenauigkeit (8087/8 MHz Coprozessor), stellt er mit seinen
 Massenspeichern (10 MB Festplatte, 1.2 MB und 360 KB Floppydisks)
 ein ideales Steuer- und Auswertesystem dar.
 
- Die Steuerung des Experimentablaufes läßt sich über das im Subsystem
-ablaufende Programm und entsprechende Parameterbergaben direkt vom
+Die Steuerung des Experimentablaufes läßt sich über das im Subsystem
+ablaufende Programm und entsprechende Parameterübergaben direkt vom
 PC aus beeinflussen.
 
- Eine zeitlich asynchrone Rechnerkopplung von Host- und Subsystem,
+Eine zeitlich asynchrone Rechnerkopplung von Host- und Subsystem,
 realisiert durch Hardware-FIFOs, gewährleistet eine einwandfreie
 Funktion des PC-Rechners auf DOS-Betriebssystemebene. Die PC-I/O
 Karte  umfaßt  neben  einer  96 Bit breiten  parallel  I/O-Leiste
@@ -75,35 +75,33 @@ Karte  umfaßt  neben  einer  96 Bit breiten  parallel  I/O-Leiste
 Leitungstreiber bzw. -empfänger um eine störunempfindliche Signal-
 übertragung zwischen Host- und Subrechner zu gewährleisten.
 
- Eine Vorabreduktion der Daten sowie eine grafische Auswertung
+Eine Vorabreduktion der Daten sowie eine grafische Auswertung
 können bei Bedarf 'On-Line' am PC-Rechner erfolgen. Die Spektren
 lassen sich in einer High-Resolution (720x348 Pixel) Grafik auf
 dem Bildschirm darstellen und bei Bedarf auf einem HP 7475A Plotter
 bzw. EPSON FX-100 Drucker ausgeben.
 
- Für weitere Auswertungen, die zeitintensivere Algorithmen benötigen,
+Für weitere Auswertungen, die zeitintensivere Algorithmen benötigen,
 lassen sich die Daten mittels Diskettendatenträgern (5 1/4", 360 KB)
 an einen IBM-4381 bzw. IBM-3081 Großrechner im hiesigen Rechenzentrum
-RHRZ weiterleiten.
-
-
+RHRZ (Rheinisches Hochschul-Rechenzentrum) weiterleiten.
 
 
 Subcomputersystem :
 -------------------
 
- Der Z80-ECB-Subrechner, der Firma Janich & Klas, steuert das
+Der Z80-ECB-Subrechner, der Firma Janich & Klass, steuert das
 Experiment in Echtzeit, während der IBM-PC mit seinem komfortablen
 Betriebssystem für weitere Verarbeitung und Abspeicherung der Mess-
 daten zuständig ist.
 
- Um dem Problem der Echtzeitfähigkeit bei der Messwerterfassung
+Um dem Problem der Echtzeitfähigkeit bei der Messwerterfassung
 gerecht zu werden, enthält der Z80-Subrechner ein ROM-residentes
 FORTH-Betriebssystem und ein im RAM gespeichertes Messprogramm,
 welches den jeweiligen experimentellen Bedingungen angepaßt werden
 kann.
 
- Die Kopplung der beiden Rechner erfolgt asynchron ber mehrere
+Die Kopplung der beiden Rechner erfolgt asynchron über mehrere
 Hardware FIFOs (First-In-First-Out) wodurch eine Pufferung und
 zeitliche Abkopplung der beiden Rechner gewährleistet ist. Bei
 dieser Verbindung von Z80 zum PC handelt es sich um einen 16 Bit
@@ -111,30 +109,29 @@ breiten und 128 Byte tiefen Datenweg, der durch "two-wire-handshake"
 gesteuert wird. Die maximale Datenrate der FIFOs beträgt ca. 1 MHz,
 wodurch eine hohe Messdatentransferrate gewährleistet wird. Die
 Verbindung vom PC zum Z80 zwecks Initialisierung, Parameter- und
-Messprogrammbergabe ist 8 Bit breit und 128 Byte tief ausgelegt.
+Messprogrammübergabe ist 8 Bit breit und 128 Byte tief ausgelegt.
 
- Die Zeittaktsteuerung für das Experiment wird ber interruptgene-
+Die Zeittaktsteuerung für das Experiment wird über interruptgene-
 riernde Z80-CTCs (Counter-Timer-Circuit) gesteuert wodurch eine
-zgige Verarbeitung von schnellauftretenden Mess-Signalen ermög-
+zügige Verarbeitung von schnellauftretenden Mess-Signalen ermög-
 licht wird.
 
- Eine Zwischenspeicherung der Messdaten kann bei Bedarf in einem
+Eine Zwischenspeicherung der Messdaten kann bei Bedarf in einem
 RAM-Buffer erfolgen, falls der PC durch "User-I/O" beschäftigt
 sein sollte.
 
 
-
 Interfacesystem :
 -----------------
- Das Interface-Bus-System stellt die eigentliche Schnittstelle
+Das Interface-Bus-System stellt die eigentliche Schnittstelle
 zum physikalischen Experiment dar. Durch seine universelle Bus-
-struktur und Modularität der Messeinschbe ist man nicht auf ein
+struktur und Modularität der Messeinschübe ist man nicht auf ein
 bestimmtes "Messproblem" festgelegt. Durch gezielten Einsatz der
 entsprechenden Module und entsprechender Wahl der Messprogramme
 läßt sich der Aufbau z.B. schnell vom optischen zum HF-Experiment
 verändern.
 
- Einer späteren Erweiterbarkeit des Mess-Systems wurde dadurch
+Einer späteren Erweiterbarkeit des Mess-Systems wurde dadurch
 Rechnung getragen, daß der Interface-Bus möglichst universell aus-
 gelegt wurde:
 
@@ -143,11 +140,11 @@ gelegt wurde:
   *  8 Adress    Leitungen : Auswahl der 256 versch. Mess-Module
   *  8 Control   Leitungen : Ansteuerung der versch. Mess-Module
 
- Die einzelnen Module bestehen aus Zählern (TTL bzw. ECL-Technik,
+Die einzelnen Module bestehen aus Zählern (TTL bzw. ECL-Technik,
 32 Bit, max. 150 MHz), VFC-Karte (Voltage-to-Frequency Converter),
 Hoch-Frequenzdekadentreiber (BCD, 10 Bit parallel), 8 Single-Bit
 IN (Instrumentation Amplifier), 8 Single-Bit OUT Karten.
 
- Eine Erweiterung z.B. durch A/D- bzw. D/A-Wandlerkarten ist
+Eine Erweiterung z.B. durch A/D- bzw. D/A-Wandlerkarten ist
 jederzeit möglich.
 
