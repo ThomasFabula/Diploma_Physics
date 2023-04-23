@@ -20,6 +20,7 @@ SPEKTRUM	: Turbo-Pascal Hfs-Simulationsprogramm
 
 Eine elementare Forderung an das Softwarekonzept war, das Meßwerterfassungssystem möglichst flexibel zu halten.
 Die Auswahl der Programmiersprachen fiel auf FORTH und Turbo-Pascal.
+
 Das PC-FORTH der Firma Laboratory-Microsystems-Incorporated /28/ bietet eine Vielfalt von Programmiermöglichkeiten. Neben einem eingebauten Editor, 
 Assembler und Debugger stehen dem Benutzer Grafikbefehle und Massenspeicherverwaltung zur Verfügung. Eine Koprozessorunterstützung erlaubt schnellste
 und hochgenaue (32 Bit) Berechnungen.
@@ -51,6 +52,7 @@ auf eine genaue Beschreibung in /34, 35, 36/ verwiesen.
 		
 Das Betriebssystem des Z80-Subrechners (KERNEL) ist in LMI-FORTH (Ver. 3.1) geschrieben und wurde uns in dieser Version von K.D. Krause /21/ freundlicherweise 
 zur Verfügung gestellt.
+
 Es befindet sich im unteren Adreßbereich (0000-7FFFh) in einem 32 kB großen EPROM. Es enthält die Primitivroutinen (Wörter) des FORTH und ist in seinen
 Ein-/Ausgabebefehlen auf die Kommunikation mit dem PC-Rechner angepaßt. Der PC-Rechner dient hierbei dem Z80-Subrechner lediglich als Terminal. Folgende 
 Befehle des FORTH-Kerns wurden umgeschrieben:
@@ -70,12 +72,12 @@ ASSEMBLER          ( Einschalten des Assembler-Dictionary )
 
 CODE emit
 	HL			POP		( Zeichen vom Stack holen   )
- 1$: A,	SIO_CTRL	IN		( Lese SIO-Statuswort ein   )
+    1$: A,	SIO_CTRL	IN		( Lese SIO-Statuswort ein   )
 	2	A		BIT		( Bit Nummer 2 gesetzt ?    )
 	Z	1$		JR		( Falls Null, springe zu 1$ )
 	A,	L		LD		( Lade Zeichen in den Akku  )
-	SIO_DATA   A	OUT		( Ausgabe des Zeichens      )
-	NEXT,				( Rücksprung ins FORTH	   )
+	SIO_DATA   A	OUT			( Ausgabe des Zeichens      )
+	NEXT,					( Rücksprung ins FORTH	    )
 END-CODE
 
 (ii.)  Eingabe:  
@@ -91,13 +93,14 @@ FORTH-Definition von KEY:
 
 CODE KEY
 
- 1$: A,	SIO_CTRL	IN		( Lese SIO-Statuswort ein   )
+    1$: A,	SIO_CTRL	IN		( Lese SIO-Statuswort ein   )
 	0	A		BIT		( Bit Nummer 0 gesetzt ?    )
 	Z	1$		JR		( Falls Null, springe zu 1$ )
 	A,	SIO_DATA	IN		( Lese Zeichen von SIO ein  )
-	HL,	# 0		LD		( Lösche oberes Byte von HL ) 	L,	A		LD		( Lade Akku ins Register L  )
+	HL,	# 0		LD		( Lösche oberes Byte von HL ) 	
+	L,	A		LD		( Lade Akku ins Register L  )
 	HL			PUSH		( Lege Zeichen auf Stack    )
-	NEXT,				( Rücksprung ins FORTH	   )
+	NEXT,					( Rücksprung ins FORTH	   )
 
 END-CODE	
 
@@ -113,13 +116,13 @@ FORTH-Definition von ?TERMINAL:
 
 CODE ?TERMINAL
 
-  A,	SIO_CTRL	IN		( Lese SIO-Statuswort ein   )
-  0	A		BIT		( Bit Nummer 0 gesetzt ?    )
-  HL,	# 0		LD		( Lösche oberes Byte von HL )
+ 	A,	SIO_CTRL	IN		( Lese SIO-Statuswort ein   )
+ 	0	A		BIT		( Bit Nummer 0 gesetzt ?    )
+	HL,	# 0		LD		( Lösche oberes Byte von HL )
 	Z	1$		JR		( Falls Zeichen ---> 1$     )
 	L			DEC		( erzeuge:   -1 = 'FALSE'   )
   1$:	HL			PUSH		( Lege FLAG auf den Stack   )
-	NEXT,				( Rücksprung ins FORTH	   )
+	NEXT,					( Rücksprung ins FORTH	    )
 
 END-CODE	
 
@@ -183,6 +186,7 @@ Nachdem alle Hardware- und Softwarekomponenten des neuen Meßwerterfassungssyste
 unter Laborbedingungen durchgeführte Messung Aufschluß über die Leistungsfähigkeit des Gesamtsystems geben.
 
 Im Rahmen der polarisationsspektroskopischen Messungen an Zirkon sollte eine Testversion eines optischen Meßprogramms implementiert werden.
+
 Das entwickelte Meßprogramm FLUOTEST stellt im wesentlichen eine Testversion des von W.Kress geschriebenen FLUO1-Programms /1/ dar.
 
 
@@ -192,7 +196,7 @@ FLUOTEST:
 Das Testprogramm FLUOTEST sollte in seiner Grundversion folgende Möglichkeiten bieten:
 
 1.)	Durchstimmen des Lasers im gesamten Frequenzbereich von 30 GHz. Hierzu sollte das notwendige Timing für das Z80-Laserinterface (NMI-Eingang) 
-generiert werden, um den Laser in diskreten Frequenzschritten durchstimmen zu können.
+	generiert werden, um den Laser in diskreten Frequenzschritten durchstimmen zu können.
 
 2.)	Aufnahme des Fluoreszenzsignals für eine Zeitdauer im 	Bereich 100 - 300 ms in Frequenzschritten von 2 MHz.
 
@@ -200,6 +204,7 @@ generiert werden, um den Laser in diskreten Frequenzschritten durchstimmen zu k�
 
 Aus diesen Forderungen ergibt sich das zur Steuerung des Experimentes notwendige Impulsmuster (Abb. 23).
 Hierbei besteht ein Meßzyklus aus der Erfassung von vier
+
 
 Abb. 23:  Timingdiagramm FLUOTEST
 
@@ -211,8 +216,8 @@ wobei:
 		tE : Meßzeit für das Eichmarkensignal
 		t0 : Auslesen und Abspeichern der Zählraten
 
-Das reale Timing wurde anhand eines Speicheroszilloskops (TEKTRONIX, Modell 2230) überprüft und ist in Abb. 24 und Abb. 25 zu sehen. Die NMI-Pulse für d
-ie Ansteuerung des Z80-Laserinterface haben hierbei eine Pulslänge von ca. 5 μs. Die Gate-Öffnungszeiten für die beiden Zähler sind fest vorgegeben (tF, tE). 
+Das reale Timing wurde anhand eines Speicheroszilloskops (TEKTRONIX, Modell 2230) überprüft und ist in Abb. 24 und Abb. 25 zu sehen. Die NMI-Pulse für die
+Ansteuerung des Z80-Laserinterface haben hierbei eine Pulslänge von ca. 5 μs. Die Gate-Öffnungszeiten für die beiden Zähler sind fest vorgegeben (tF, tE). 
 In Abb. 24 sieht man die zeitliche Abfolge der NMI-Signale und des Gate-Öffnungssignals für die Eichmarken. Das erste NMI-Signal veranlaßt den Laser, 0.5 MHz 
 in der Frequenz hochzufahren, das zweite NMI-Signal stoppt den Laser. Anschließend wird der Zähler ausgelesen, die Zählrate zwischengespeichert und der 
 Zähler für die nächste Zählrate gelöscht. Dieser Vorgang wiederholt sich viermal, sodaß der Laser jetzt um 2 MHz vorgefahren ist. Anschließend wird das 
@@ -224,8 +229,8 @@ Bemerkung:
 Da es sich beim FLUOTEST-Programm lediglich um eine Testversion handelt, wurde die Aufnahme der Eichmarken im Timingdiagramm zwar berücksichtigt, im realen 
 Testlauf aber weggelassen. Dies geschah aus folgenden Gründen:
 
----	Die Aufnahme der Eichmarken stellt ein hohes Datenauf	kommen dar (Transfer zum PC) und ist nur für die 	quantitative Auswertung der Spektren wichtig.
----	Für die qualitative Beurteilung der gemessenen 	Spektren sollte ein Vergleich mit dem parallel laufen	den Z80-MES genügen.
+---	Die Aufnahme der Eichmarken stellt ein hohes Datenauf kommen dar (Transfer zum PC) und ist nur für die quantitative Auswertung der Spektren wichtig.
+---	Für die qualitative Beurteilung der gemessenen 	Spektren sollte ein Vergleich mit dem parallel laufenden Z80-MES genügen.
 
 Abb. 24:  a.) Gemessenes Timingdiagramm NMI (invertiert)
 
