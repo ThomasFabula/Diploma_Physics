@@ -32,11 +32,11 @@ Taskzustand:
     ├── inaktiv (STOP)   : Task ist beendet
     │
     ├── wartend (WAIT)   : Task ist 'rechenwillig',
-    │				   aber blockiert
+    │			   aber blockiert
     │     
     ├── laufend (START)  : Task ist aktiv, diesen  Zustand 	
-    │				   kann jeweils nur ein Task
-    │				   annehmen
+    │			   kann jeweils nur ein Task
+    │			   annehmen
     │
     └── defekt  (FAIL)   : Task ist in einen fehlerhaften Zustand gelaufen.
     
@@ -47,6 +47,7 @@ Abb. 33:  Übergänge zwischen Taskzuständen (nach /7/)
 
 Tasks, die ihrerseits sequentiell ablaufen, werden unter FORTH parallel abgearbeitet. Sie werden im sog. 'Time-Sharing'-Verfahren behandelt, d.h. 
 ein bestimmtes Zeitintervall wird in so viele Zeitscheiben eingeteilt, wie Tasks vorhanden sind. Hierbei erhalten alle Tasks die gleiche Priorität.
+
 Die Prozessorzuteilung für die Tasks erfolgt im Umlaufverfahren (Abb. 34)
 
 
@@ -58,23 +59,22 @@ Struktur eines parallelen Meßprogramms:
 Aufgrund der gleichzeitig anfallenden Aufgaben wie Datenaufnahme und Vorauswertung (siehe hierzu Kapitel 7.3) bedarf es hier parallel konkurrierender
 Tasks. Eine mögliche Implementierung eines solchen Meßprogramms im LMI-FORTH Multitasker zeigt folgendes Beispiel:
 
-TASKER		( Aktivieren des Multitaskers )
-		( wird nur einmal aufgerufen. )
-          	(Erzeugen der Task-Control-Blocks)
-
+TASKER		 ( Aktivieren des Multitaskers )
+		 ( wird nur einmal aufgerufen. )
+(Erzeugen der Task-Control-Blocks)
 PSD1 RSD1 BUILD  GET&SAVE_DATA    
 PSD2 RSD2 BUILD  ANALYZE_DATA     
-		 ( PSD = Parameter-Stack-Tiefe    )
-		 ( RSD = Return-Stack-Tiefe	   )
+		 ( PSD = Parameter-Stack-Tiefe )
+		 ( RSD = Return-Stack-Tiefe    )
 
-: GET&SAVE ... ; ( FORTH-Worte: * Schnittstelle abfragen  )
-		 ( 			 * Datensicherung	  )
-		 (			 * Dateiverwaltung	  )
-: ANALYZE ... ;  ( FORTH-Worte: * Prüfen der Gütekriterien )
-		 ( 			 * Berechnungen	   )
-		 (			 * Interpolationen 	   )
+: GET&SAVE ... ; ( FORTH-Worte: * Schnittstelle abfragen       )
+		 ( 			 * Datensicherung      )
+		 (			 * Dateiverwaltung     )
+: ANALYZE ... ;  ( FORTH-Worte: * Prüfen der Gütekriterien     )
+		 ( 			 * Berechnungen	       )
+		 (			 * Interpolationen     )
 		 (			 * Grafische Darstell. )
-		 (			 * etc.			   )
+		 (			 * etc.		       )
 
 ( ANALYZE-Task wird deaktiviert )
 : STOP_ANALYZE  ANALYZE_DATA  SLEEP ;
@@ -88,28 +88,28 @@ PSD2 RSD2 BUILD  ANALYZE_DATA
 ( Hauptroutine )
 : MAIN						
         GET&SAVE_DATA   START		( Task starten )
-	   BEGIN					( Schleifenbeginn )
+	   BEGIN			( Schleifenbeginn )
 		...
-		DATA?				( Daten vorhanden ? )
+		DATA?			( Daten vorhanden ? )
 	 	IF
 			STOP_ANALYZE   	( ANALYZE-Task beenden )
-			@DATA			( Daten einlesen )
-			SAVE				( Daten sichern  )
+			@DATA		( Daten einlesen )
+			SAVE		( Daten sichern  )
 		ELSE RESTART_ANALYZE 	( Analyse fortsetzen)
 		THEN	PAUSE  	( GET&SAVE-Task unterbrechen )
 	   AGAIN  ;
 
-( ...das eigentliche Meßprogramm )
+( ... das eigentliche Meßprogramm )
 : MESSUNG
 		...
 		ANALYZE_DATA  START	( Start der Datenanalyse )
-						( als Hintergrund-Task	)   
-		MAIN				( Abfrage der Meßdaten-	)
-						( Schnittstelle		)
+					( als Hintergrund-Task	 )   
+		MAIN			( Abfrage der Meßdaten-  )
+					( Schnittstelle		 )
 		STOP_ANALYZE		( Deaktiviere den Hinter-)
-						( grund-Task ANALYZE	)
+					( grund-Task ANALYZE	 )
 		GET&SAVE_DATA STOP	( Deaktiviere den Vorder-)
-					     ( grund-Task GET&SAVE_DATA )
+					( grund-Task GET&SAVE_DATA)
 		...
 ;
 
@@ -130,13 +130,14 @@ sich das Eichmarkenspektrum bei einem freien Spektralbereich (FSR) von ca. 60.67
 der Eichmarken aus. Anstatt wie bisher die 'schlechten' Eichmarken bei der Datenauswertung mitzufitten bzw. vollkommen wegzulassen, wäre es mit dem neuen 
 System möglich, gezielt einen neuen Scan vorzunehmen. Das auf dem PC-System ablaufende Datenreduktionsprogramm könnte anhand von vorher definierten 
 Gütekriterien das Weiterverarbeiten der experimentell gewonnenen Daten direkt beeinflussen. Geeignete Gütekriterien könnten z.B. eine Festlegung der 
-zu erwartenden Eichmarkenabstände (FSR) und Halbwertsbreiten (Õ ̧ 8 ± 2 MHz) sein. 'Ausreißer' bei den Fluoreszenzzählraten, bedingt durch äußere 
+zu erwartenden Eichmarkenabstände (FSR) und Halbwertsbreiten (Sigma ~ 8 ± 2 MHz) sein. 'Ausreißer' bei den Fluoreszenzzählraten, bedingt durch äußere 
 Störeinflüsse auf die Interface-Elektronik, könnten ebenfalls unter Softwarekontrolle behoben werden.
 
 Die direkte Rückkopplung des Meßwerterfassungssystems aufgrund der sofort einsetzenden Meßdatenanalyse würde die Güte der aufgenommenen Spektren 
 erheblich erhöhen und  wesentlich zur Reduktion der Meßdaten beitragen.
 
 Abb. 35:  Prinzip der bisherigen Scanverfahren
+
 
 Hochfrequenz Messungen:
 
@@ -156,5 +157,3 @@ Eine Voraussetzung hierfür ist die notwendige Rechnerleistung und sinnvolle Auf
 Das hier beschriebene Zwei-Rechnersystem erfüllt diese Bedingungen und eröffnet neue Möglichkeiten für komplexere Scanverfahren.
 
 Abb. 36:  Prinzip des neuen Scanverfahrens
-
-
