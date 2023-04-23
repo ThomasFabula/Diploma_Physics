@@ -5,7 +5,7 @@
 !                  Busdefinition der Interface-Box des IBM-PC
 !                  Messwert-Erfassungs-Systems (MES)
 !
-!                  ...weitgehend kompatibel mit der Z80-I/O-
+!                  ... weitgehend kompatibel mit der Z80-I/O-
 !                  Busdefinition von P.A.Dietrich.
 !
 !    Aenderungen :
@@ -26,8 +26,8 @@
 !           Grund :
 !           -------
 !           Da allgemein in Computersystemen mit EuroCard-Bus (ECB)
-!           Pin 1 a-c und Pin 32 a-c mit  der  Versorgungsspannung
-!           bzw.  Masse (Gnd) belegt  sind,  wurde  hier  dieses
+!           Pin 1 a-c und Pin 32 a-c mit der Versorgungsspannung
+!           bzw.  Masse (Gnd) belegt  sind, wurde hier dieses
 !           weiterhin beibehalten.
 !           Um allerdings eine weitestgehende Kompatibilität mit
 !           dem bereits vorhandenem I/O-Bussystem des Z80-MES
