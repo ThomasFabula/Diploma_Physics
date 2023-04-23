@@ -53,14 +53,14 @@ E = │ W(Fo) - W(Fu) │    unter Beachtung der
 
 Auswahlregeln:  	
     1.  │ ⌂F │ = │ Fu - Fo │ = 0, 1
-		2.  Fu = 0  ->  Fo = 0  verboten.
+    2.  Fu = 0  ->  Fo = 0  verboten.
 
 Den Übergängen, die den Auswahlregeln entsprechen, werden die zugehörigen relativen Linienintensitäten nach folgender Gleichung zugeordnet:
 
 Intensitäten:
-							 Jo   Fo   I	²
-Intensity = (2Fo + 1) (2Fu + 1)                 
-							 Fu   Ju   1
+							| Jo   Fo   I	|²
+Intensity = (2Fo + 1) (2Fu + 1)                 	|		|
+							| Fu   Ju   1	|
 
 und anschließend die stärkste Komponente auf 100 % normiert.
 
@@ -72,10 +72,10 @@ angezeigt. Hierauf erfolgt der Grafikaufbau und die Abfrage nach der gewünschte
 Gaussprofil wählen:
 
 Lorentzprofil:
-L (E)  =   FWHM² / [ (E - E0)² + FWHM² / 4 ]
+L (E)  ~   FWHM² / [ (E - E0)² + FWHM² / 4 ]
 
 Gaussprofil:
-G (E)  =   exp( - ½ [ (E - E0) / FWHM ]² )
+G (E)  ~   exp( - ½ [ (E - E0) / FWHM ]² )
 
 Um lediglich einen schnellen Überblick über die qualitative Form des Spektrums zu erlangen, besteht die Möglichkeit, das Spektrum in einer vereinfachten 
 Darstellung auf dem Bildschirm auszugeben. Bei dieser Programmoption werden die Übergänge lediglich als vertikale Striche dargestellt, was sich sehr günstig 
