@@ -1,21 +1,21 @@
 Inhaltsverzeichnis:
-        									    Seite
+        								 Seite
 Zusammenfassung								
 Inhaltsverzeichnis								
 Abbildungsverzeichnis							
 
-1. Einleitung									  1
+1. Einleitung								  1
 
 
 2. Voraussetzungen für die Arbeit					
 
-	2.1  Bisherige Meßwerterfassungssysteme			  2
+	2.1  Bisherige Meßwerterfassungssysteme				  2
 
 	2.2  Anforderungen an das neue MES				  6
 	2.2.1  Hardware-Anforderungen					  8
 	2.2.2  Software-Anforderungen					 10
 
-	2.3	Rechnerkopplung						 12
+	2.3  Rechnerkopplung						 12
 
 
 3. Beschreibung der Hardware						
@@ -24,53 +24,53 @@ Abbildungsverzeichnis
 
 	3.2  PC-XT Hostrechnersystem					 22
 	3.2.1  Systemeinheit						 22
-	3.2.2  Grafik								 22
+	3.2.2  Grafik							 22
 	3.2.3  Massenspeicher						 23
 	3.2.4  Multifunktionskarte					 23
-	3.2.5  Subsystem Interfacekarte				 24
+	3.2.5  Subsystem Interfacekarte				 	 24
 	3.2.6  IEEE-488 Karte						 27
 
 	3.3  Z80-ECB Subrechnersystem					 29
 
-	3.3.1  CPU-IV Karte							 29
+	3.3.1  CPU-IV Karte						 29
 	3.3.2  Slave CPU-Karte						 29
-	3.3.3  Serielle Schnittstellenkarte			 30
-	3.3.4  Timerkarte							 31
-	3.3.5  FIFO-Karte							 31
-	3.3.6  FIFO-Treiberkarte						 34
-	3.3.7  PIO-Karte							 34
+	3.3.3  Serielle Schnittstellenkarte			 	 30
+	3.3.4  Timerkarte						 31
+	3.3.5  FIFO-Karte						 31
+	3.3.6  FIFO-Treiberkarte					 34
+	3.3.7  PIO-Karte						 34
 	3.3.8  PIO-Treiberkarte						 35
 	
 	3.4  Interfacesystem						 36
-	3.4.1  VFC-Karte							 38
+	3.4.1  VFC-Karte						 38
 	3.4.2  TTL-Zählerkarte 						 42
 	3.4.3  ECL-Zählerkarte 						 45
-	3.4.4  Hochfrequenz-Dekadeninterface			 47
+	3.4.4  Hochfrequenz-Dekadeninterface			 	 47
 
 
 4. Beschreibung der Software						 50
 
-	4.1  Software Programm-Organisation			 51
-	4.2  Subrechner-Betriebssystem   (KERNEL)		 53
-	4.3  PC-Terminalprogramm       (TERMINAL)		 58
-	4.4  Testmeßprogramm     	 (FLUOTEST)		 61
-	4.5  Hfs-Simulationsprogramm   (SPEKTRUM)		 67
+	4.1  Software Programm-Organisation			 	 51
+	4.2  Subrechner-Betriebssystem  (KERNEL)		 	 53
+	4.3  PC-Terminalprogramm        (TERMINAL)		 	 58
+	4.4  Testmeßprogramm     	(FLUOTEST)		 	 61
+	4.5  Hfs-Simulationsprogramm    (SPEKTRUM)		 	 67
 
 
 5. Messungen
 
 	5.1  Experimenteller Aufbau					 78
-	5.2  Test des neuen Meßwerterfassungssystems		 80
+	5.2  Test des neuen Meßwerterfassungssystems		 	 80
 
 
-6. Schlußbemerkung								 83
+6. Schlußbemerkung							 83
 
 7. Ausblick
 	7.1  Interface-Erweiterungen					 85
-	7.2  Multitasking-System						 85
+	7.2  Multitasking-System					 85
 	7.3  Neue Scanverfahren						 90
 
-Anhang										 94
+Anhang									 94
 
 A. Blockschaltbilder / Schaltpläne
 B. Bestückungspläne / Anschlußbelegungen
