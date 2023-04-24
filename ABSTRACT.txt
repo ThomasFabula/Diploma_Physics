@@ -11,7 +11,7 @@
        *                                                      *
        *          Diplomarbeit Thomas Fabula                  *
        *          Institut für Angewandte Physik              *
-       *          Universität Bonn                            *
+       *          Universität Bonn - 1987                     *
        *                                                      *
        ********************************************************
 
@@ -20,7 +20,7 @@
                        =========
 
   (i)   Kopplung zweier Rechner-Industriestandards:
-         * IBM - PC  (Intel 8088 CPU / 8 MHz)
+         * IBM-PC    (Intel 8088 CPU / 8 MHz)
          * Z80-ECB   (Zilog  Z80 CPU / 4 MHz)
 
   (ii)  Entlastung des Hostcomputers von der zeitkritischen
@@ -54,7 +54,7 @@
 Hostcomputersystem :
 --------------------
 
-Der IBM-PC-kompatible Rechner stellt als Hostsystem das Kernstck
+Der IBM-PC-kompatible Rechner stellt als Hostsystem das Kernstück
 des MES dar.
 
 Aufgrund seiner hohen Rechengeschwindigkeit (8 MHz getaktete CPU),
@@ -112,7 +112,7 @@ Verbindung vom PC zum Z80 zwecks Initialisierung, Parameter- und
 Messprogrammübergabe ist 8 Bit breit und 128 Byte tief ausgelegt.
 
 Die Zeittaktsteuerung für das Experiment wird über interruptgene-
-riernde Z80-CTCs (Counter-Timer-Circuit) gesteuert wodurch eine
+rierende Z80-CTCs (Counter-Timer-Circuit) gesteuert wodurch eine
 zügige Verarbeitung von schnellauftretenden Mess-Signalen ermög-
 licht wird.
 
