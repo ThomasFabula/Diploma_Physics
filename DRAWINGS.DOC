@@ -9,7 +9,7 @@
 Gesamtschaltbilder:
 -------------------
 
-MES.DWG       <->   Meﬂwert-Erfassungs-System ( Prinzipschaltbild )
+MES.DWG       <->   Me√üwert-Erfassungs-System ( Prinzipschaltbild )
 
 IOBOX.DWG     <->   Interface-Box             ( Prinzipschaltbild )
 
@@ -25,11 +25,11 @@ TURBO.DWG     <->   Speicheraufteilung Pascal ( Memorymap )
 Timerkarte:
 -----------
 
-TIMERK.DWG    <->   Best¸ckungsplan
+TIMERK.DWG    <->   Best√ºckungsplan
 
 TIMERPLN.DWG  <->   Gesamtschaltplan
 
-TIMERCTC.DWG  <->   CTC-Beschaltung & Timerkarten-Ausg‰nge
+TIMERCTC.DWG  <->   CTC-Beschaltung & Timerkarten-Ausg√§nge
 
 
 
@@ -37,7 +37,7 @@ TIMERCTC.DWG  <->   CTC-Beschaltung & Timerkarten-Ausg‰nge
 PC-I/O-Wrap Karte:
 ------------------
 
-PCWRAP1.DWG   <->   Best¸ckungsplan
+PCWRAP1.DWG   <->   Best√ºckungsplan
 
 PCWRAP2.DWG   <->   Gesamtschaltplan
 
@@ -49,7 +49,7 @@ PCWRAP3.DWG   <->   PPI-Reset-Save-Logic
 FIFO-Karte:
 -----------
 
-FIFO1.DWG     <->   Best¸ckungsplan
+FIFO1.DWG     <->   Best√ºckungsplan
 
 FIFO2.DWG     <->   Gesamtschaltplan
 
@@ -62,14 +62,14 @@ FIFO5.DWG     <->   Treiberbeschaltung BUS-IN
 
 FIFO6.DWG     <->   Treiberbeschaltung BUS-OUT
 
-Z8038FIO.DWG  <->   FIFO-Bauteil f¸r Bibliothek ( Pinbelegung )
+Z8038FIO.DWG  <->   FIFO-Bauteil f√ºr Bibliothek ( Pinbelegung )
 
 
 
 FIFO-Treiberkarte:
 ------------------
 
-FIFODRV1.DWG   <->   Best¸ckungsplan
+FIFODRV1.DWG   <->   Best√ºckungsplan
 
 FIFODRV2.DWG   <->   Gesamtschaltplan
 
@@ -79,7 +79,7 @@ FIFODRV2.DWG   <->   Gesamtschaltplan
 PIO-Treiberkarte (IOB):
 -----------------------
 
-PIODRV1.DWG    <->   Best¸ckungsplan
+PIODRV1.DWG    <->   Best√ºckungsplan
 
 PIODRV2.DWG    <->   Gesamtschaltplan
 
@@ -90,7 +90,7 @@ PIODRV2.DWG    <->   Gesamtschaltplan
 VFC-Wandlerkarte:
 -----------------
 
-VFC1.DWG       <->   Best¸ckungsplan
+VFC1.DWG       <->   Best√ºckungsplan
 
 VFC2.DWG       <->   Schaltplan eines VFC's ( OpAmp-VFC )
 
@@ -99,16 +99,16 @@ VFC3.DWG       <->   Schaltplan Stromversorgung
 
 
 
-Z‰hlerkarte:
+Z√§hlerkarte:
 ------------
 
-COUNTER1.DWG   <->   Best¸ckungsplan TTL-Z‰hler
+COUNTER1.DWG   <->   Best√ºckungsplan TTL-Z√§hler
 
-COUNTER2.DWG   <->   Gesamtschaltplan TTL-Z‰hler
+COUNTER2.DWG   <->   Gesamtschaltplan TTL-Z√§hler
 
-COUNTER3.DWG   <->   Best¸ckungsplan ECL-Z‰hler
+COUNTER3.DWG   <->   Best√ºckungsplan ECL-Z√§hler
 
-TIMCOUNT.DWG    <->  Timingdiagramm der Z‰hleransteuerung
+TIMCOUNT.DWG    <->  Timingdiagramm der Z√§hleransteuerung
 
 
 
@@ -121,17 +121,17 @@ FREQU2.DWG    <->   Dekadenseitiger Schaltplan
 
 FREQU3.DWG    <->   Frequenz-Dekadeninterface ( Prinzipschaltbild )
 
-FREQU4.DWG    <->   Frequenz-Dekadeninterface ( Best¸ckungsplan )
+FREQU4.DWG    <->   Frequenz-Dekadeninterface ( Best√ºckungsplan )
 
 TIMFREQU.DWG    <->  Timingdiagramm der HF-Dekadenansteuerung
 
 
 
 
-Testmeﬂprogramm FLUOTEST:
+Testme√üprogramm FLUOTEST:
 -------------------------
 
-FLOWFLUO.DWG    <->  Fluﬂdiagramm FLUOTEST
+FLOWFLUO.DWG    <->  Flu√üdiagramm FLUOTEST
 
 TIMFLUO.DWG     <->  Timingdiagramm FLUOTEST
 
@@ -143,11 +143,11 @@ ZUSTFLUO.DWG    <->  Zustandsdiagramm FLUOTEST
 Simulationsprogramm SPEKTRUM:
 -----------------------------
 
-FLOWSPK1.DWG    <->  Fluﬂdiagramm SPEKTRUM
+FLOWSPK1.DWG    <->  Flu√üdiagramm SPEKTRUM
 
-FLOWSPK2.DWG    <->  Fluﬂdiagramm SPEKTRUM
+FLOWSPK2.DWG    <->  Flu√üdiagramm SPEKTRUM
 
-FLOWSPK3.DWG    <->  Fluﬂdiagramm SPEKTRUM
+FLOWSPK3.DWG    <->  Flu√üdiagramm SPEKTRUM
 
 
 
@@ -159,16 +159,13 @@ LASER.DWG       <->  Experimentaufbau : Optogalvanik
 
 POLSPEC.DWG     <->  Experimentaufbau : Polarisationsspektroskopie
 
-RECHNKOP.DWG    <->  Arten der Rechnerkopplungen
-                     (Seriell, Parallel, Dual-Port-RAM, FIFO)
+RECHNKOP.DWG    <->  Arten der Rechnerkopplungen (Seriell, Parallel, Dual-Port-RAM, FIFO)
 
-SIGNAL.DWG      <->  Prinzip der "Dual-Line-‹bertragung"
-                     (Gerichteter Zustandsgraph, Subgraph)ä
+SIGNAL.DWG      <->  Prinzip der "Dual-Line-√úbertragung" (Gerichteter Zustandsgraph, Subgraph)
+
 Z80MAP.DWG      <->  Speicherbelegung des Z80-Subrechners
 
 REALTIM1.DWG    <->  Bisherige Scanverfahren
 
 REALTIM2.DWG    <->  Neues Scanverfahren (mit "Echtzeit"-ANALYSE)
-
-
 
