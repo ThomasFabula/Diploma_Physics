@@ -22,7 +22,7 @@ Folgende Parameter sind dem Programm vom Benutzer in dieser Reihenfolge einzugeb
 
 9.)	FWHM     :  Halbwertsbreite der Hfs-Linien 				( 1 - 999.99 [MHz] )
 
-10.) Auflsng  :  Grafische Auflösung der Frequenzachse				( 100 - 500 )
+10.) 	Auflsng  :  Grafische Auflösung der Frequenzachse				( 100 - 500 )
         
 Für die Kennzeichnung einer Simulation lassen sich ferner noch der Name des Elementes und die spektroskopischen Bezeichnungen des unteren sowie oberen 
 Zustandes eingeben.
@@ -101,7 +101,7 @@ hat man jetzt die Möglichkeit neben der zusätzlichen Angabe von geraden Isotop
 Isotope berechnen zu lassen (siehe hierzu Anhang D). Eine genaue Beschreibung dieser und anderer Auswerteprogramme für Hfs-Messungen ist in /38/ zu finden.
 
 Um das Hfs-Simulationsprogramm SPEKTRUM zu testen, wurde es mit einem gemessenen Spektrum (Abb. 28) verglichen. Hierzu wurde ein Zirkon-Spektrum aus /39/ 
-herangezogen. Es wurde hierfür der Übergang vom Zustand  a 3F4  nach  z 3F4  mit einer Wellenlänge von 612.744 nm ausgewählt. Neben den vier geradzahligen
+herangezogen. Es wurde hierfür der Übergang vom Zustand  a 3F4  nach  z 3F4  mit einer Wellenlänge von 612,744 nm ausgewählt. Neben den vier geradzahligen
 Isotopen (90Zr, 92Zr, 94Zr und 96Zr) sieht man sechs deutlich aufgelöste Hfs-Komponenten des ungeradzahligen Zirkon-Isotops (91Zr). Die A- und B-Faktoren 
 sowie Isotopieverschiebungen wurden obiger Arbeit entnommen:
 
