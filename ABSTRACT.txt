@@ -135,8 +135,8 @@ Einer späteren Erweiterbarkeit des Mess-Systems wurde dadurch
 Rechnung getragen, daß der Interface-Bus möglichst universell aus-
 gelegt wurde:
 
-  * 16 Daten-OUT Leitungen : MES -> Experiment
-  * 16 Daten-IN  Leitungen : Experiment -> MES
+  * 16 Daten-OUT Leitungen : MES => Experiment
+  * 16 Daten-IN  Leitungen : Experiment => MES
   *  8 Adress    Leitungen : Auswahl der 256 versch. Mess-Module
   *  8 Control   Leitungen : Ansteuerung der versch. Mess-Module
 
