@@ -3,4 +3,4 @@
 Diplom in Physik 
 - University of Bonn
 - Institute of Applied Physics
-- https://www.iap.uni-bonn.de/de
+- https://www.iap.uni-bonn.de/
