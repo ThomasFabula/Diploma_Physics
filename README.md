@@ -1,7 +1,7 @@
 # Diploma_Physics
 
 ## Diploma Thesis in Physics 
-- University of Bonn, Institute of Applied Physics
+University of Bonn, Institute of Applied Physics
 - https://www.iap.uni-bonn.de/
 
 ## Further information
