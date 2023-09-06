@@ -1,6 +1,7 @@
 # Diploma_Physics
 
 ## Diploma Thesis in Physics 
+- https://iopscience.iop.org/article/10.1088/0022-3735/21/12/005
 
 ## University of Bonn 
 Institute of Applied Physics
