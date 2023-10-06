@@ -41,7 +41,7 @@ einen ersten Eindruck der Leistungsfähigkeit der Datenübertragung:
 1.)  V.24:
 	Art		 :	seriell (1-2 Leitungen)
 	Pegel	 	 :	'0' = 3..15 V, '1' = -3..-15 V
-	Baudrate	 :	2 ̈ 104 [Bit / s]
+	Baudrate	 :	2 ̈10e4 [Bit / s]
 	Stationen	 :	1
 	max. Länge 	 :	ca. 30 m
 	Übertragung	 :	asynchron
@@ -51,7 +51,7 @@ einen ersten Eindruck der Leistungsfähigkeit der Datenübertragung:
 2.)  CENTRONICS:
 	Art		 :	parallel (8 Bit, unidirektional)
 	Pegel	 	 :	TTL
-	Baudrate	 :	106 [Bit / s]
+	Baudrate	 :	10e6 [Bit / s]
 	Stationen	 :	1
 	max. Länge 	 :	ca. 2 m
 	Übertragung	 :	-
@@ -61,7 +61,7 @@ einen ersten Eindruck der Leistungsfähigkeit der Datenübertragung:
 3.)  IEEE-488:
 	Art		 :	parallel (8 Bit)
 	Pegel	 	 :	'0' = 5 V, '1' = 0 V
-	Baudrate	 :	2 ̈ 106 [Bit / s]
+	Baudrate	 :	2 ̈10e6 [Bit / s]
 	Stationen	 :	15
 	max. Länge	 :	2..20 m
 	Übertragung	 :	asynchron
@@ -71,7 +71,7 @@ einen ersten Eindruck der Leistungsfähigkeit der Datenübertragung:
 4.)  IOB:
 	Art		 :	parallel (16 Bit Input, 16 Bit Output)
 	Pegel	 	 :	TTL
-	Baudrate	 :	ca. 4 ̈ 105 [Bit / s]
+	Baudrate	 :	ca. 4 ̈10e5 [Bit / s]
 	Stationen	 :	256
 	max. Länge	 :	¾ 10 m
 	Übertragung	 :	synchron
@@ -81,7 +81,7 @@ einen ersten Eindruck der Leistungsfähigkeit der Datenübertragung:
 5.)  FIFO:
 	Art		 :	parallel (16 Bit Input, 8 Bit Output)
 	Pegel	 	 :	TTL
-	Baudrate	 :	ca. 4 ̈ 106 [Bit / s]
+	Baudrate	 :	ca. 4 ̈10e6 [Bit / s]
 	Stationen	 :	1
 	max. Länge 	 :	¾ 2 m
 	Übertragung	 :	asynchron
