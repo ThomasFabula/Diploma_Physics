@@ -6,7 +6,7 @@
 !                  Messwert-Erfassungs-Systems (MES)
 !
 !                  ... weitgehend kompatibel mit der Z80-I/O-
-!                  Busdefinition von P.A.Dietrich.
+!                  Busdefinition von P.A. Dietrich.
 !
 !    Aenderungen :
 !    -------------
