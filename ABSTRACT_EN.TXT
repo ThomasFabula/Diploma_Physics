@@ -20,13 +20,13 @@ Features:
          * Z80-ECB (Zilog Z80 CPU / 4 MHz)
 
   (ii) Relief of the host computer from time-critical
-        time-critical 'on-line' data acquisition by an intelligent subsystem
+       'on-line' data acquisition by an intelligent subsystem
 
   (iii) Timing asynchronous computer coupling of host and
         subsystem via 16-bit IN/8-bit OUT hardware FIFOs
 
   (iv) Highspeed I/O bus (IOB) with the possibility of connecting
-        of up to 256 measuring modules
+       of up to 256 measuring modules
 
   (v) Arbitrary expandability on all hardware levels:
          * host system : PC bus compatible interface cards
@@ -34,10 +34,9 @@ Features:
          * I/O system : fixed, standardized bus interface
 
   (vi) Widely available software languages,
-        software tools & utilities and a resulting optimal software
-        resulting optimal software development environment
-        for both time-critical machine-oriented as well as
-        time-intensive high-level language programming problems.
+          software tools & utilities and a resulting optimal software
+          development environment for both time-critical machine-oriented
+          as well as time-intensive high-level language programming problems.
 
 
 Description of the individual components:
@@ -67,13 +66,13 @@ transmission between host and subcomputer.
 
 A pre-reduction of the data as well as a graphical evaluation can be 
 performed 'on-line' on the PC computer if required. The spectra can 
-be displayed in a high-resolution (720x348 pixels) graphic on the 
+be displayed in a high-resolution (720 x 348 pixels) graphic on the 
 screen and, if required, printed on an HP 7475A plotter or EPSON FX-100 printer.
 
 For further evaluations, which require more time-intensive algorithms,
 the data can be transferred by means of diskette data carriers (5 1/4", 360 KB)
-to an IBM-4381 or IBM-3081 mainframe in the local computer center RHRZ 
-(Rheinisches Hochschul-Rechenzentrum).
+to an IBM-4381 or IBM-3081 mainframe in the local computer data center 
+RHRZ (Rheinisches Hochschul-Rechenzentrum).
 
 
 Subcomputer System :
@@ -96,7 +95,7 @@ from the PC to the Z80 for initialization, parameter and measurement measurement
 transfer is designed to be 8 bits wide and 128 bytes deep. 
 
 The timing for the experiment is controlled via interrupt-gene Z80-CTCs 
-(Counter-Timer-Circuit), which allows a fast processing of  fast occurring 
+(Counter-Timer-Circuit), which allows a fast processing of fast occurring 
 measurement signals is made possible.
 
 If necessary, the measurement data can be stored temporarily in a RAM buffer, if the 
@@ -115,8 +114,8 @@ for example, from an optical to an RF experiment.
 A later expandability of the measuring system was taken into account by making 
 the interface bus as universal as possible:
 
-  * 16 data-OUT lines : MES => Experiment
-  * 16 data-IN lines : Experiment => MES
+  * 16 data-OUT lines : DAS => Experiment
+  * 16 data-IN lines : Experiment => DAS
   * 8 address lines : selection of 256 different measuring modules. 
   * 8 Control lines : Control of the different measuring modules. 
 
