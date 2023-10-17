@@ -1,0 +1,25 @@
+
+ABSTRACT for the DPG Spring Meeting 1988 
+German Physical Society 
+
+
+Real-time data acquisition system for high frequency and laser spectroscopy
+
+T.Fabula, S.Büttgenbach*, T.Brenner, W.Rupprecht
+(Institute for Applied Physics, University of Bonn)
+
+
+On the basis of a commercially available PC-XT compatible computer, a powerful two-processor computer system 
+operating in 'real time' was built. The host computer (PC) is relieved from time-critical data acquisition 
+by an autonomous subsystem (Z80-ECB). A time asynchronous computer coupling of the two computers by means of 
+hardware FIFOs allows fastest data transfer rates in the MHz range. 
+
+A standardized interface I/O bus (IOB) allows the connection of various measurement modules to the experiment. 
+measurement modules to the experiment. 
+
+The data acquisition system was successfully used for the polarization spectroscopic measurement of the 
+hyperfine structure (Hfs) and isotopic shift (IS) of zircon in a hollow cathode gas Hollow cathode gas discharge.
+
+
+* Research Institute of the Research Society for Precision Instrumentation, Microtechnology and 
+Clock Technology (FFMU), Stuttgart, Germany.
