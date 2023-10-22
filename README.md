@@ -1,7 +1,7 @@
 # Diploma_Physics
 
 ## Diploma Thesis in Physics 
-Journal of Physics E: Scientific Instruments:
+Journal of Physics E Scientific Instruments:
 - Title: Real-time data acquisition system for laser and radio frequency spectroscopy
 - Authors: Thomas Brenner, Stephanus Büttgenbach, Thomas Fabula and Wolfgang Rupprecht
 - Published under licence by IOP Publishing Ltd
