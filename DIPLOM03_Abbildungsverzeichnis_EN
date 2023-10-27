@@ -1,6 +1,6 @@
 List of figures:
 
-     							                                                   	Page    
+     							             Page    
                           
 Fig.  1 : Serial computer coupling                                    12
 Fig.  2 : Parallel computer coupling                                  13
@@ -24,11 +24,11 @@ Fig. 19 : Block diagram of RF decade interface                        49
 Fig. 20 : Memory allocation of the subcomputer                        57
 Fig. 21 : State graph 
               a.) directional graph                                   58
-		          b.) Subgraph                                            58
+	      b.) Subgraph                                            58
 Fig. 22 : State diagram of the PC terminal program                    59
 Fig. 23 : Timing diagram FLUOTEST                                     62
 Fig. 24 :     a.) Measured timing diagram NMI                         64
-   		        b.) Measured timing diagram EICH-Gate                   64
+   	      b.) Measured timing diagram EICH-Gate                   64
 Fig. 25 : Measured timing diagram FLUO-Gate                           65
 Fig. 26 : Flow diagram FLUOTEST                                       66
 Fig. 27 : Flow chart SPEKTRUM                                      70-72
