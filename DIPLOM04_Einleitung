@@ -1,20 +1,26 @@
 1. Einleitung:
 
-Ziel dieser Arbeit war es, ein komfortables und leistungsfähiges Meßwerterfassungssystem (MES) auf der Basis eines handelsüblichen IBM PC-XT kompatiblen Rechners
-zu entwickeln, das sowohl in der Hochfrequenz- als auch optischen Laserspektroskopie eingesetzt werden kann.
+Ziel dieser Arbeit war es, ein komfortables und leistungsfähiges Meßwerterfassungssystem (MES) auf der Basis eines 
+handelsüblichen IBM PC-XT kompatiblen Rechners zu entwickeln, das sowohl in der Hochfrequenz- als auch optischen 
+Laserspektroskopie eingesetzt werden kann.
 
-Die Vorteile gegenüber dem bereits im Einsatz befindlichen Z80-MES /1, 2/ sind vor allem in der durch das Zwei-Prozessor-Rechnersystem bedingten Echtzeitfähigkeit
-und Universalität des Systems zu sehen.
+Die Vorteile gegenüber dem bereits im Einsatz befindlichen Z80-MES /1, 2/ sind vor allem in der durch das 
+Zwei-Prozessor-Rechnersystem bedingten Echtzeitfähigkeit und Universalität des Systems zu sehen.
 
-Um eine weitgehende Ausnutzung des bereits vorhandenen Z80 Hard- und Softwarewissens zu gewährleisten, wurde ein Z80-System als Subrechner integriert, welcher 
-den PC-Hauptrechner im Meßbetrieb entlasten soll. Die Auslegung dieses Subrechners entspricht im wesentlichen dem des bereits bestehenden Z80-Meßwerterfassungssystems.
+Um eine weitgehende Ausnutzung des bereits vorhandenen Z80 Hard- und Softwarewissens zu gewährleisten, wurde ein 
+Z80-System als Subrechner integriert, welcher den PC-Hauptrechner im Meßbetrieb entlasten soll. Die Auslegung 
+dieses Subrechners entspricht im wesentlichen dem des bereits bestehenden Z80-Meßwerterfassungssystems.
 
-Das neue Meßwerterfassungssystem sollte sich außerdem durch eine hohe Flexibilität sowohl auf Hardware- als auch Softwareseite auszeichnen, d.h. durch eine 
-entsprechende Auswahl von Meßeinschubmodulen und entsprechenden Programmen sollte ein möglichst schneller Umbau im Laborbetrieb ermöglicht werden.
+Das neue Meßwerterfassungssystem sollte sich außerdem durch eine hohe Flexibilität sowohl auf Hardware- 
+als auch Softwareseite auszeichnen, d.h. durch eine entsprechende Auswahl von Meßeinschubmodulen und 
+entsprechenden Programmen sollte ein möglichst schneller Umbau im Laborbetrieb ermöglicht werden.
 
-Hierzu wurde eine universelle Schnittstelle zum physikalischen Experiment in Form eines Input/Output-Busses (IOB) entwickelt, die eine Interface-Einheit 
-mit unterschiedlichen Meßeinschüben und PC-Rechner verbindet. Dieser IOB-Interfacebus ist weitgehend kompatibel zum Bussystem der Z80-MES Systemerweiterung /3/.
-Der Benutzer bedient auf der PC-Seite das Meßprogramm, während die Experimentsteuerung in Echtzeit durch den Z80-Subrechner übernommen wird. Hierdurch wird 
-der PC-Hostrechner entlastet und kann somit zur Vorabauswertung (Reduktion) der Daten herangezogen werden. Durch die schnelle Hardwarekopplung der beiden 
-Rechner mittels FIFO (First-In-First-Out) bzw. serieller Schnittstelle, läßt sich der Experimentablauf auch 'On-Line' (in Echtzeit) auf dem PC-Rechner vom 
-Benutzer verfolgen.
+Hierzu wurde eine universelle Schnittstelle zum physikalischen Experiment in Form eines Input/Output-Busses (IOB) 
+entwickelt, die eine Interface-Einheit mit unterschiedlichen Meßeinschüben und PC-Rechner verbindet. Dieser 
+IOB-Interfacebus ist weitgehend kompatibel zum Bussystem der Z80-MES Systemerweiterung /3/.
+
+Der Benutzer bedient auf der PC-Seite das Meßprogramm, während die Experimentsteuerung in Echtzeit durch 
+den Z80-Subrechner übernommen wird. Hierdurch wird der PC-Hostrechner entlastet und kann somit zur 
+Vorabauswertung (Reduktion) der Daten herangezogen werden. Durch die schnelle Hardwarekopplung der 
+beiden Rechner mittels FIFO (First-In-First-Out) bzw. serieller Schnittstelle, läßt sich der 
+Experimentablauf auch 'On-Line' (in Echtzeit) auf dem PC-Rechner vom Benutzer verfolgen.
