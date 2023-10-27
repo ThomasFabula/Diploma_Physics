@@ -21,7 +21,6 @@ A two-processor computer system based on an IBM PC-XT compatible personal comput
 the hardware necessary for computer interfacing was developed and a powerful terminal program (TERMINAL) for computer communication was implemented.
 
 The overall system was tested with a test measurement of a ZrI spectrum with the method of polarization spectroscopy and checked for its performance. 
-performance.
 
 For the interpretation of the measured Hfs spectra, a simulation program (SPEKTRUM) was written to facilitate the assignment of the Hfs components to the 
 lines of the recorded spectrum.
