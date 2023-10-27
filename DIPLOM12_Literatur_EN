@@ -1,0 +1,96 @@
+Bibliography:
+
+
+/1/ : Wolfram Kress, Diploma thesis, Univ. Bonn 1985, (unpublished).
+
+/2/ : Uwe Urmoneit, Diploma thesis, Univ. Bonn 1985, (unpublished)
+
+/3/ : Peter A. Dietrich, Diploma thesis, Univ. Bonn 1987, (unpublished)
+
+/4/ : Technical description PDP-8, Digital Research Corporation, USA 1968
+
+/5/ : Technical description ECB-Z80 computer system, Janich & Klass, Wuppertal 1985
+
+/6/ : Wilbert Aretz, State examination thesis, Univ. Bonn 1983, (unpublished)
+
+/7/ : Wolfgang Schorn, Process Computer System Programs, Franzis-Verlag GmbH, Munich 1983
+
+/8/ : Dr. Reinhard Männer, Bruno Deluigi, "Busvergabe durch dezentrale Arbiter", Multiprozessor-Systeme, 
+	    Elektronik-Sonderheft Nr.54, Franzis-Verlag GmbH, Munich 1982
+
+/9/ : Wilfried Heer, "FIO-Baustein facilitates processor coupling and peripheral connection", 
+	    Multiprocessor Systems, Elektronik-Sonderheft Nr.54, Franzis-Verlag GmbH, Munich 1982
+
+/10/ : Uwe Müller, "Interfaces at a glance", μC-Praxis, ELEKTRONIK 19 / 19. september 1986, p.134 ff
+
+/11/ : Thomas Fabula, Technical Documentation MAS, Univ. Bonn 1987, IAP
+
+/12/ : IBM PC-XT Hardware Technical Reference, IBM Corporation
+
+/13/ : Zilog, Z80 microprocessor devices (CPU, PIO, CTC, SIO, FIO, etc.)
+
+/14/ : Intel, Processor and peripheral devices (8088 CPU, 8255 PPI, 8253/54 Timer, etc.)
+
+/15/ : Texas Instruments, data sheet, line receiver SN75173, line driver SN 75175
+
+/16/ : HP-IB Command Library for MS-DOS, Hewlett & Packard, USA 1985 
+
+/17/ : ASYST, Technical Information I - IV, Mac Millan Software Company, New York, USA 1985
+
+/18/ : Claudia Schwarzwald, Diploma thesis, Univ. Bonn (in preparation)
+
+/19/ : Mostek, Z80 Designers-Guide, 1982/83
+
+/20/ : Technical description Oettle & Reichler, Slave Z80-System, Nuremberg 1986
+
+/21/ : Klaus-Dieter Krause, FORTH operating system Slave, Univ. Bonn 1987, IAP
+ 
+/22/ : Technical description (E-LAB), Bad Rappenau SIC 2.0, ECB serial interface card
+
+/23/ : Zilog data sheet, FIFO device Z8038-FIO
+
+/24/ : Burr-Brown, data sheet VFC VG62B
+
+/25/ : Thomas Brenner, Dissertation, Univ. Bonn (in preparation)
+
+/26/ : Technical description, SCHOMANDL high frequency decade, type MG 520M (1 - 520 MHz)
+
+/27/ : Thomas Fabula, Program library MAS, Univ. Bonn 1987, IAP
+
+/28/ : LMI PC-Forth, version 3.x, user manual, Laboratory-Microsystems-International
+
+/29/ : Microsoft, Macro-Assembler, Version 4.00
+
+/30/ : LMI PC-Forth Metacompiler, Version 2.0, Laboratory-Microsystems-International
+
+/31/ : Turbo Pascal, Version 3.00, User's Guide, Borland International Corporation
+
+/32/ : Turbo-Graphix Toolbox, Version 1.00, User's Guide, Borland International Corporation
+
+/33/ : Ronald Zech, The FORTH programming language, Franzis Verlag GmbH, 1984
+
+/34/ : Microsoft, MS-DOS 3.1 Programmer's Reference Manual
+         
+/35/ : IBM PC DOS 3.00 Reference Manual, IBM Corporation
+
+/36/ : IBM PC DOS 3.00 Technical Reference, IBM Corporation
+
+/37/ : Erwin Hölzler, Ullrich Meyenburg, The state graph in μC programming, Software tools,
+    	 Elektronik-Sonderheft Nr.53, Franzis-Verlag GmbH, Munich 1981
+
+/38/ : Thomas Fabula, PC evaluation programs for Hfs measurements, Univ. Bonn 1987, IAP
+
+/39/ : Wolfgang Rupprecht, Dissertation, Univ. Bonn (in preparation)
+
+/40/ : Christoph Bourauel, Diploma thesis, Univ. Bonn 1987, (unpublished)
+
+/41/ : U.Tietze, Ch.Schenk, Halbleiterschaltungstechnik, Springer-Verlag, 6th edition, Berlin, Heidelberg,
+	     New York, Tokyo 1983
+
+/42/ : Donald C. Long, A FORTH Driven, Networked System for Applied Automation, EuroFORML Conferences 1985, USA
+
+/43/ : H.E.R. Wijnands, P.M. Bruijn, A Realtime FORTH System Including Multitasking, EuroFORML Conferences 1985, USA
+
+/44/ : Jens Zander, Event driven multitasking - a syntax, EuroFORML Conferences 1985, USA
+
+/45/ : Michael Mertes, Diploma thesis, Univ. Bonn 1987 (unpublished)
