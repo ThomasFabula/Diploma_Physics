@@ -1,0 +1,371 @@
+2 Prerequisites for the work:
+
+2.1 Previous data acquisition systems
+
+The data acquisition systems (DAS) used so far were characterized on the one hand by their relatively low computing power, 
+on the other hand by a limited expandability with respect to their interface and hardware structure.
+
+
+PDP-8:
+
+In the case of the PDP-8 from Digital Research Corporation (1968), one was dealing with a computer system that had become 
+obsolete over time, and for which a hardware extension was always connected with a substantial expenditure at self-development. 
+The PDP-8 computer hardware /4/ represented a closed complex. The connected interface unit was characterized by poor expandability, 
+since it was not modular and bus-oriented. On the software side, due to the Teletype terminal and a punch tape reader/puncher 
+system as external mass storage, there were also no development tools available. Editing and creating programs proved 
+to be very cumbersome and error-prone with punched tape as the storage medium. 
+
+
+Z80:
+
+The introduction of a standardized ECB multi-board computer based on the Z80 microprocessor /5/ represented a significant improvement 
+in terms of hardware modularization based on the Z80 microprocessor /5/. As an industrial standard, the ECB system guaranteed a large
+number of hardware components for later extensions. The possibility of connecting external mass storage devices (1 MB drives, 8") 
+and the use of the operating system CP/M 3.0, with the available available languages and programs, created a good software development
+environment. Especially in computing power, the Z80 system surpassed the PDP-8 by a considerable margin: while previously only 
+256 measuring points per scan could be recorded in the optical measurements /6/, the number increased to over 30000 with the 
+new system. In addition, calibration mark signals could be recorded simultaneously via a second counter channel. The subsequent 
+evaluation of the of the measurements was characterized by a high degree of user convenience, since it was automated by means 
+of data carriers. This reduced the number of manually induced error sources could be reduced considerably.
+
+However, some limitations in programming and application in the laboratory arose with the Z80 system due to its now obsolete 
+architecture (8-bit CPU), its relatively low duty cycle (1 μs min. instruction cycle at 4 MHz), and the low memory 
+addressability (64 kB) of the CPU. Although the memory capacity in the computer could be increased by "bankswitching" 
+(switching to other 64 kB areas), it posed considerable problems in the measurement process. The programmer was forced 
+to bypass the operating system CP/M 3.0 in order to realize interrupt driven process controls on assembler level to realize
+interrupt driven process controls. The existing experiment interface could also only be extended with considerable effort, 
+since it had no defined bus structure. A detailed description of the system can be found in the works of 
+W. Kress /1/ and U. Urmoneit /2/.
+
+
+System comparison:
+
+A brief comparison of the computer systems will provide an overview of their performance:
+
+
+1.) PDP-8 computer system:
+
+	Model: 1968
+	Company: Digital Research Corporation
+	Memory: 4 k words á 12 bit
+	CPU: 12 bit
+	Clock: approx. 1 MHz
+	Instruction cycle: approx. 1.5 - 3 μs
+	Technology: discrete structure (DTL technology)
+	Operating system: -
+	Bus system: -
+	Mass storage: punched tape
+	Terminal: Teletype (110 baud)
+
+
+2.) ECB computer system:
+
+	Model: 1980
+	Company: Janich & Klass
+	Memory: 64 kB RAM
+	CPU: 8 Bit (Z80)
+	Clock: 4 MHz
+	Instruction cycle: approx. 1 - 1.6 μs
+	Technology: TTL, LSI
+	Operating system: CP/M 3.0
+	Bus system: ECB (Europe Card Bus)
+	Mass storage: Floppy disks (1 MB, 8")
+	Terminal:		Screen and keyboard
+				(max. 9600 baud)
+				Graphic screen (750 x 256 pixels)
+
+
+3.) PC-XT host computer system:
+
+	Model: 1985
+	Company: IBM PC-XT compatible
+	Memory: 640 kB RAM
+	CPU: 8 Bit (8088) - internal 16 Bit	
+	Clock: switchable 4.77 / 8 MHz
+	Instruction cycle: 0.4 / 0.25 μs
+	Technology: TTL, VLSI, SMD
+	Operating system: PC-DOS 3.x
+	Bus system: IBM PC bus
+	Mass storage: 
+        floppy disks (1.2 MB, 360 kB, 5¼")
+				Hard disk (32 MB)
+	Terminal: graphics-capable screen
+				(graphic resolution: 720 x 348 pixels)
+
+
+	ECB subcomputer system:
+
+	Model: 1985
+	Company: Janich & Klass (CPU-IV)
+	Memory: 64 kB SRAM
+	CPU: 8 Bit (Z80 compatible)
+	Clock: 4 MHz
+	Instruction cycle: approx. 1 μs (see above)
+	Technology: CMOS, TTL, LSI
+	Operating system: LMI Z80-FORTH
+	Bus system: ECB (Europe Card Bus)
+	Mass storage: not applicable
+	Terminal: not applicable
+
+
+2.2 Requirements for the new data acquisition system
+
+The task of the thesis was to build up a complete data acquisition system on the basis of a PC-compatible computer for 
+high-frequency and optical laser spectroscopy and to test it in laboratory operation. This included the creation of 
+programs for the communication of the two computers, as well as a test two computers, as well as a test measurement 
+program to control an experiment.
+
+Specifically, the planning included the following:
+
+
+  - Analysis of the experiment:
+
+	* What quantities are to be measured ?
+	* Which parameters are to be controlled ?
+	* Which reaction times condition the experiment ?
+
+
+  - Computer design:
+
+	* How far should the computer be extended ?
+	* Should there be an 'online/offline' control ?
+	* Memory capacity, computing speed ?
+	* Use of standardized systems
+	  (19" rack, ECB, PC bus, etc.)
+
+
+  - Interface electronics:
+
+	* Interference immunity of the measuring transducers
+	* Accuracy of data acquisition
+	* Speed of data acquisition
+	* External subsystem or internal plug-in card ?
+	* Availability of hardware development tools ?
+	* Discussion of advantages/disadvantages of wrap technology ?
+
+  - Software design:
+
+	* Choice of programming language. 	
+	* Operating system bypass necessary or not ?
+	* Interrupt or polling method ?
+	* Pre-reduction of data necessary/possible ?
+	* Availability of software development tools ?
+	* Maintainability and extensibility of programs ?
+
+
+  - System costs:
+
+	* Total system cost should be kept to a minimum
+	* Comparison of MAS available on the market
+	* Decision: In-house development / standard solution
+
+
+2.2.1 Hardware requirements
+
+The following are the most important aspects that must characterize the data acquisition system during 
+development and laboratory operation.
+
+- Fast response to measurement sequences and a high execution speed for calculations:
+		* Resolution in the 10 - 1000 ms range (online).
+		* μs range in 'offline' operation.
+ 
+- High security against external interference during signal transmission and power supply:
+		* Line filter in primary voltage supply.
+		* Strong, stabilized secondary power supply unit
+		* Good heat dissipation in the entire MES
+
+- Possibility to acquire the following signals:
+		* Lock-in amplifier
+		* Photomultiplier
+		* etc.
+
+- Modularization of the measuring modules and a resulting definition of an interface bus:
+		* analog VFC - counter modules
+		  (voltage-to-frequency converter)
+		* fast ECL - counter (photoncounting)
+		* frequency decade control		
+
+		( in planning:
+			* single bit input/output (digital)
+			* A/D converter modules
+			* D/A converter modules
+			* etc. )
+
+- Relief of the main computer (host) by an autonomous subsystem:
+		* Real-time data acquisition possible
+		* Bypass of the PC DOS operating system
+		* programming on machine level
+		* selectable 'On-/Offline' data acquisition
+
+- Mechanical stability of the overall setup
+
+- Use of standardized systems:
+		* Computer - Bus (PC, ECB)
+		* 19" housing technology
+
+- Use of wrap technology for prototype development:
+		* Fast circuit changes possible
+		* High mechanical stability
+		* Clean processing
+
+- Possibility to use an in-circuit emulator:
+		* Testing the Z80 processor board
+		* Testing of the ECB subsystem components
+
+- Option for later expansion at all levels:
+		* Host computer (16 or 32 bit technology).
+		* Subsystem (ECB expansion cards)
+		* Connection of additional 'stand-alone' systems
+		  (laser control, wavelength meter, etc.)
+		* Interface unit (IOB standardization)	
+
+
+2.2.2 Software requirements
+
+Since the function of the data acquisition system is to be determined essentially by the software, special 
+requirements must be considered here:
+
+- Modularity of the program parts and subroutines, in order to ensure successive testing:
+		* FORTH (words)
+		* Pascal (procedure, function)
+		
+- Sufficient documentation of all program parts for subsequent extensions by other programmers
+
+- Defined software interfaces:
+		* Calling convention with Pascal
+		* Parameter transfer (stack) with FORTH
+
+- Realize variability of the MAS through software
+
+- FORTH operating system should be expandable
+
+- Measurement programs should be loaded into RAM
+	(program transfer via PC computer)
+
+- Basic routines should be contained in EPROM
+
+- Minimize interrupt processing on the PC side
+	(A system crash during the measurement must be avoided at all costs). 	
+
+- Safe user guidance on all levels:
+		* program level
+		* PC-DOS operating system
+		* batch operation
+
+- Safe management of the data volume
+
+- Choice of programming language:
+		* FORTH with assembler for machine-oriented routines.
+		* Turbo Pascal as high level language (num. evaluation)
+
+- Use of software development tools:
+		* Debugger, Tracer
+		* Emulators (ICE)
+		* Metacompiler
+		* FORTH interpreter
+		* etc.
+
+- Ergonomic design of the user interface for
+	programs:
+		* greatest possible reduction of all inputs
+		* Avoidance of wrong inputs
+		* Detailed help and error messages
+
+2.3 Computer coupling
+
+The problem of real-time processing quickly led to the necessity of using two independent computer systems. 
+The two systems used represent an 'industry standard' (IBM-PC and ECB). However, the solution of the communication 
+problem of the two systems turned out to be more difficult. 
+A comparison of the generally used computer couplings /7/ should clarify the decision for the concept used here.
+In the following the most important principle possibilities of the coupling of two computers are presented and 
+compared with one another. In chapter 3 the technical details of the corresponding interfaces will be discussed further.
+
+Serial computer coupling:
+
+The serial computer coupling (RS-232 standard) is the most common way to connect computers with each other or 
+computers with peripheral devices. Communication takes place via one line connection per data direction.
+
+Advantages:  
+	* Long transmission distances possible
+	* Only one line connection necessary
+
+Disadvantages:
+	* Slowest of all data communications, since serial.
+	* Handshake (hardware and/or software) required,
+	  so that both computers are blocked during communication for
+	  real-time measurement processes are blocked
+	* Computers are not independent of each other
+
+
+Fig. 1: Serial computer coupling
+
+Parallel Computer Coupling:
+
+Parallel computer coupling is a simple way to connect two systems together. The parallel I/O module (PIO), which 
+is directly connected to the computer bus, communicates with the other system by means of the "handshake" lines. 
+The READY signal announces the readiness to receive data, the STROBE signal indicates the intention to transfer 
+the data. This procedure makes it particularly clear that both computers depend on each other and are dependent 
+on each other and must be synchronized for communication.
+
+Advantages:  
+	* Fast data transfer, because parallel (8-bit).
+	* Simple programming of the PIO device.
+
+Disadvantages:
+	* Time-consuming handshake (hardware and software)
+	  required
+	* Both computers are blocked during communication for
+	  real-time measurement processes
+ 	* computers are not independent of each other
+
+
+Fig. 2: Parallel computer coupling
+
+Dual-Port RAM (DPR) Computer Coupling:
+
+The computer coupling is done by a two-port memory directly connected to both data buses. Both computers can 
+independently write and read directly to the memory cells of the RAM. These memory accesses can take place 
+simultaneously, provided that the same memory location is not meant. A unique memory allocation must take place.
+This is taken over by an arbitration logic /8/, which excludes that not simultaneously both computers on the 
+same (physical) memory location write access.
+
+Advantages:  
+	* Data transfer rate very high (parallel)
+	* Asynchronous communication possible
+
+Disadvantages:
+	* Direct bus connection to PC and Z80 difficult.	
+	* Communication protocol must exclude simultaneous read access if necessary
+	* More expensive than serial and parallel devices	
+
+
+Fig. 3: Dual-port RAM computer coupling
+
+FIFO computer coupling:
+
+Here, the computer coupling is done via a buffer memory that preserves the temporal order of the incoming
+data. In principle, the data buffer corresponds to a two-port memory, but the FIFO (First-In-First-Out) 
+itself performs the arbitration.
+
+An additional FIFO logic allows the contents of the data buffer to be read, cleared, among other things, 
+to generate various conditional interrupts at any time. 
+In dynamic operation, the FIFO allows buffering of the data and thus relieves the interface communication. 
+Both computers can simultaneously access andc an write to and read from the data buffer at the same time. 
+Computer interfacing with Zilog FIFO's has become a standard procedure (see e.g. /9/).
+
+Advantages:  
+	* Data transfer rate very high (parallel)
+	* Asynchronous computer communication possible
+	* Temporal decoupling of the computer systems during the
+	  communication, so that both computers are independent of each other
+	* Direct bus connection possible with the Z80 system
+	* Time sequence of the data is preserved
+	* Dynamic buffer operation
+	
+Disadvantages:
+	* Programming of the device due to the multitude
+	  of possibilities relatively complex
+	* More expensive than serial and parallel blocks	
+
+
+Fig. 4: FIFO computer coupling
