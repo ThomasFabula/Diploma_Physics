@@ -1,0 +1,64 @@
+Appendix
+
+A.  Block diagrams / Circuit diagrams
+B.  Assembly diagrams / terminal assignments
+C.  Measured spectra
+D.  Evaluation programs
+
+
+Appendix A:   Block diagrams / schematics
+
+Appendix B:   Assembly diagrams / terminal assignments
+
+Appendix C:   Measured spectra
+
+Appendix D:   Evaluation programs
+
+
+
+For the evaluation of Hfs measurements the following programs are available on the PC:
+
+HFSFIT:  
+This program represents the PC version of the HFSFIT program already successfully used on the IBM3081.
+Under the condition, that the corresponding transitions (Fu, Fo) have already been assigned to the 
+measured lines (Ei, ⌂Ei), the program calculates the A and B factors for the corresponding FS transition. 
+The program generates parameter files (*.PAR) for the subsequent spectrum simulation with the programs 
+HFSSPEK or SPEKTRUM.
+( Batch file : HF.BAT )
+
+HFSSPEK:
+This program calculates the Hfs spectrum of an odd isotope (e.g.: 51V).
+( Batchfile : HSPEK.BAT )
+
+SPEKTRUM:
+This program calculates the spectrum of an odd isotope (ex: 91Zr) and max. six other even isotopes 
+(ex: 90Zr, 92Zr, 94Zr and 96Zr).
+( Batch file : SPEK.BAT )
+
+ISOTOP:
+This program calculates the Hfs spectrum of two odd isotopes (Hfs splitting of both isotopes).
+( Batchfile : ISO.BAT )
+
+ISOTOPG:
+This program calculates the spectrum of two odd isotopes (e.g.: 95Mo, 97Mo) and max. six 
+further even isotopes (e.g.: 92Mo, 94Mo, 96Mo, 98Mo and 100Mo).
+( Batch file : ISOG.BAT )
+
+
+A detailed description of the program operations as well as the source files of all modules 
+necessary for the function of the above programs can be found in /38/.
+
+
+
+Acknowledgements
+
+I would like to thank Prof. Dr. S. Penselin for the opportunity to do this work at the Institute of Applied Physics.
+
+I would like to thank Prof. Dr. S. Büttgenbach for the interesting topic of the thesis.
+
+I am especially grateful to Dipl.-Phys. W. Rupprecht, Dipl.-Phys. T. Brenner and Mr. W. Gutsch for their continuous help 
+in the execution of the work. the work as well as for the numerous stimulating discussions.
+
+I would also like to thank the staff of the electronics workshop, especially Dipl.-Ing. K.D. Krause for the extremely 
+helpful support during the MAS development, especially during the implementation of the FORTH systems.
+
