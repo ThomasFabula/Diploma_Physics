@@ -1,0 +1,24 @@
+1. Introduction:
+
+The objective of this work was to develop a convenient and powerful measurement acquisition system (MAS) based 
+on an IBM PC-XT compatible computer, which can be used in high frequency as well as optical laser spectroscopy.
+
+The advantages over the already used Z80-MAS /1, 2/ are mainly the real-time capability and universality of the 
+system due to the two-processor computer system.
+
+In order to ensure extensive utilization of the already existing Z80 hardware and software knowledge, a Z80 system 
+was integrated as a subcomputer, which is to relieve the PC main computer in the measuring operation. The design 
+of this subcomputer is essentially the same as that of the existing Z80 data acquisition system.
+
+The new data acquisition system should also be characterized by a high degree of flexibility on both the hardware 
+and software sides. This means that an appropriate selection of measurement plug-in modules and corresponding 
+programs should enable the fastest possible conversion in laboratory operation.
+
+For this purpose, a universal interface to the physical experiment was developed in the form of an input/output 
+bus (IOB), which connects an interface unit with different measurement plug-in modules and a PC computer. 
+This IOB interface bus is largely compatible with the bus system of the Z80-DAS system extension /3/.
+
+The user operates the measuring program on the PC side, while the experiment control is taken over in real time 
+by the Z80 subcomputer. This relieves the PC host computer and can thus be used for the pre-evaluation (reduction) 
+of the data. Due to the fast hardware coupling of the both computers by means of FIFO (First-In-First-Out) and 
+serial interface, respectively, the user can also follow the experiment 'on-line' (in real time) on the PC computer.
