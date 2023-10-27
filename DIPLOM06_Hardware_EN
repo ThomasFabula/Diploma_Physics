@@ -1,0 +1,459 @@
+3. Description of the hardware:
+
+3.1 Hardware organization
+
+The overall data acquisition system (Fig. 5) is divided into three functional groups:
+	* PC - computer
+	* Z80 - subcomputer
+	* Interface for measurement plug-in units.
+  
+The IBM PC-XT compatible host computer represents the 'interface' to the user (experimenter) in the data acquisition system. 
+It takes over the user guidance and transfers the parameters necessary for controlling the experiment to the Z80 subcomputer. 
+In addition to user guidance, the PC computer is also responsible for saving all the data generated during the experiment to 
+external data storage media. In 'online' mode (real-time processing of the measurement signals), the data is displayed on the 
+screen simultaneously with the acquisition. The PC computer with its high processing speed can be used for additional evaluations. 
+By using the parallel PC-subcomputer interface card as well as the serial terminal interface, the operation of the MAS is also 
+ensured on a computer of the AT class. The use of a PC-AT computer allows an approximately 2 to 3-fold increase of the computing 
+power, with unchanged hardware and software structure.
+
+The principle of the subcomputer was introduced to allow the PC computer to be relieved during time-critical measurements. 
+The subcomputer is intended to relieve the PC and be available for direct control of the experiment via the interface bus. 
+The operating system (PC-DOS) of the PC computer does not provide any interrupt-driven measurement operation, since the operating 
+system itself operates system-internal routines via interrupts. The refreshing of the dynamic random access memory (DRAM) and the 
+operation of the hardware clock each require an interrupt (IRQ0 or IRQ1), which have the highest priority in the system. 
+This limits the response time of the system. This disadvantage can be countered if a complex operating system is dispensed with
+and the system is run at the machine level. In the case of the subsystem based on the Z80 microprocessor, the operating system 
+has been replaced by a FORTH program. Since FORTH itself is an operating system and only has to take over the administration 
+of the interfaces and the time generation (timer/counter), it is particularly suitable for the subsystem. 
+
+The FIFO concept allows asynchronous data transfer by allowing each of the two computers to operate independently. In dynamic 
+operation, the  number of data in the FIFO varies, so that the FIFO acts as a buffer zone between the PC and the subsystem. A
+defined communication protocol ensures that no ensures that no character is written to the FIFO if it is already full, and no 
+character is read if the FIFO is already empty. The FIFO concept thus guarantees a fast transfer of measurement data between 
+subsystem and PC, while the time-uncritical communication (parameter transfer, program development) can be carried out in 
+the opposite direction via the serial interface (COM2) in terminal mode.
+
+Fig. 5 : Total measurement acquisition system (MAS)
+
+
+Interface comparison:
+
+A comparison of the standard interfaces /10/ with the interface used in the input/output bus (IOB) as well as the built-up 
+computer coupling (FIFO) gives a first impression of the performance of the data transmission:
+
+
+1.) V.24:
+	Type : serial (1-2 lines)
+	Level : '0' = 3..15 V, '1' = -3..-15 V
+	Baud rate : 2 ̈10e4 [bit / s].
+	stations : 1
+	max. length : approx. 30 m
+	transmission : asynchronous
+	application : computer peripherals
+
+
+2.) CENTRONICS:
+	type : parallel (8 bit, unidirectional)
+	level : TTL
+	baud rate : 10e6 [bit / s]
+	stations : 1
+	max. length : approx. 2 m
+	transmission : -
+	application : printer interface
+
+
+3.) IEEE-488:
+	Type : parallel (8 bit)
+	Level : '0' = 5 V, '1' = 0 V
+	Baud rate : 2 ̈10e6 [bit / s].
+	stations : 15
+	max. length : 2..20 m
+	transmission : asynchronous
+	Application : laboratory automation
+
+
+4.) IOB:
+	Type : parallel (16 bit input, 16 bit output)
+	level : TTL
+	Baud rate : approx. 4 ̈10e5 [bit / s].
+	stations : 256
+	max. length : ¾ 10 m
+	transmission : synchronous
+	Application : data acquisition
+
+
+5.) FIFO:
+	Type : parallel (16 bit input, 8 bit output)
+	level : TTL
+	Baud rate : approx. 4 ̈10e6 [bit / s].
+	stations : 1
+	max. length : approx. 2 m
+	transmission : asynchronous
+	application : computer coupling
+
+The interface to the physical experiment is a universal input/output bus (IOB). A uniform bus structure was realized, 
+to which different measuring different measuring inserts can be connected. This bus is managed under the control of 
+the Z80 subsystem, which organizes the interaction of the transducers is organized. A stabilized power supply 
+( with the voltages: 5 V / 6 A, 12 V / 1 A, 2 x 18 V / 2 A ) supplies both the ECB subsystem and the interface bus. 
+The two 18 V lines serve as raw voltage, which is stabilized decentrally to ± 15 V on the respective boards to 
+minimize unnecessary interference.
+
+In the following, the individual modules of the MAS are briefly described in their function. For more detailed 
+information on the hardware components developed and assembled in-house, please refer to the MAS technical 
+documentation /11/. The PC and ECB system components are described in detail in the technical descriptions 
+/12, 5/ of the manufacturers.
+
+
+3.2 PC-XT host computer system
+
+3.2.1 System unit
+
+This is an IBM PC-XT compatible computer with an INTEL-8088 microprocessor, which can be operated with 4.77 MHz 
+as well as with 8.0 MHz system clock. The 8088 microprocessor represents the 8-bit version of the 8086/80x86 family
+and has an internal 16-bit register architecture. The system clock switching, which corresponds to a factor of 1.7 
+in increase of the computing speed, can be initiated by software from the operating system. The minimum instruction 
+cycle time at the highest clock rate (8 MHz) is approx. tz = 0.25 μs, so that I/O routines can be implemented at
+assembly level in the μs range.
+
+Furthermore, the computer is equipped with 640 kByte (RAM) working memory as well as 32 kByte (EPROM) read-only 
+memory for the BIOS operating system.
+
+A numerical coprocessor (8087/8 MHz) connected in parallel to the 8088 main processor allows floating point 
+operations to be executed at increased speed. The coprocessor considerably increases the computing speed for 
+complex numerical calculations. Depending on the type of machine instructions, the 8087 coprocessor can 
+guarantee a speed increase by a factor of 10 to 100.
+
+
+3.2.2 Graphics
+
+A high-resolution monochrome HERCULES-compatible graphics card with a resolution of 720 x 348 pixels in 
+graphics mode and a 25 lines á 80 characters text display drives a 12" EIZO monitor (20 MHz bandwidth). 
+In addition to a 64 kB dynamic screen memory, the board also contains a parallel 8-bit CENTRONICS interface (LPT1) 
+to which the EPSON FX-100 printer is connected. The large screen memory allows to manage two graphic pages as well 
+as one text page at the same time, which proves to be very advantageous during programming, e.g. when different 
+spectra are to be displayed and compared with each other.
+
+
+3.2.3 Mass storage
+
+A hard disk drive of the type NEC 5126 with a total capacity of 32 MByte (average access time approx. 80 ms), 
+which supports an increased storage density of the drive due to the use of an RLL controller, and two 5 1/4 inch 
+floppy disk drives of the type NEC FD 1255 (1.2 MB storage capacity) and of the type NEC FD 1205 (360 kB storage 
+capacity) are available to the system as mass storage.
+
+
+3.2.4 Multifunction card
+
+In order for the computer to be able to communicate with external peripheral devices, it is necessary to provide 
+additional interfaces. This is done with the aid of the multifunction card, which has two serial interfaces 
+(COM1 and COM2), an additional parallel interface (LPT2) and three analog inputs (Gameport) are available.
+
+In addition, there is a buffered real-time clock that can be queried by the operating system and automatically
+logs the date and time when saving the files. 
+
+With the help of the two serial interfaces according to RS-232 standard, one can connect standard peripheral 
+devices such as a plotter (HP 7475A) and an input medium "mouse" (Microsoft compatible) can be connected. In 
+the measuring mode, the Z80 laser interface /1/, which controls the Coherent dye laser (COM1), and the ECB 
+subcomputer (COM2) are connected to these interfaces.
+
+3.2.5 Subsystem interface board
+
+The data connection from the PC to the Z80 computer, which is designed for high speeds, is made via an asynchronous 
+parallel data transfer by means of hardware FIFOs /13/. In contrast to the other PC expansion cards, this interface 
+has been developed and built completely in-house. As basis serves a prototype card (wire wrap) from IBM, on which 
+the most important PC bus signals are already led out. All data and address lines are buffered, so that they can 
+drive several I/O devices. A pre-decoding of the addresses (300-31Fh) has already been made by IBM, so that own 
+hardware developments in the I/O area do not conflict with other hardware components or the operating system. 
+The board contains four parallel I/O modules (8255 PPI) with a total of 96 I/O lines, as well as two timer 
+modules (8253 and 8254) with a total of 6 x 16 bit timers/counters, which have a maximum clock frequency of 
+5 and 10 bit, i.e. maximum clock frequency of 5 and 10 MHz respectively /14/. In order to ensure a signal
+transmission to the Z80 system which is as insensitive to interference as possible, all are routed via "dual-line" 
+drivers or receivers /15/ (Fig. 6), so that interferences which are superimposed on both lines in the same 
+direction during the transmission path are compensated at the end of the line.
+
+
+Fig. 6: Principle of "Dual-Line" signal transmission
+
+Communication is via two main channels, each unidirectional, to enable the highest possible speeds:
+
+BUS-IN:
+represents the connection from the Z80- to the PC-system, on which the measurement data are received in the 
+experiment. Because of the high amount of data this channel is 16 bit wide. Since additional control lines 
+are added, the BUS-IN is 50-pole and is led to the PC system via ribbon cable (max. 2 meters) to the PC system.
+
+BUS-OUT:
+represents the connection from the PC to the Z80 system, on which e.g. the commands and initial parameters, 
+which are entered by the user, are sent. Since this part of the communication is not time-critical, this 
+channel was designed to be only 8 bits wide. Also here additional control lines are needed, so that the 
+BUS-OUT needs 34 poles, which are led over ribbon cables as above.
+
+To further increase the noise immunity, the inexpensive ribbon cables can be replaced by more expensive 
+"twisted pairs" cables, which provide a better shielding. provide a better shielding. The inputs and 
+outputs of the two timers are connected to wrap sockets on the wire-wrap card and are led out at the 
+rear computer housing. The programming of the I/O devices and timers can be done in 8088 assembler as
+well as directly in a high level language (e.g. Turbo Pascal, FORTH, C).
+
+The following page (Fig. 7) shows the structure of the parallel PC-subcomputer interface board.
+
+Fig. 7: Subcomputer interface card
+
+3.2.6 IEEE-488 Card
+
+Newer commercial measuring instruments often already have an interface for connection to a computer system. 
+This is the standardized 8-bit parallel IEEE-488 standard interface, which allows several measuring 
+instruments to be operated on one bus. The number of remote stations is limited to 15. Each device has 
+an address and communicates with the computer via "3-wire handshake" /16/. A distinction is made between 
+the following possibilities for connecting a measuring instruments:
+
+  * LISTENER : receives information from the computer
+	* TALKER : supplies the computer with information
+	* LISTENER & TALKER : bidirectional information exchange with the connected computer.
+
+The IEEE-488 card is an HP-IB interface card from Hewlett-Packard /16/. With the help of this card it
+is possible to connect e.g. to control the following measuring instruments under PC control:
+
+	- TEKTRONIX storage oscilloscope,
+	- EG&G Lock-In Amplifier,
+	- FLUKE digital voltmeter,
+	- etc.
+
+The instruments can be programmed under BASIC, Pascal or C using the libraries supplied. The commercial 
+program package for measurement data acquisition ASYST /17/ also allows a comfortable and user-friendly 
+operation of the devices connected to the IEEE-488 bus, since IEEE control programs (FORTH words) already exist.
+
+The pulse diagrams of the measuring program FLUOTEST recorded in chapter 5 with the storage oscilloscope 
+(TEKTRONIX, model 2230) were read out under ASYST with the aid of the IEEE-488 card under ASYST. With the 
+help of a plot program developed by C. Schwarzwald /18/, the figures Fig. 24 and Fig. 25 were plotted on an HP-7475A plotter.
+
+Fig. 8: IEEE-488 instrument bus concept (from /16/)
+
+3.3 Z80-ECB subcomputer system
+
+3.3.1 CPU-IV board
+
+The main computer card used in the laboratory is the CPU-IV card from Janich & Klass. The Z80-A NMOS microprocessor (4 MHz) 
+used can be replaced by a CMOS type, which is particularly suitable for use in a subcomputer system due to its low 
+power consumption. With this timing problems caused by refreshing the dynamic memories (DRAM) do not occur, the board contains 
+32 kB of static RAM (4 x 6264 SRAM, 150 ns access time). The actual FORTH operating system kernel is located in a fixed 
+memory (27256 EPROM), which is also 32 kB in size. 
+As additional I/O components, the board contains two parallel interfaces (Z80-PIO) with a total of four 8-bit ports, 
+as well as a timer/counter (Z80-CTC) with four 8 bit counters each. A buffered real time clock (RTC), which can be 
+accessed via one port of the parallel devices, allows to set the time on the subsystem independently of the PC computer. 
+The programming of the Z80 peripheral modules is described in detail in the data sheets /13, 19/. 
+
+
+3.3.2 Slave CPU card
+
+In the test phase of the MES, the subcomputer was operated with the slave processor card SUB-S from the company 
+Oettle & Reichler /20/. In this test phase the FORTH operating system developed in the electronics workshop of
+K.D. Krause /21/ was implemented and tested. The communication to the PC was done via a bidirectional serial 
+interface (RS-232), so that commands were sent from the PC to the Z80 and vice versa via this connection. The 
+data transfer rate was max. 9600 baud (approx. 1000 characters per second).
+
+In contrast to the CPU-IV, this CPU card contains a serial block (Z80-SIO) instead of two parallel I/O blocks
+(Z80-PIO) as well as a timer/counter block (Z80-CTC). The timer is used for baud rate generation and "watchdog" 
+circuitry. The "watchdog" circuit ensures ensures error-free operation of the processor board by periodically 
+resetting one channel of the timer. Should this reset fail to occur, the device triggers a non-maskable interrupt 
+(NMI) at the microprocessor and the system is reinitialized. The CMOS technology Z80 microprocessor is operated 
+at a clock rate of 3.99 MHz, thus guaranteeing a high processing speed. The memory layout (32 kB SRAM, 32 kB EPROM) 
+and the organization of the FORTH operating system were otherwise the same as on the CPU-IV board, which 
+subsequently allowed a fast implementation.
+
+
+3.3.3 Serial interface card
+
+To enable simple terminal operation between the PC computer and the subsystem, it was necessary to equip the 
+subcomputer with at least one serial interface (RS-232). A second serial interface should also be available, 
+since it seemed to make sense for future measuring programs to use the intelligent laser interface /1/ directly 
+from the Z80 subsystem. The serial interface card SIC 2.0 of the company E-LAB /22/ with a total of three 
+serial modules (Z80-SIO and Z80-DART) was selected for this purpose. A Z80-CTC module provides the clock 
+signal for the required baud rate of 9600. The six channels of the three SIO modules are connected to
+nine-pin connectors (DSUB) at the front interface housing. The number of RS-232 connection lines to the 
+host system has been kept to a minimum. Beside the signal ground (Gnd) there is only one line for
+transmitting (TxD) and for receiving (RxD) data.
+
+3.3.4 Timer card
+
+The timer card corresponds to the timer card of the old Z80-MES in its design and structure. A complete compatibility
+was aimed at consciously, to be able to test it in the Z80-CP/M computer during the test phase on the one hand, 
+and on the other hand to guarantee a direct replacement in case of failure of one of the cards in laboratory operation. 
+(base address : 30h). For a detailed description of the timer card, please refer to the work of U. Urmoneit /2/.
+
+The task of this card in the measuring mode is the exact time control of the experiment sequence, which is achieved 
+by prioritized vector interrupts /5/ of the four counter components (Z80-CTC). These counters open and close according 
+to a precise timing scheme, depending on the respective measuring program, the counters (gate) for the signals to be
+recorded (e.g. fluorescence and calibration mark signal) and cause the intelligent Z80 laser interface to control the 
+dye laser in scan mode in discrete steps. The four timer modules connected in series allow the generation of time 
+intervals in a range from 4 μs to approx. 2̈105 d. The timing scheme of the measurement in the FLUOTEST test program 
+is explained in detail in Chapter 4.
+
+
+3.3.5 FIFO card
+
+The FIFO card of the subcomputer system contains the FIFO's and the logic blocks required to control them. The FIFO 
+components (Zilog Z8038FIO, /23/) have an eight-bit wide and 128-byte deep data buffer and enable asynchronous computer
+coupling (Fig. 9) between the PC host computer and the Z80 subcomputer. In the Z80 system, the FIFOs are addressed directly 
+via the system-internal data bus like I/O modules, on the PC side they communicate with two parallel modules (8255 PPI) 
+of the PC wrap card via two "handshake" lines each. While the BUS-IN channel, as already mentioned, has a width of 
+16 bits wide because of the high data rate and therefore requires two FIFO devices (FIO1 and FIO2), the BUS-OUT channel 
+is limited to eight bits (FIO3) wide. The control of the FIFO's is done by the parallel blocks of both systems. 
+After the FIFOs have been automatically reset (RESET) at Z80 system startup (RESET), they must be initialized and 
+programmed into the correct operating mode. Under software control it is possible at any time possible to clear their 
+data buffer (CLEAR) and to query whether their data buffer is empty (EMPTY) or full (FULL). The maximum data transfer 
+rate of the FIFO blocks is 1 MHz (=106 words/s). The time required for a word to pass through the data buffer is 
+approximately tr = 250 ns. The FIFO devices are capable of triggering seven differently prioritized Z80 vector 
+interrupts, thus offering a wide range of operating possibilities. More details on programming this device can
+be found in the Zilog data sheet /23/.
+
+Fig. 9: FIFO computer coupling (PC <-> subcomputer)
+
+3.3.6 FIFO driver card
+
+The counterpart to the PC parallel card (prototype wire-wrap) is the FIFO driver card in the Z80 subsystem. 
+For reasons of space and to ensure better heat dissipation, the line drivers and the line drivers and receivers /15/
+are placed on a separate card. On this card, the two ribbon cables BUS-IN and BUS-OUT from the PC computer system 
+are fed in and short-circuited against signal reflections via the five Wi (100 Û) resistor arrays (Fig. 6). 
+The board contains a total of six line drivers (SN75172) and four line receivers (SN75173). All signals from 
+the PC system are fed to the FIFO card via a 50-pin ribbon cable. 
+
+
+3.3.7 PIO card
+
+The connection from the subcomputer to the interface bus (IOB) is made by means of the PIO card from 
+Janich & Klass /5/. This card also corresponds in its the PIO wrap card of the old Z80 data acquisition system, 
+and is identical in the address assignment (base address : 60h), so that they can be directly against each other
+in laboratory operation. Via four parallel I/O modules (Z80-PIO) the data stream from the experiment to the MAS 
+(16 DATA-IN) and from the MES to the experiment (16 DATA-OUT), as well as all eight control signals (CONTROL) 
+and the eight address signals (ADDRESS) to the measuring modules.
+
+Since all eight address lines can be decoded, it is possible to address a maximum of 256 measuring modules. 
+Since this is currently not necessary in laboratory operation, only the four upper bits (ADR4 to ADR7) are 
+decoded, so that now 16 different measuring modules can be addressed.
+
+
+3.3.8 PIO driver card
+
+So that the interface bus is not overloaded by the connected measuring modules and can also control them without 
+errors, it must be buffered. Unidirectional buffer modules (74LS244) ensure that up to 60 TTL loads can be safely 
+operated at one output. All signals from the subcomputer to the experiment (DATA-OUT, CONTROL, ADDRESS) are amplified 
+via this board. The DATA-IN channel is driven on each corresponding card, on which the signal is recorded, if this 
+is necessary. For the two counter cards used, latches (74HC374) buffer of the signals. The PIO driver card,
+which is located on the interface bus, is connected to the PIO card.
+
+
+3.4 Interface system
+
+According to the requirements the interface system allows by its universal design to connect different measuring 
+modules and interface cards. The interface bus (IOB) is led out on a 64-pole VG strip in the upper part of the 
+housing, on which 25 slots are located. The bus is divided into the following main logical groups:
+
+	- DATA-IN bus (16 lines : DI0...DI15)
+	- DATA-OUT bus (16 lines : DO0...DO15)
+	- ADDRESS Bus (8 lines : ADR0...ADR7)
+	- CONTROL Bus (8 lines : CTRL0...CTRL7)
+	- Power supplies : + 5 V (6A), ± 18 V (2A)
+
+This definition of the bus is identical with the bus extension of the old Z80 data acquisition system as described 
+in /3/, and thus permits thus a simultaneous use of all measuring modules and interface cards at both systems.
+
+The following page shows the schematic diagram (Fig. 10) of the interface unit, which is divided into input (BUS-IN) 
+and output channels (BUS-OUT). The data flow is controlled by the control bus (CONTROL), the selection of the measuring 
+modules is done by the address bus (ADDRESS). A bus termination of the DATA-IN bus pulls all 16 lines to ground via 
+resistor arrays (2.2 kÛ), so that defined input levels are guaranteed.
+
+Fig. 10: Subcomputer system and interface bus (IOB)
+
+3.4.1 VFC card
+
+Since the principle of voltage/frequency conversion has proven itself in laboratory operation, the same principle was 
+used here as already in the old Z80-MAS was used.
+
+The VFC card (Voltage-to-Frequency-Converter) makes it possible to convert analog input variables into digital signal 
+variables. The analog input voltage is converted into a corresponding frequency (TTL level). This conversion is linear 
+in the working range of the VFC (characteristic curve). The  circuitry of the voltage/frequency converter is shown in Fig. 11. 
+The VFC receives its negative input via an operational amplifier (OP) connected as an inverting amplifier. The VFC receives
+its negative input voltage. The offset (P1) and the gain (P2) can be adjusted externally at the operational amplifier 
+via two potentiometers. The VFC board contains two separate channels, one for the fluorescence signal (Uin = 0..10 V), 
+the other for the calibration mark signal (Uin = 0..2 V). The external circuitry of the VFC's is designed for a maximum
+output frequency fout of 1 MHz. Fig. 12 and Fig. 13 show the linear progression of the characteristics 
+(dependence of the output frequency fout on the input voltage Uin) of the two channels can be clearly seen.
+
+Fig. 14 shows the frequency deviation ⌂f = fmax - fmin of the calibration mark channel as a function of the gain set 
+at potentiometer P2. With a fixed set offset value of P1 = 9.7 [skt], a maximum frequency deviation ⌂f of approx. 221 [kHz] 
+results for the amplification P2 = 5.0 [skt]. The input voltage was kept constant at Uin = 2 V. In order to shield the 
+sensitive VFC analog components as far as possible from external interference, the setup was mounted on a "ground plane" 
+board (continuous ground plane on the upper side of the board).
+
+The ± 15 V supply voltages for the OPs and VFCs were generated directly on the board in order to keep the interface 
+bus-side raw voltages ± 18 V largely unaffected by external interferences.
+
+More detailed circuit information and operating parameters can be taken from the data sheets of the company Burr-Brown /24/.
+
+Fig. 11: Circuit diagram VFC card
+
+Fig. 12: VFC characteristic curve fluorescence input
+
+Fig. 13: VFC characteristic curve for calibration mark input
+
+Fig. 14: VFC frequency deviation of the calibration mark input
+
+3.4.2 TTL counter card
+
+The counter card contains two counter channels (á 32 bit) each, which allow to record count rates up to a maximum of 
+232-1 (=4,294,967,295). The input signal is linked to the gate signal via an AND gate (74LS08) to activate the counters 
+for fixed time periods. The four series-connected counter components (74HC393, high-speed CMOS) allow a maximum input 
+frequency of 100 MHz. Via the four latches (74HC374), the count rates are read out in parallel and forwarded to the DATA-IN bus.
+
+Depending on the measurement program used, the gate signal of the fluorescence channel (GATE1) and the gate signal of the 
+calibration mark channel (GATE2) are set or cleared by the subcomputer. The two latch signals (LATCH1, LATCH2) trigger the 
+transfer of the count rates into the latch buffer. Since the input data bus (DATA-IN) is only designed for 16 bit width, 
+two accesses must be made to read in a 32 bit count rate. The addressing of the low value (LOW) is done with the Enable-LOW signal,
+the higher value (HIGH) with the Enable-HIGH signal. The addressing of the counter card on the IOB bus is done by a comparator
+circuit (74LS85). Here, the four address bits (A4, A5, A6, A7) present on the upper IOB bus are addressed by setting four 
+DIP-switch' switches. If they are equal, the lower address bits A0 and A1 enable the LOW and HIGH values of the counters
+to be addressed respectively.
+
+On this board, the base address is set to 10h. After the count rates have been read, the clear signals (CLEAR1, CLEAR2) 
+clear the corresponding counter channels and prepare the counter for recording the next data. The timing of the control 
+signals necessary for recording count rates is shown on the following page of Fig. 15. The circuit diagram of the 
+counter board can be seen in Fig. 16.
+
+Fig. 15: Timing diagram of the counter cards
+
+Fig. 16: Circuit diagram of TTL counter card
+
+3.4.3 ECL counter card
+
+The ECL counter card is similar in principle to the TTL counter card just described. In contrast to the TTL counter card, 
+the first counting stage is in ECL technology. (Emitter-Coupled-Logic) in order to be able to resolve counting events with 
+very short time intervals (up to approx. 10 ns). With the help of this card it is possible to record the pulses of the
+photomultiplier, which are processed to standard pulses by a discriminator (photon counting). ECL circuits are characterized 
+by very short gate propagation times ( ¾ 5 ns), but have different logic levels than TTL devices. Therefore it is necessary 
+to compare the two TTL input signals for the first counter stage (MC10154) by means of a TTL/ECL converter (MC10124). 
+For the subsequent TTL counters a new level conversion is necessary. This is done with the help of the ECL/TTL 
+converter (MC10125). The timing diagram corresponds to that of the TTL counter card (Fig. 15). The base address 
+of the ECL counter is 20h. Fig. 16 shows the structure of the ECL counter card.
+
+Fig. 17: Structure of the ECL counter card
+
+3.4.4 High-frequency decade interface
+
+A module for controlling the SCHOMANDL frequency decade /26/ used in high-frequency spectroscopy /25/ was designed and built. 
+Here the possibility of the external control of the individual places of the decade in the BCD code was used. In order to 
+communicate a frequency value of the decade over the computer the ten decade digits must be transferred individually. With
+ten digits, a total of 40 lines is required when using the BCD coding.To save control lines, the multiplex principle was used. 
+With four data lines (DATA0 - DATA3) the digits 0 to 9 and with four address lines (ADR0 - ADR3) decode the 10 decimal places.
+An intermediate memory (register A) allows to fill up the digits one after the other, and afterwards to the frequency 
+decade (register B). The two control signals ADR-Valid and DATA-Valid enable the transfer of the single digits or the 
+complete frequency value to the decade. The control is done with TTL level in negative logic. If the frequency decade is 
+is in the remote mode, it holds the frequency value contained in register B. So that the decade and the computer do not 
+have to be in the immediate vicinity of each other in the laboratory, an approx. 5 meter long 50 Ohms coaxial line was 
+set up via line drivers. This allows interference-free data transmission between the data acquisition system and experiment.
+
+The time course of the input signals at the decade interface for the transmission of a complete frequency value can be seen
+in Fig. 18. In Fig. 19 the block diagram of the high frequency decade interface can be seen.
+
+Fig. 18: Timing diagram of the decade interface
+
+Fig. 19: Block diagram of high-frequency decade interface
+
