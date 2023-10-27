@@ -150,21 +150,23 @@ increase the quality of the recorded spectra and contribute substantially to the
 
 Fig. 35: Principle of the previous scanning methods
 
+
 High frequency measurements:
 
-Im Gegensatz zu den optischen Messungen läßt sich die dem Experiment eingespeiste Frequenz genau einstellen. Die Frequenzdekaden lassen sich unter
-Rechnerkontrolle auf 0.1 Hz genau justieren. Dieses ermöglicht "punktuelle" Messungen bei unterschiedlichsten Frequenzwerten. Störungen, die sich
-niederfrequent auf den Atomstrahl (rotierendes Target) auswirken, könnten durch eine geeignet ausgewählte aber zufällige Frequenzverteilung (random)
-behoben werden, sofern diese gleichverteilt ist.
+In contrast to the optical measurements, the frequency fed to the experiment can be precisely adjusted. The frequency 
+decades can be computer controlled to an accuracy of 0.1 Hz. This allows "punctual" measurements at a wide range of 
+frequency values. Disturbances, which low frequency on the atomic beam (rotating target) could be eliminated by a 
+suitably selected but random frequency distribution (random), that it is uniformly distributed.
 
-Der Langzeitdrift der Apparatur tritt allerdings aufgrund des nicht beliebig lang konstant gehaltenen Magnetfeldes auf. Eine in Echtzeit geführte 
-Verarbeitung des Kontrollsignals (Vergleich von Soll- und Istwert) der neu entwickelten Magnetfeldregelung /25/ könnte dem Steuerprogramm das notwendige 
-Gütekriterium zur Datenauswahl liefern.
+However, the long-term drift of the apparatus occurs due to the magnetic field not being kept constant for an 
+arbitrary length of time. A real-time guided processing of the control signal (comparison of target and actual value) 
+of the newly developed magnetic field control /25/ could provide the necessary quality criterion for data selection 
+to the control program. quality criterion for data selection.
 
-Abschließend kann man festhalten, daß Unzulänglichkeiten, die durch Meßapparatur und Experiment bedingt sind, durch eine geeignete Auswahl von 
-Meßdatenreduktionsprogrammen und entsprechenden Gütekriterien softwaremäßig begegnet werden kann.
+Finally, it can be stated that inadequacies caused by the measuring apparatus and the experiment can be eliminated 
+by a suitable selection of data reduction programs and appropriate quality criteria.
 
-Eine Voraussetzung hierfür ist die notwendige Rechnerleistung und sinnvolle Aufgabenverteilung während der Experimentsteuerung. 
-Das hier beschriebene Zwei-Rechnersystem erfüllt diese Bedingungen und eröffnet neue Möglichkeiten für komplexere Scanverfahren.
+A prerequisite for this is the necessary computer performance and sensible task distribution during experiment control. 
+The two-computer system described here fulfills these conditions and opens up new possibilities for more complex scanning procedures.
 
 Fig. 36:  Principle of the new scanning method
