@@ -1,0 +1,54 @@
+Table of contents:                         			Page
+
+Summary								
+
+Table of Contents								
+
+List of Figures							
+
+1. introduction                                  1
+
+
+2 Prerequisites for the work					
+
+	2.1 Previous data acquisition systems          2
+
+	2.2 Requirements for the new MES               6
+	2.2.1 Hardware requirements                    8
+	2.2.2 Software requirements                   10
+
+	2.3 Computer coupling                         12
+
+
+3 Description of the hardware						
+
+	3.1 Hardware organization                     17
+
+	3.2 PC-XT host computer system                22
+	3.2.1 System unit                             22
+	3.2.2 Graphics                                22
+	3.2.3 Mass storage                            23
+	3.2.4 Multifunction card                      23
+	3.2.5 Subsystem interface card                24
+	3.2.6 IEEE-488 card                           27
+
+	3.3 Z80-ECB subcomputer system                29
+
+	3.3.1 CPU-IV card                             29
+	3.3.2 Slave CPU card                          29
+	3.3.3 Serial interface card                   30
+	3.3.4 Timer card                              31
+	3.3.5 FIFO card                               31
+	3.3.6 FIFO driver card                        34
+	3.3.7 PIO card                                34
+	3.3.8 PIO driver card                         35
+	
+	3.4 Interface system                          36
+	3.4.1 VFC card                                38
+	3.4.2 TTL counter card                        42
+	3.4.3 ECL counter card                        45
+	3.4.4 High frequency decade interface         47
+
+
+
+
