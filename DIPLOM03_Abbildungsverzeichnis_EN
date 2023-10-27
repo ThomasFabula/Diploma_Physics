@@ -1,0 +1,43 @@
+List of figures:
+
+     							                                                   	Page    
+                          
+Fig.  1 : Serial computer coupling                                    12
+Fig.  2 : Parallel computer coupling                                  13
+Fig.  3 : Dual-port RAM computer interface                            14
+Fig.  4 : FIFO computer coupling                                      16
+Fig.  5 : Total data acquisition system (DAS)                         19
+Fig.  6 : Principle of "Dual-Line" signal transmission                24
+Fig.  7 : Subcomputer interface card                                  26
+Fig.  8 : IEEE-488 measuring device bus concept                       28
+Fig.  9 : FIFO computer coupling (PC <-> subcomputer)                 33
+Fig. 10 : Subcomputer system and interface bus (IOB)                  37
+Fig. 11 : Circuit diagram VFC card 39
+Fig. 12 : VFC characteristic curve fluorescence input                 40
+Fig. 13 : VFC characteristic curve for calibration mark input         40
+Fig. 14 : VFC frequency deviation of the calibration mark input       41
+Fig. 15 : Timing diagram of the counter cards                         43
+Fig. 16 : Circuit diagram of TTL counter card                         44
+Fig. 17 : Circuit diagram ECL counter card                            46
+Fig. 18 : Timing diagram of decade control                            48
+Fig. 19 : Block diagram of RF decade interface                        49
+Fig. 20 : Memory allocation of the subcomputer                        57
+Fig. 21 : State graph 
+              a.) directional graph                                   58
+		          b.) Subgraph                                            58
+Fig. 22 : State diagram of the PC terminal program                    59
+Fig. 23 : Timing diagram FLUOTEST                                     62
+Fig. 24 :     a.) Measured timing diagram NMI                         64
+   		        b.) Measured timing diagram EICH-Gate                   64
+Fig. 25 : Measured timing diagram FLUO-Gate                           65
+Fig. 26 : Flow diagram FLUOTEST                                       66
+Fig. 27 : Flow chart SPEKTRUM                                      70-72
+Fig. 28 : Measured zircon spectrum                                    76
+Fig. 29 : Simulated zirconium spectrum                                77
+Fig. 30 : Experimental setup                                          79
+Fig. 31 : Measured Zr spectrum                                        81
+Fig. 32 : Comparison Zr spectrum                                      82
+Fig. 33 : Transitions between task states                             86
+Fig. 34 : Processor allocation in multitask systems                   87
+Fig. 35 : Principle of the previous scan methods                      91
+Fig. 36 : Principle of the new scan method                            93
