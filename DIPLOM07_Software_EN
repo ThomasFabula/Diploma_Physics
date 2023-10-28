@@ -1,0 +1,266 @@
+4. Description of the software:
+
+This chapter describes the software organization of the data acquisition system. The extensive source code has been 
+extracted from the thesis. For more detailed information, please refer to the program library MAS /27/, which contains
+the entire program texts required for the operation of the MAS. is necessary.
+
+
+These are the following programs:
+
+KERNEL : FORTH operating system for the subcomputer
+TERMINAL : FORTH communication program for the PC computer
+FLUOTEST : FORTH test measurement program for the subcomputer.       
+
+
+Evaluation program:
+
+SPEKTRUM : Turbo-Pascal Hfs simulation program
+
+4.1 Software program organization
+
+An elementary demand on the software concept was to keep the data acquisition system as flexible as possible. 
+The choice of the programming languages fell on FORTH and Turbo-Pascal.
+
+The PC-FORTH of the company Laboratory Microsystems Incorporated /28/ offers a variety of programming possibilities. 
+Beside a built-in editor, assembler and debugger, graphics commands and mass memory management are available to the user. 
+A coprocessor support allows fastest and highly accurate (32 bit) calculations.
+
+In contrast to Assembler /29/ FORTH is to be counted to the high-level languages, so that the program production is
+particularly understandable and structurable, as long as all stack operations are documented in detail. Most problems
+can be solved within one screen (1 kB) in FORTH. The fact that the PC and the subsystem use the same FORTH version (LMI) 
+also has a positive effect on software development. In terminal mode, the program is created in FORTH on the PC side,
+converted to Z80 object code with a metacompiler and transferred to the subcomputer as executable code. In the test 
+phase, this was done with the help of the Z80 emulator.
+
+One of the most important development tools turned out to be the Z80 metacompiler /30/, with which one is able to 
+develop Z80 object code on the 8088 microprocessor. With this it was possible to implement FORTH and assembler routines 
+quickly on the subcomputer. The subcomputer is able to load measurement programs from the PC mass memories directly into 
+its main memory and expand its FORTH vocabulary. This type of program transfer proves to be very flexible in laboratory
+operation, so that only the primitive routines such as operating the interface bus, reading the counters, initializing
+the timer card and the interface communication (FIFO's, COM2) have to be stored in the read-only memory (EPROM). If the 
+programs are complete and error-free after the test phase, the compiled Z80 code can be 'burned' into an EPROM, so that
+it is available at any time when the subcomputer is switched on. 
+
+Pascal proved to be more advantageous than FORTH for evaluations and the preliminary reduction of measurement data. 
+Due to its mathematical-formulaic structure, Pascal makes it easier for the programmer to convert the algorithms into 
+'computer code', so that the simulation program (SPEKTRUM), for calculating the Hfs spectrum of an element to be
+examined was realized in Pascal. Since it concerned a limited problem it seemed favorable to use Turbo-Pascal which is 
+also characterized by a particularly fast program translation. This had a particularly positive effect on the 
+program development time. A detailed description of the Turbo Pascal language can be found in the manuals /31, 32/.
+
+The concept and the description of the computer language FORTH is described in detail in the book by R. Zech /33/. 
+In the case of the operating system PC-DOS to a detailed description in /34, 35, 36/.
+
+
+4.2 Subcomputer operating system (KERNEL)
+		
+The operating system of the Z80 subcomputer (KERNEL) is written in LMI-FORTH (Ver. 3.1) and was kindly provided in this 
+version by K.D. Krause /21/ to our disposal.
+
+It is located in the lower address area (0000-7FFFh) in a 32 kB EPROM. It contains the primitive routines (words) of
+the FORTH and is in its input/output commands are adapted to the communication with the PC computer. The PC computer 
+serves only as a terminal for the Z80 subcomputer. The following commands of the FORTH kernel have been rewritten:
+
+( i.) Output:  
+
+EMIT ( char -- )
+
+The subcomputer outputs a character (character), which is on the stack (stack register), to the PC computer via 
+the serial interface (COM2).
+
+
+FORTH definition of EMIT:
+
+ASSEMBLER ( Switching on the assembler dictionary )
+
+( char -- )
+
+CODE emit
+	HL POP ( get character from stack )
+    1$: A, SIO_CTRL IN ( Read SIO status word )
+	2 A BIT ( Bit number 2 set ? )
+	Z 1$ JR ( If zero, jump to 1$ )
+	A, L LD ( Load character into accumulator )
+	SIO_DATA A OUT ( Output the character )
+	NEXT, ( Return to FORTH )
+END-CODE
+
+(ii.) Input:  
+
+
+KEY ( -- char )
+
+The subcomputer continuously reads the status register of the serial interface in a loop. If a character is 
+received, the loop is aborted, the is terminated, the character is read and placed on the stack.
+
+
+FORTH definition of KEY:
+
+CODE KEY
+
+    1$: A, SIO_CTRL IN ( Read SIO status word )
+	0 A BIT ( Bit number 0 set ? )
+	Z 1$ JR ( If zero, jump to 1$ )
+	A, SIO_DATA IN ( Read character from SIO )
+	HL, # 0 LD ( Delete upper byte of HL ) 	
+	L, A LD ( Load accumulator into register L )
+	HL PUSH ( Put character on stack )
+	NEXT, ( Return to FORTH )
+
+END-CODE	
+
+
+
+?TERMINAL ( -- flag )
+
+This command is similar in function to the KEY command: If a transmission from the PC computer has taken 
+place, then instead of the incoming character a TRUE' flag (0) is placed on the stack instead of the incoming
+character. If no transmission has taken place, a 'FALSE' flag (-1) is placed on the stack. This command allows
+FORTH to respond to user input without having to constantly poll the interface.
+
+FORTH definition of ?TERMINAL:
+
+CODE ?TERMINAL
+
+ 	A, SIO_CTRL IN ( Read SIO status word )
+ 	0 A BIT ( Bit number 0 set ? )
+	HL, # 0 LD ( Delete upper byte of HL )
+	Z 1$ JR ( If character ---> 1$ )
+	L DEC ( generate: -1 = 'FALSE' )
+  1$:	HL PUSH ( Put FLAG on the stack )
+	NEXT, ( return to FORTH )
+
+END-CODE	
+
+The FORTH interpreter of the subsystem expects all inputs and outputs via the serial interface. In terminal
+mode, the user communicates with the subsystem from the PC computer with the subsystem by entering commands
+to the interpreter from the keyboard. As the mass storage concept of FORTH is fully implemented on the is
+fully implemented on the subsystem, program files can also be loaded directly from the drive or hard disk:
+
+- USING : Causes the subsystem to use a FORTH file from mass storage.  
+- LOAD : Causes the FORTH interpreter to load the file registered by USING, and to compile the words to the dictionary.
+	
+Fig. 20 shows the layout of the Z80 memory. In the upper memory area (8000-FFFFh) is the RAM memory, which, 
+for the mass storage concept, contains a disk buffer and a ring buffer, each with a capacity of 2 kB.
+These two memory areas serve the subsystem as communication buffers to the PC computer. Individual screens
+(or entire files) can be loaded via these two buffers.
+
+Primitives:
+The FORTH operating system of the subcomputer contains the following additional routines:
+
+	* PIO routines (initialize interface bus).
+	* FIFO routines (transfer measurement data)
+	* IOB routines (control counters)
+	* CTC routines (timer control)
+
+A detailed description of the routines is contained in the program library MAS /27/.
+
+The size of the operating system kernel is about 12 kB of translated Z80 code. The EPROM offers about 
+three times the capacity for additional FORTH extensions, so that the user has enough memory in reserve.
+
+Fig. 20: Memory allocation of the subcomputer
+
+4.3 PC terminal program (TERMINAL)
+
+The terminal program (TERMINAL) described here allows the user to operate the subcomputer from the PC. 
+The program sequence can be best illustrated with the aid of state diagrams /37/. The graphs used for 
+this purpose obey simple rules. If a certain event E occurs, then the action A is executed and the 
+system is transferred from the initial state Z1 to the state Z2. The corresponding 'directed graph' 
+is shown in Fig. 21 a. The graphs may in turn contain subgraphs when more complex actions are triggered, 
+which in turn may result in state changes (Fig. 21 b). The state diagram for the terminal program is 
+shown in Fig. 22.
+
+This is a FORTH program /21/ which has two states. in state 0 (PC host) you are in the FORTH interpreter 
+of the PC computer, in state 1 (slave) the FORTH interpreter of the subsystem is operated. The transition
+from one state to the other is triggered by the F1 function key. This key enables the user to change 
+the system at any time, regardless of the action currently being performed by the FORTH interpreter in 
+question. is being executed. On the PC side, the F1 key corresponds to the FORTH word TERMINAL, which 
+switches to the subcomputer and handles all input/output via the serial interface with the PC computer. 
+interface with the PC computer. On the subsystem side, the F1 key corresponds to the FORTH word MASTER, 
+which is used to return to the FORTH interpreter of the PC computer.
+
+Fig. 21: a.) Directed graph, b.) Subgraph
+
+Fig. 22: State diagram of the PC terminal program
+
+In state 1 (slave) the measurement (MEASURE) and the measurement data transfer (TRANSFER) to the PC host
+system are performed, which is indicated by a subgraph. If no FORTH word is activated on the subsystem, 
+the subsystem runs in a waiting loop and continuously polls the interface to the PC. In state 0 (PC host), 
+the measurement data input/output is managed on the PC side, i.e. the interfaces to the subsystem (FIFO, SIO) 
+are queried and the data arising in the measurement mode are displayed and stored. displayed and stored. 
+If an error occurs in one of the two systems, the FORTH interpreter returns to the cold start routine 
+(COLD) and reinitializes (INIT) the system again. The terminal program can only be exited on the PC 
+side by the BYE command, which returns the user to the DOS operating system level. The subsystem can 
+be in any state; in particular, it can continue the measuring operation, provided that the intermediate
+measurement operation, provided that the intermediate storage of the measurement data is secured. 
+Switching the PC host system off and on again also allows the subsystem to continue operating 
+continue to operate independently.
+
+4.4 PC test measuring program (FLUOTEST)
+
+After all the hardware and software components of the new data acquisition system have been individually 
+checked for proper functioning, a measurement carried out under laboratory conditions should measurement 
+carried out under laboratory conditions should provide information about the performance of the entire system.
+
+Within the scope of the polarization spectroscopic measurements on zirconium, a test version of an optical
+measurement program was to be implemented.
+
+The developed measuring program FLUOTEST is essentially a test version of the FLUO1 program /1/ written by W.Kress.
+
+
+
+FLUOTEST:
+
+The test program FLUOTEST should offer the following possibilities in its basic version:
+
+1.) Tuning of the laser in the whole frequency range of 30 GHz. For this purpose, the necessary timing for
+the Z80 laser interface (NMI input) should be generated in order to be able to tune the laser in discrete frequency steps.
+
+2.) Recording of the fluorescence signal for a period in the range of 100 - 300 ms in frequency steps of 2 MHz.
+
+3.) optional: possibility to record calibration marks for a period of 10 ms in frequency steps of 0.5 MHz for scaling 
+the frequency axis.
+
+These requirements result in the pulse pattern necessary for controlling the experiment (Fig. 23). Here, a measurement 
+cycle consists of the acquisition of four
+
+
+Fig. 23: Timing diagram FLUOTEST
+
+calibration marks and a corresponding fluorescence counting rate. The total time tz, which is necessary for this, results to:
+		tz = tF + 4 * tE + 5 * t0
+
+where:
+   		tF : measuring time for the fluorescence signal
+		tE : measuring time for the calibration mark signal
+		t0 : reading and storing of the count rates
+
+The real timing was checked using a storage oscilloscope (TEKTRONIX, model 2230) and can be seen in Fig. 24 and Fig. 25. 
+The NMI pulses for control of the Z80 laser interface have a pulse length of about 5 μs. The gate opening times for the 
+two counters are fixed (tF, tE). Fig. 24 shows the time sequence of the NMI signals and the gate opening signal 
+for the calibration marks. The first NMI signal causes the laser to run up 0.5 MHz in frequency, the second NMI 
+signal stops the laser. The counter is then read, the count rate is buffered and the counter is cleared for the 
+next count rate. counter is cleared for the next count rate. This process is repeated four times, so that the laser 
+has now advanced by 2 MHz. The fluorescence signal is then fluorescence signal is recorded and read out. This ends 
+the measuring cycle tZ and the following cycle starts again with the recording of the calibration marks. The flow 
+diagram of the FLUOTEST test program is shown in Fig. 26.
+
+Remark:
+
+Since the FLUOTEST program is only a test version, the recording of the calibration marks was taken into account in the
+timing diagram, but omitted in the real test run. omitted in the real test run. This was done for the following reasons:
+
+--- The recording of the calibration marks represents a high data input (transfer to the PC) and is only important for the quantitative evaluation of the spectra.
+--- For the qualitative evaluation of the measured spectra a comparison with the parallel running Z80-MES should be sufficient.
+
+Fig. 24: a.) Measured timing diagram NMI (inverted)
+
+Fig. 24: b.) Measured timing diagram EICH gate
+
+The timing behavior of the opening of the gate for the calibration mark signal and the fluorescence signal is shown in Fig. 25. 
+Between each fluorescence dot recording (here tF = 100 ms) there are four calibration mark recordings with a measurement time of tE = 10 ms.
+
+
+Fig. 25: Measured timing diagram FLUO gate
+
+Fig. 26: Flow diagram FLUOTEST
