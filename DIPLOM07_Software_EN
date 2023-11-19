@@ -250,8 +250,9 @@ Remark:
 Since the FLUOTEST program is only a test version, the recording of the calibration marks was taken into account in the
 timing diagram, but omitted in the real test run. omitted in the real test run. This was done for the following reasons:
 
---- The recording of the calibration marks represents a high data input (transfer to the PC) and is only important for the quantitative evaluation of the spectra.
---- For the qualitative evaluation of the measured spectra a comparison with the parallel running Z80-MES should be sufficient.
+- The recording of the calibration marks represents a high data input (transfer to the PC) and is only important for 
+  the quantitative evaluation of the spectra.
+- For the qualitative evaluation of the measured spectra a comparison with the parallel running Z80-MES should be sufficient.
 
 Fig. 24: a.) Measured timing diagram NMI (inverted)
 
