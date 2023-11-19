@@ -1,0 +1,138 @@
+4.5 Hfs simulation program (SPEKTRUM)
+
+The SPEKTRUM program calculates and draws the hyperfine structure spectrum of a transition between two fine structure states. 
+Input parameters are the name of the element, the angular momentum quantum numbers (I, Ju, Jo) and the Hfs constants 
+(A and B factor) of the two fine structure states. 
+The following parameters must be entered into the program by the user in this order (validity ranges of the parameters):
+
+1.) Ao : A-factor for the upper state ( 0 - 9999 [MHz] )
+
+2.) Au : A-factor for the lower state ( 0 - 9999 [MHz] )
+
+3.) Bo : B-factor for the upper state ( 0 - 9999 [MHz] )
+
+4.) Bu : B-factor for the lower state ( 0 - 9999 [MHz] )
+
+5.) Jo : Envelope angular momentum of the upper state ( 0.5 - 99 [h] )
+
+6.) Ju : Envelope angular momentum of the lower state ( 0.5 - 99 [h] )  	( 0.5 - 99 [h] )
+
+7.) I : Nuclear spin of the atom ( 0.5 - 99 [h] )
+				
+8.) Untrgnd : Background ( 0 - 999 )
+
+9.) FWHM : Half-width of the Hfs lines ( 1 - 999.99 [MHz] )
+
+10.) Auflsng : Graphical resolution of the frequency axis ( 100 - 500 )
+        
+The name of the element and the spectroscopic designations of the lower and upper states can also be entered to identify a simulation. 
+
+In order to avoid unnecessary sources of error and to increase the user-friendliness of the program, all the above parameters are 
+stored in temporary files (SPEKTRUM.PAR, SPROFIL.PAR) and read in automatically at the start of the program. When the program is 
+exited correctly, the parameters are saved for the next program run, so that the program can be restarted without time-consuming 
+re-entry of the parameters. 
+
+Program sequence:
+The flow chart in Fig. 27 documents the simulation program sequence in detail. After the parameters have been read in and 
+checked for correctness in a loop the user is asked for a file name for saving the data. The file name may consist of a maximum 
+of eight The extension .DAT is generated automatically.
+
+Based on the parameters entered, the program calculates the following values for the lower and upper states:
+
+Quantum numbers F:
+F = I + J, ... , │ I - J │
+
+Casimir values K:
+K = F ( F + 1 ) - I ( I + 1 ) - J ( J + 1 )
+
+Energy levels W:
+W = ½h {KA + ¼[ 3(K(K+1)-I(I+1)J(J+1))B / (I(2I-1)J(2J-1)]}
+
+Line energies E:
+E = │ W(Fo) - W(Fu) │ taking into account the  
+
+selection rules:  	
+    1. │ ⌂F │ = │ Fu - Fo │ = 0, 1
+    2. fu = 0 -> fo = 0 prohibited.
+
+The transitions that correspond to the selection rules are assigned the corresponding relative line intensities according 
+to the following equation:
+
+Intensities:
+							| Jo Fo I |²
+Intensity = (2Fo + 1) (2Fu + 1) | |
+							| Fu Ju 1 |
+
+and then the strongest component is normalized to 100 %.
+
+Fig. 27: Flow diagram SPEKTRUM
+
+
+To allow the user a quick check, all calculated values are displayed on the screen in addition to the number of components 
+in the Hfs spectrum. This is followed by the graph structure and the query for the desired type of line shape. The user can 
+choose between a Lorentz or Gaussian profile:
+
+Lorentz profile:
+L (E) ~ FWHM² / [ (E - E0)² + FWHM² / 4 ]
+
+Gaussian profile:
+G (E) ~ exp( - ½ [ (E - E0) / FWHM ]² )
+
+To obtain a quick overview of the qualitative form of the spectrum, it is possible to display the spectrum in a simplified form
+on the screen. With this program option, the transitions are only displayed as vertical lines, which has a very favorable 
+effect This has a very favorable effect on the computing time and shortens it considerably. The user then has the option of
+calculating and plotting the sum profile. An important aspect of the program was to display the spectrum as a summed line 
+signal on the screen. In this display it is possible to the influence of the line width (FWHM) of the individual lines
+on the total sum signal.
+
+After the spectrum has been built up on the screen, the most important parameters are displayed in a window at the bottom of 
+the screen. The information of the energies E(min) and E(max) as well as the line center of gravity allow the energy axis 
+of the Hfs multiplet to be scaled (see Fig. 29).
+
+Comparing the simulated spectrum with experimentally obtained spectra makes it easier for the experimenter to identify the 
+measured lines. If the "simulated" spectrum corresponds to the measured Hfs spectrum in terms of the distribution of its 
+components, the user can use the final parameters (*.PAR) and all calculated values in ASCII files (*.DAT), otherwise the 
+program returns to parameter input.
+
+If required, the screen content can be printed out on the connected printer (Prnt-Scr <0>) without having to interrupt 
+the program. At the end of the program, a comment on the simulation run (max. 80 characters) can be entered for 
+documentation purposes.
+
+The simulation program was created in the Turbo Pascal programming language and is started at operating system level by 
+a batch file (batch job). This batch file carries out the necessary printer and plotter initializations and briefly 
+explains the program's options to the user (SPEKTRUM.TXT).
+
+Additional program extensions have been added to facilitate the comparison of measured and simulated spectra. For various 
+applications you now have the option of calculating the Hfs spectrum of two odd isotopes in addition to the additional 
+specification of even isotopes that have no Hfs splitting (see isotopes (see Appendix D). A detailed description of this 
+and other evaluation programs for Hfs measurements can be found in /38/.
+
+In order to test the Hfs simulation program SPEKTRUM, it was compared with a measured spectrum (Fig. 28). For this purpose, 
+a zircon spectrum from /39/ was used for this purpose. The transition from state a 3F4 to z 3F4 with a wavelength of 
+612.744 nm was selected for this purpose. In addition to the four even-numbered isotopes (90Zr, 92Zr, 94Zr and 96Zr), 
+six clearly resolved Hfs components of the odd-numbered zirconium isotope (91Zr) can be seen. The A and B factors and 
+isotopic shifts were taken from the above work:
+
+A and B factors:
+
+	a 3F4 : Au = -77.90 MHz, Bu = -33.50 MHz
+	z 3F4 : Ao = -274.90 MHz, Bo = -32.10 MHz
+
+Isotopic shifts:
+
+	90Zr : 0.0000 MHz ( 51.46 % )
+	91Zr : -96.3600 MHz ( 11.23 % )
+	92Zr : -230.6200 MHz ( 17.11 % )
+	94Zr : -400.5500 MHz ( 17.40 % )
+	96Zr : -523.8700 MHz ( 2.80 % )
+
+The nuclear spin for the odd-numbered isotope is I=5/2.
+
+For the full width at half maximum (FWHM) of the lines 20 MHz were used. The SPEKTRUM program used these values to calculate 
+the zirconium spectrum in Fig. 29. A comparison of the simulated spectrum with the measured spectrum shows good agreement 
+in the distribution of the Hfs components. Clearly the Hfs components with lower intensities can be seen to be drowned out 
+in the signal noise or covered by it in the area of the even isotopes.
+
+Fig. 28: Measured zircon spectrum (from /39/)
+
+Fig. 29: Simulated zirconium spectrum
