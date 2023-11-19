@@ -1,0 +1,76 @@
+5 Measurements:
+		
+5.1 Experimental setup
+
+The data acquisition system was tested with measurements on zirconium. This involved the method of polarization spectroscopy, 
+the setup of which is described in detail in described in detail in the work by Ch. Bourauel /40/.
+
+For control purposes, the old Z80 data acquisition system was operated in parallel with the new PC data acquisition system in 
+order to qualitatively compare the fluorescence signal recorded by both systems. fluorescence signal recorded by both systems.
+
+Fig. 30 shows the overall setup of the experiment.
+
+Fig. 30: Experimental setup
+
+5.2 Test of the new data acquisition system
+
+The new PC data acquisition system was tested by recording the transition from the a 3F3 state to the z 3F3 state of zirconium 
+with a wavelength of 6143.20 Å. A total of 10 scans with different scan widths were recorded. Fig. 31 shows the Zr spectrum 
+for a scan width of 4 GHz can be seen. The scanning time here was approx. 6 min. For comparison, Fig. 32 shows an already 
+evaluated (corrected computer scale) spectrum recorded by the Z80 system /39/. The four even-numbered zirconium isotopes 
+(90Zr, 92Zr, 94Zr and 96Zr) and some weakly pronounced Hfs components are clearly visible.
+
+In addition, several scans with a scan width of 800 MHz were recorded in the area of the even isotopes. The scanning time was 
+approx. 1.2 min.  
+
+Appendix C shows the recordings of the new and old data acquisition system for comparison.
+
+The measurements were recorded with the following parameter settings:
+
+Discharge parameters:	
+Current: 200 mA
+Voltage: 700 - 800 V
+Pressure: 1 - 1.5 mbar
+
+Lock-in amplifier:
+Time constant: 100 ms
+Signal amplitude: 400 - 500 mV
+
+
+Fig. 31: Measured Zr spectrum
+
+Fig. 32: Comparative Zr spectrum ( from /39/)
+
+
+6. Final remark:
+
+In comparison with the old Z80 measured value acquisition system, the new measured value acquisition system is characterized 
+by a reduced susceptibility to interference during measurement operation. There was a clear reduction in the number of 
+'outliers' in the fluorescence spectrum, which is due not least to the careful design and adequate shielding of the individual
+components. 
+
+The two-computer system concept and the associated separation of tasks during measurement operation also resulted in 
+significant advantages:
+
+The subsystem is fully available for measured value acquisition in real time. Since, in comparison to the old Z80 system, 
+there is no 'high-level' operating system such as CP/M and the generation of refresh signals for the dynamic memory modules 
+(DRAM) is no longer necessary, the programmer has absolute control over the subsystem. Within the framework of the Z80-FORTH
+operating system, the programmer can utilize the entire performance of the subsystem.
+
+The new data acquisition system is characterized by its flexibility in measurement operation. Existing program errors or changes
+to the program routines only required a switchover to the PC (F1 function key), editing of the program source file and subsequent
+loading (LOAD) from the subsystem. 
+
+The various program sections could then be tested individually and checked for functionality. This program development and
+testing phase required considerably more time on the old Z80 computer system. In this form, the new two-computer system represents
+an ideal program development environment.
+
+The implementation of interrupt-driven measurement routines can be omitted completely in some cases (see FLUOTEST), as long 
+as there is no need to react to unforeseen events, but rather to maintain a uniform program flow. 
+
+This is only guaranteed by the fact that the Z80 microprocessor is fully subordinated to the FORTH interpreter and has no 
+other tasks to perform.
+
+On the PC side, there are some further possibilities for improving the control and measurement programs, which are discussed 
+in Chapter 7.
+
