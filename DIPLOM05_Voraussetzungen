@@ -260,8 +260,7 @@ Da die Funktion des Meßwerterfassungssystems im Wesentlichen durch die Software
 		* FORTH-Interpreter
 		* etc.
 
--	Ergonomische Gestaltung der Benutzeroberfläche bei
-	Programmen:
+-	Ergonomische Gestaltung der Benutzeroberfläche bei Programmen:
 		* Größtmögliche Reduzierung aller Eingaben
 		* Vermeidung von Falscheingaben
 		* Ausführliche Hilfs- und Fehlermeldungen
@@ -303,10 +302,8 @@ Vorteile:
 	* Einfache Programmierung des PIO-Bausteins
 
 Nachteile:
-	* zeitaufwendiger Handshake (Hard- und Software)
-	  erforderlich
-	* Beide Rechner sind während der Kommunikation für
-	  Echtzeit-Meßabläufe blockiert
+	* zeitaufwendiger Handshake (Hard- und Software) erforderlich
+	* Beide Rechner sind während der Kommunikation für Echtzeit-Meßabläufe blockiert
  	* Rechner sind nicht unabhängig voneinander
 
 
@@ -325,8 +322,7 @@ Vorteile:
 
 Nachteile:
 	* Direkter Busanschluß an PC und Z80 schwierig	
-	* Kommunikationsprotokoll muß gleichzeitigen Schreib-
-	  und Lesezugriff ggf. ausschließen
+	* Kommunikationsprotokoll muß gleichzeitigen Schreib- und Lesezugriff ggf. ausschließen
 	* teurer als Seriell- und Parallelbausteine	
 
 
@@ -338,24 +334,21 @@ Hier erfolgt die Rechnerkopplung über einen Pufferspeicher, der die zeitliche R
 Datenpuffer einem Zweitor-Speicher, bei dem jedoch das FIFO (First-In-First-Out) selbst die Arbitrierung vornimmt.
 
 Eine zusätzliche FIFO-Logik erlaubt es, den Inhalt des Datenpuffers jederzeit zu lesen, zu löschen, u.a. verschieden bedingte Interrupts zu generieren. 
-Im dynamischen Betrieb erlaubt das FIFO eine Pufferung der Daten und entlastet somit die Schnittstellenkommunikation. Beide Rechner können gleichzeitig s
-chreibend und lesend auf den Datenpuffer zugreifen. Eine Rechnerkopplung mit den Zilog FIFO's ist inzwischen zu einem Standardverfahren geworden (siehe z.B. /9/).
+Im dynamischen Betrieb erlaubt das FIFO eine Pufferung der Daten und entlastet somit die Schnittstellenkommunikation. Beide Rechner können gleichzeitig 
+schreibend und lesend auf den Datenpuffer zugreifen. Eine Rechnerkopplung mit den Zilog FIFO's ist inzwischen zu einem Standardverfahren geworden 
+(siehe z.B. /9/).
 
 Vorteile:  
 	* Datenübertragungsrate sehr hoch (parallel)
 	* Asynchrone Rechnerkommunikation möglich
-	* Zeitliche Entkopplung der Rechnersysteme während der
-	  Kommunikation, sodaß beide Rechner voneinander
-	  unabhängig sind
+	* Zeitliche Entkopplung der Rechnersysteme während der Kommunikation, sodaß beide Rechner voneinander unabhängig sind
 	* Direkter Busanschluß beim Z80-System möglich
 	* Zeitliche Reihenfolge der Daten bleibt erhalten
 	* Dynamischer Pufferbetrieb
 	
 Nachteile:
-	* Programmierung des Bausteins aufgrund der Vielzahl
-	  von Möglichkeiten relativ aufwendig
+	* Programmierung des Bausteins aufgrund der Vielzahl von Möglichkeiten relativ aufwendig
 	* teurer als Seriell- und Parallelbausteine	
 
 
 Abb. 4:  FIFO Rechnerkopplung
-
