@@ -77,7 +77,7 @@ computer coupling (FIFO) gives a first impression of the performance of the data
 	level : TTL
 	Baud rate : approx. 4 ̈10e5 [bit / s].
 	stations : 256
-	max. length : ¾ 10 m
+	max. length : <= 10 m
 	transmission : synchronous
 	Application : data acquisition
 
@@ -87,7 +87,7 @@ computer coupling (FIFO) gives a first impression of the performance of the data
 	level : TTL
 	Baud rate : approx. 4 ̈10e6 [bit / s].
 	stations : 1
-	max. length : approx. 2 m
+	max. length : <= 2 m
 	transmission : asynchronous
 	application : computer coupling
 
@@ -205,7 +205,7 @@ instruments to be operated on one bus. The number of remote stations is limited 
 an address and communicates with the computer via "3-wire handshake" /16/. A distinction is made between 
 the following possibilities for connecting a measuring instruments:
 
-  * LISTENER : receives information from the computer
+  	* LISTENER : receives information from the computer
 	* TALKER : supplies the computer with information
 	* LISTENER & TALKER : bidirectional information exchange with the connected computer.
 
@@ -359,7 +359,7 @@ in /3/, and thus permits thus a simultaneous use of all measuring modules and in
 The following page shows the schematic diagram (Fig. 10) of the interface unit, which is divided into input (BUS-IN) 
 and output channels (BUS-OUT). The data flow is controlled by the control bus (CONTROL), the selection of the measuring 
 modules is done by the address bus (ADDRESS). A bus termination of the DATA-IN bus pulls all 16 lines to ground via 
-resistor arrays (2.2 kÛ), so that defined input levels are guaranteed.
+resistor arrays (2.2 kOhm), so that defined input levels are guaranteed.
 
 Fig. 10: Subcomputer system and interface bus (IOB)
 
@@ -379,7 +379,7 @@ output frequency fout of 1 MHz. Fig. 12 and Fig. 13 show the linear progression 
 (dependence of the output frequency fout on the input voltage Uin) of the two channels can be clearly seen.
 
 Fig. 14 shows the frequency deviation ⌂f = fmax - fmin of the calibration mark channel as a function of the gain set 
-at potentiometer P2. With a fixed set offset value of P1 = 9.7 [skt], a maximum frequency deviation ⌂f of approx. 221 [kHz] 
+at potentiometer P2. With a fixed set offset value of P1 = 9.7 [Scale parts], a maximum frequency deviation ⌂f of approx. 221 [kHz] 
 results for the amplification P2 = 5.0 [skt]. The input voltage was kept constant at Uin = 2 V. In order to shield the 
 sensitive VFC analog components as far as possible from external interference, the setup was mounted on a "ground plane" 
 board (continuous ground plane on the upper side of the board).
@@ -400,7 +400,7 @@ Fig. 14: VFC frequency deviation of the calibration mark input
 3.4.2 TTL counter card
 
 The counter card contains two counter channels (á 32 bit) each, which allow to record count rates up to a maximum of 
-232-1 (=4,294,967,295). The input signal is linked to the gate signal via an AND gate (74LS08) to activate the counters 
+2e32-1 (=4,294,967,295). The input signal is linked to the gate signal via an AND gate (74LS08) to activate the counters 
 for fixed time periods. The four series-connected counter components (74HC393, high-speed CMOS) allow a maximum input 
 frequency of 100 MHz. Via the four latches (74HC374), the count rates are read out in parallel and forwarded to the DATA-IN bus.
 
@@ -428,7 +428,7 @@ The ECL counter card is similar in principle to the TTL counter card just descri
 the first counting stage is in ECL technology. (Emitter-Coupled-Logic) in order to be able to resolve counting events with 
 very short time intervals (up to approx. 10 ns). With the help of this card it is possible to record the pulses of the
 photomultiplier, which are processed to standard pulses by a discriminator (photon counting). ECL circuits are characterized 
-by very short gate propagation times ( ¾ 5 ns), but have different logic levels than TTL devices. Therefore it is necessary 
+by very short gate propagation times ( <= 5 ns), but have different logic levels than TTL devices. Therefore it is necessary 
 to compare the two TTL input signals for the first counter stage (MC10154) by means of a TTL/ECL converter (MC10124). 
 For the subsequent TTL counters a new level conversion is necessary. This is done with the help of the ECL/TTL 
 converter (MC10125). The timing diagram corresponds to that of the TTL counter card (Fig. 15). The base address 
@@ -456,4 +456,3 @@ in Fig. 18. In Fig. 19 the block diagram of the high frequency decade interface 
 Fig. 18: Timing diagram of the decade interface
 
 Fig. 19: Block diagram of high-frequency decade interface
-
