@@ -87,10 +87,10 @@ A brief comparison of the computer systems will provide an overview of their per
 	Operating system: PC-DOS 3.x
 	Bus system: IBM PC bus
 	Mass storage: 
-        floppy disks (1.2 MB, 360 kB, 5¼")
-				Hard disk (32 MB)
+        	floppy disks (1.2 MB, 360 kB, 5¼")
+		Hard disk (32 MB)
 	Terminal: graphics-capable screen
-				(graphic resolution: 720 x 348 pixels)
+		  (graphic resolution: 720 x 348 pixels)
 
 
 	ECB subcomputer system:
@@ -130,8 +130,7 @@ Specifically, the planning included the following:
 	* How far should the computer be extended ?
 	* Should there be an 'online/offline' control ?
 	* Memory capacity, computing speed ?
-	* Use of standardized systems
-	  (19" rack, ECB, PC bus, etc.)
+	* Use of standardized systems (19" rack, ECB, PC bus, etc.)
 
 
   - Interface electronics:
@@ -180,8 +179,7 @@ development and laboratory operation.
 		* etc.
 
 - Modularization of the measuring modules and a resulting definition of an interface bus:
-		* analog VFC - counter modules
-		  (voltage-to-frequency converter)
+		* analog VFC - counter modules (voltage-to-frequency converter)
 		* fast ECL - counter (photoncounting)
 		* frequency decade control		
 
@@ -215,8 +213,7 @@ development and laboratory operation.
 - Option for later expansion at all levels:
 		* Host computer (16 or 32 bit technology).
 		* Subsystem (ECB expansion cards)
-		* Connection of additional 'stand-alone' systems
-		  (laser control, wavelength meter, etc.)
+		* Connection of additional 'stand-alone' systems (laser control, wavelength meter, etc.)
 		* Interface unit (IOB standardization)	
 
 
@@ -239,13 +236,11 @@ requirements must be considered here:
 
 - FORTH operating system should be expandable
 
-- Measurement programs should be loaded into RAM
-	(program transfer via PC computer)
+- Measurement programs should be loaded into RAM (program transfer via PC computer)
 
 - Basic routines should be contained in EPROM
 
-- Minimize interrupt processing on the PC side
-	(A system crash during the measurement must be avoided at all costs). 	
+- Minimize interrupt processing on the PC side (A system crash during the measurement must be avoided at all costs). 	
 
 - Safe user guidance on all levels:
 		* program level
@@ -265,8 +260,7 @@ requirements must be considered here:
 		* FORTH interpreter
 		* etc.
 
-- Ergonomic design of the user interface for
-	programs:
+- Ergonomic design of the user interface for programs:
 		* greatest possible reduction of all inputs
 		* Avoidance of wrong inputs
 		* Detailed help and error messages
@@ -291,8 +285,7 @@ Advantages:
 
 Disadvantages:
 	* Slowest of all data communications, since serial.
-	* Handshake (hardware and/or software) required,
-	  so that both computers are blocked during communication for
+	* Handshake (hardware and/or software) required, so that both computers are blocked during communication for
 	  real-time measurement processes are blocked
 	* Computers are not independent of each other
 
@@ -312,10 +305,8 @@ Advantages:
 	* Simple programming of the PIO device.
 
 Disadvantages:
-	* Time-consuming handshake (hardware and software)
-	  required
-	* Both computers are blocked during communication for
-	  real-time measurement processes
+	* Time-consuming handshake (hardware and software) required
+	* Both computers are blocked during communication for real-time measurement processes
  	* computers are not independent of each other
 
 
@@ -356,15 +347,13 @@ Computer interfacing with Zilog FIFO's has become a standard procedure (see e.g.
 Advantages:  
 	* Data transfer rate very high (parallel)
 	* Asynchronous computer communication possible
-	* Temporal decoupling of the computer systems during the
-	  communication, so that both computers are independent of each other
+	* Temporal decoupling of the computer systems during the communication, so that both computers are independent of each other
 	* Direct bus connection possible with the Z80 system
 	* Time sequence of the data is preserved
 	* Dynamic buffer operation
 	
 Disadvantages:
-	* Programming of the device due to the multitude
-	  of possibilities relatively complex
+	* Programming of the device due to the multitude of possibilities relatively complex
 	* More expensive than serial and parallel blocks	
 
 
