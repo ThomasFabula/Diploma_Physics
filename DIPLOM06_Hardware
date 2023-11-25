@@ -73,7 +73,7 @@ einen ersten Eindruck der Leistungsfähigkeit der Datenübertragung:
 	Pegel	 	 :	TTL
 	Baudrate	 :	ca. 4 ̈10e5 [Bit / s]
 	Stationen	 :	256
-	max. Länge	 :	¾ 10 m
+	max. Länge	 :	<= 10 m
 	Übertragung	 :	synchron
 	Anwendung	 :	Meßwerterfassung
 
@@ -83,7 +83,7 @@ einen ersten Eindruck der Leistungsfähigkeit der Datenübertragung:
 	Pegel	 	 :	TTL
 	Baudrate	 :	ca. 4 ̈10e6 [Bit / s]
 	Stationen	 :	1
-	max. Länge 	 :	¾ 2 m
+	max. Länge 	 :	<= 2 m
 	Übertragung	 :	asynchron
 	Anwendung	 :	Rechnerkopplung
 
@@ -186,7 +186,7 @@ Neuere kommerzielle Meßgeräte besitzen bereits oftmals eine Schnittstelle zum 
 Jedes Gerät besitzt eine Adresse und kommuniziert über "3-Wire-Handshake" /16/ mit dem Rechner. Man unterscheidet zwischen folgenden Möglichkeiten ein 
 Meßgeräte anzuschließen:
 
-  * LISTENER : erhält Informationen vom Rechner
+	* LISTENER : erhält Informationen vom Rechner
 	* TALKER   : versorgt den Rechner mit Informationen
 	* LISTENER & TALKER : bidirektionaler Informationsaustausch mit dem angeschlossenen Rechner
 
@@ -322,7 +322,7 @@ somit eine gleichzeitige Verwendung aller Meßmodule und Interfacekarten an beid
 
 Auf der folgenden Seite ist die schematische Abbildung (Abb. 10) der Interface-Einheit zu sehen, die in Ein- (BUS-IN) und Ausgabekanäle (BUS-OUT) 
 untergliedert ist. Der Datenfluß wird durch den Kontrollbus (CONTROL) gesteuert, die Auswahl der Meßmodule wird durch den Adreßbus (ADDRESS) vorgenommen.
-Eine Busterminierung des DATA-IN Busses zieht über Widerstandsarrays (2.2 kÛ) alle 16 Leitungen auf Masse, sodaß definierte Eingangspegel gewährleistet werden.
+Eine Busterminierung des DATA-IN Busses zieht über Widerstandsarrays (2.2 kOhm) alle 16 Leitungen auf Masse, sodaß definierte Eingangspegel gewährleistet werden.
 
 Abb. 10:  Subrechnersystem und Interface-Bus (IOB)
 
@@ -359,7 +359,7 @@ Abb. 14:  VFC-Frequenzhub des Eichmarkeneingangs
 
 3.4.2  TTL-Zählerkarte
 
-Die Zählerkarte enthält jeweils zwei Zählerkanäle (á 32 Bit), die es ermöglichen, Zählraten bis maximal 232-1 (=4.294.967.295) aufzunehmen. Das Eingangssignal
+Die Zählerkarte enthält jeweils zwei Zählerkanäle (á 32 Bit), die es ermöglichen, Zählraten bis maximal 2e32-1 (=4.294.967.295) aufzunehmen. Das Eingangssignal
 wird über ein UND-Gatter (74LS08) mit dem Gate-Signal verknüpft, um die Zähler für fest definierte Zeitspannen zu aktivieren. Die vier hintereinander geschalteten 
 Zählerbausteine (74HC393, High-Speed CMOS) erlauben eine maximale Eingangsfrequenz von 100 MHz. Über die vier Latches (74HC374) werden die Zählraten parallel 
 ausgelesen und an den DATA-IN Bus weitergeleitet.
@@ -384,7 +384,7 @@ Abb. 16:  Schaltplan TTL-Zählerkarte
 Die ECL-Zählerkarte gleicht in ihrem prinzipiellen Aufbau der eben beschriebenen TTL-Zählerkarte. Im Gegensatz zu dieser ist die erste Zählstufe in ECL-Technik 
 (Emitter-Coupled-Logic) ausgeführt, um auch Zählereignisse mit sehr kurzen zeitlichen Abständen (bis ca. 10 ns) noch auflösen zu   können. Mit Hilfe dieser
 Karte ist es möglich, die über einen Diskriminator zu Normimpulsen aufbereiteten Pulse des Photomultipliers, aufzunehmen (Photoncounting). ECL-Schaltungen 
-zeichnen sich durch sehr kurze Gatterlaufzeiten ( ¾ 5 ns) aus, besitzen aber andere Logikpegel als TTL-Bausteine. Deshalb ist es notwendig, die beiden 
+zeichnen sich durch sehr kurze Gatterlaufzeiten ( <= 5 ns) aus, besitzen aber andere Logikpegel als TTL-Bausteine. Deshalb ist es notwendig, die beiden 
 TTL-Eingangssignale mit Hilfe eines TTL/ECL-Konverters (MC10124) für die erste Zählerstufe (MC10154) aufzubereiten. Für die anschließend folgenden TTL-Zähler 
 ist eine erneute Pegelumwandlung nötig. Dies geschieht mit Hilfe des ECL/TTL-Konverters (MC10125). Das Timingdiagramm entspricht dem der TTL-Zählerkarte 
 (Abb. 15). Die Basisadresse des ECL-Zählers beträgt 20h. In Abb. 16 ist der Aufbau der ECL-Zählerkarte zu sehen.
