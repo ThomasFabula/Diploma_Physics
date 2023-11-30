@@ -6,22 +6,21 @@ COMPUTER-MESSWERT-ERFASSUNGS-SYSTEM:     (IBM PC-XT kompatible)
 Hardware-Konfiguration:
 -----------------------
 
-
 Rechner:
  
  * PC-XT Hauptplatine 256 KByte-DRAM ( 4.77 / 7.0 MHz Taktfrequenz)
  * Multifunktions-Karte 384 KByte-DRAM
        ( Parallel-/Serielle-Schnittstelle, Gameport, RT-Clock )
- * Hercules Graphik-Karte ( Aufl.: 720x348 )
+ * Hercules Graphik-Karte ( Auflösung: 720 x 348 )
  * Floppy-Disk Kontroller (2 x 360 KB)
  * DTC Hard-Disk Kontroller
  * NEC 5.1/4-Floppy Disk 360 KB (slimline)
  * NEC 5.1/4-Hard Disk 10MB (slimline)
  * I/O-Platine (WIRE-WRAP): 4 x 8255 PPI (Parallel), 8251 SIO (Serial)
-                             2 x 8254 Timer (10Mhz), 8259 Interrupt-Contr.
+                            2 x 8254 Timer (10 MHz), 8259 Interrupt-Controller
  * Monochrom-Monitor (EIZO)
  * CHERRY-IBM Tastatur
- * 8087 (8Mhz) Coprozessor
+ * 8087 (8 MHz) Coprozessor
  * 150 Watt Netzteil
                              
 
@@ -52,7 +51,8 @@ P.A. Dietrich:  Adr: Bit 0, 1 belegt
                             - A/D-Wandler Karte ( 12 Bit )
 
 T. Fabula:      2 Karten:   - Zaehlerkarte (dito)
-                            - Frequenz-Dekadentreiber ;
+                            - Frequenz-Dekadentreiber ;
+
 
 
       I/O-Bus :    IBM-PC , Z80    ( 64poliger DIN-Stecker )
