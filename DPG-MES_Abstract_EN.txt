@@ -1,5 +1,5 @@
 
-ABSTRACT for the DPG Spring Meeting 1988 
+ABSTRACT for the DPG Spring Meeting 1988 in Bonn
 German Physical Society 
 
 
@@ -22,4 +22,4 @@ hyperfine structure (Hfs) and isotopic shift (IS) of zircon in a hollow cathode 
 
 
 * Research Institute of the Research Society for Precision Instrumentation, Microtechnology and 
-Clock Technology (FFMU), Stuttgart, Germany.
+Clock Technology (FFMU e.V. - registered association), Stuttgart, Germany.
