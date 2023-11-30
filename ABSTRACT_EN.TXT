@@ -1,4 +1,4 @@
-      ********************************************************
+      **************************************************************
       *
       * DATA ACQUISITION SYSTEM (DAS) 
       * 
@@ -9,7 +9,7 @@
       * Diploma thesis: Thomas Fabula 
       * Institute for Applied Physics
       * University of Bonn - 1987 
-      ********************************************************
+      **************************************************************
 
 
 Features:
@@ -34,9 +34,9 @@ Features:
          * I/O system : fixed, standardized bus interface
 
   (vi) Widely available software languages,
-          software tools & utilities and a resulting optimal software
-          development environment for both time-critical machine-oriented
-          as well as time-intensive high-level language programming problems.
+         * software tools & utilities and a resulting optimal software
+         * development environment for both time-critical machine-oriented
+         * as well as time-intensive high-level language programming problems.
 
 
 Description of the individual components:
@@ -61,8 +61,7 @@ realized by hardware FIFOs, guarantees a faultless function of the
 function of the PC computer at DOS operating system level. The PC-I/O
 board includes a 96 bit wide parallel I/O strip (4 x 8255 PPI) and two 
 16 bit (8254, 10 MHz) timers, bidirectional line drivers and receivers.
-line drivers and receivers to ensure an interference-free signal
-transmission between host and subcomputer.
+to ensure an interference-free signal transmission between host and subcomputer.
 
 A pre-reduction of the data as well as a graphical evaluation can be 
 performed 'on-line' on the PC computer if required. The spectra can 
@@ -87,12 +86,12 @@ the Z80 subcomputer includes a ROM-resident FORTH operating system and a measure
 program stored in RAM, which can be adapted to the respective experimental conditions.
 
 The two computers are coupled asynchronously via several hardware FIFOs (First-In-First-Out) 
-which allows buffering and time decoupling of the two computers is guaranteed. At 
-connection from the Z80 to the PC is a 16 bit wide and 128 byte deep wide and 128 byte deep 
-data path, which is controlled by "two-wire-handshake". The maximum data rate of the FIFOs 
-is approx. 1 MHz, which ensures a high measurement data transfer rate. The connection 
-from the PC to the Z80 for initialization, parameter and measurement measurement program 
-transfer is designed to be 8 bits wide and 128 bytes deep. 
+which allows buffering and time decoupling of the two computers is guaranteed. The connection
+between the Z80 and the PC is a 16-bit wide and 128-byte deep data path, which is controlled 
+by a "two-wire handshake". The maximum data rate of the FIFOs is approx. 1 MHz, which ensures
+a high measurement data transfer rate. The connection from the PC to the Z80 for initialization, 
+parameter and measurement measurement program transfer is designed to be 8 bits wide and 
+128 bytes deep. 
 
 The timing for the experiment is controlled via interrupt-gene Z80-CTCs 
 (Counter-Timer-Circuit), which allows a fast processing of fast occurring 
@@ -115,9 +114,9 @@ A later expandability of the measuring system was taken into account by making
 the interface bus as universal as possible:
 
   * 16 data-OUT lines : DAS => Experiment
-  * 16 data-IN lines : Experiment => DAS
-  * 8 address lines : selection of 256 different measuring modules. 
-  * 8 Control lines : Control of the different measuring modules. 
+  * 16 data-IN lines  : Experiment => DAS
+  * 8 address lines   : selection of 256 different measuring modules
+  * 8 Control lines   : Control of the different measuring modules 
 
 The individual modules consist of counters (TTL or ECL technology,
 32 bit, max. 150 MHz), VFC card (Voltage-to-Frequency Converter),
