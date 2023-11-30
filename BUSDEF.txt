@@ -43,7 +43,7 @@ I/O-Bus zur Meßwerterfassung für beliebige Rechnersysteme.
 Voraussetzung ist, daß der Rechner 16 Daten-Outputleitungen
 und 16 Daten-Inputleitungen hat, die TTL kompatibel sind.
 
-Außerdem kommen noch 8 Controlleitungen hinzu, die nach Wahl
+Außerdem kommen noch 8 Control-Leitungen hinzu, die nach Wahl
 als In- bzw. Outleitungen beschaltet werden können.
 
 Im Folgenden sind sie meistens als Out-Leitungen geschaltet,
@@ -57,14 +57,14 @@ pro Leitung betrieben werden können.
 Der 8-Bit Adreßbus ist gemultiplext, sodaß maximal 256 Interface
 Karten parallel betrieben werden können. Die Adreßdekodierung
 erfolgt auf jeder einzelnen Karte mittels Adreßkomparatoren. 
-uf dem Bus sind folgende Spannungen vorhanden +5,+18,-18 V.
+uf dem Bus sind folgende Spannungen vorhanden +5, +18, -18 V.
 Diese +/-18V dienen als "Rohspannungen" für OP's und VFC's.
 Um einen möglichst "sauberen", von Störeinflüßen verschonten Bus
 zu bekommen, sind mehrere Masseleitungen realisiert worden:
 
   Gnd            :  Masse für die Digitalleitungen,
   Gnd (+/-18V)   :  Masse für die OP und VFC Versorgungsspannungen,
- (Signal-Gnd     :  Masse für die externen Signalleitungen.)
+  (Signal-Gnd    :  Masse für die externen Signalleitungen.)
 
 +---------------------------------------------------------------------+
 
@@ -99,7 +99,7 @@ Pin                          Reihe
 24    CTRL 0 ;                             .      Bus
 25    CTRL 1 :                             .      :
 26      .    :                             .      :
-27      .    Controll                      .      :
+27      .    Control                       .      :
 28      .    Bus                           .      :
 29      .    :                          DATAout 12:
 30      .    :                          DATAout 13:
