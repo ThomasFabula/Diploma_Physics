@@ -1,0 +1,13 @@
+Summary
+
+Within the scope of this diploma thesis, a data acquisition system for use in high-frequency and laser spectroscopy was developed.
+
+A two-processor computer system based on an IBM PC-XT compatible personal computer in connection with an ECB Z80 system was built, 
+the hardware necessary for the computer coupling was developed and a powerful terminal programme (TERMINAL) for computer communication
+was implemented.
+
+The overall system was evaluated with a test measurement of a ZrI spectrum using the polarisation spectroscopy method and checked for 
+its performance.
+
+For the interpretation of the measured Hfs spectra, a simulation programme (SPEKTRUM) was developed to help assign the Hfs components
+to the lines of the recorded spectrum.
