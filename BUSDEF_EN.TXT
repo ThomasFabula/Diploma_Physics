@@ -1,0 +1,113 @@
+!-------------------------------------------------------------------------
+!
+!    file:        BUSDEF.IOB
+!    ------
+!                  Bus definition of the interface box of the IBM PC
+!                  Measured value acquisition system (MES)
+!
+!                  ... largely compatible with the Z80-I/O-
+!                  bus definition from P.A. Dietrich.
+!
+!    Modifications :
+!    -------------
+!           Who : Th. Fabula
+!           When : 26.06.1986   
+!           What : following pin assignments :
+!
+!                  Pin 1 a-c : +5 V supply voltage
+!                  Pin 13 a : +18V
+!                  Pin 15 a : Gnd(+/-18V) Ground for +/- 18 V
+!                  Pin 17 a : -18V
+!                  Pin 20 a :  DataIN-0 ( previously pin 1 c )
+!                  Pin 21 a :  DataOUT-15 ( previously pin 32 c )
+!                  Pin 32 a-c : Gnd Ground for digital lines
+!
+!           Ground :
+!           -------
+!           As generally in computer systems with EuroCard bus (ECB)
+!           Pin 1 a-c and Pin 32 a-c are assigned with the supply voltage
+!           or ground (Gnd), this has been retained here.
+!           However, in order to ensure the greatest possible compatibility with
+!           the existing I/O bus system of the Z80-MES
+!           bus system, the affected lines have been routed to
+!           free pins. This means that a subsequent
+!           modification of the Z80 boards is easier if they are to be used in the
+!           IBM-PC MES, or vice versa.
+!
++------------------------------------------------------------------------
+
+The following is a 64-pin (DIN 41612)
+I/O bus for measured value acquisition for any computer system.
+The prerequisite is that the computer has 16 data output lines
+and 16 data input lines which are TTL compatible.
+
+In addition, there are 8 control lines, which can be
+can be wired as input or output lines.
+
+In the following, they are mostly connected as Out lines,
+and operate, for example, the counters (Gate, Enable, Latch) and the 
+frequency decade control (data, address valid).
+
+In contrast to the Z80 bus, all lines are equipped with unidirectional buffers (74LS).
+(74LS244), so that approx. 60 LS-TTL loads can be operated per line.
+
+The 8-bit address bus is multiplexed, so that a maximum of 256 interface
+cards can be operated in parallel. The address decoding
+is carried out on each individual card by means of address comparators. 
+The following voltages are available on the bus +5, +18, -18 V.
+These +/-18V serve as "raw voltages" for OPs and VFCs.
+In order to achieve a bus that is as "clean" as possible and spared from interference
+several ground lines have been realized:
+
+  Gnd : Ground for the digital lines,
+  Gnd (+/-18V) :  Ground for the OP and VFC supply voltages,
+  (Signal-Gnd : ground for the external signal lines).
+
++---------------------------------------------------------------------+
+
+Assignment of the bus:
+--------------------
+
+Pin Series
+           a b c
+ 1 + 5V + 5V
+ 2 ADR 0 ; DATAin 1 ;
+ 3 ADR 1 : DATAin 2 :
+ 4 .    Address .      :
+ 5 .    Bus .      :
+ 6 .    : .      :
+ 7 .    : .      :
+ 8 .    : .      :
+ 9 ADR 7 < .      Data IN
+10 - .      Bus
+11 - .      :
+12 - .      :
+13 +18V .      :
+14 - .      :
+15 Gnd(+/-18V) DATAin 14 :
+16 - DATAin 15 <
+17 -18V DATAout 0 ;
+18 - DATAout 1 :
+19 - .      :
+20 DATAin 0 .      :
+21 DATAout 15 .      :
+22 - .      :
+23 - .      DataOUT
+24 CTRL 0 ; .      Bus
+25 CTRL 1 : .      :
+26 .    : .      :
+27 .    Control .      :
+28 .    Bus .      :
+29 .    DATAout 12:
+30 .    : DATAout 13:
+31 CTRL 7 < DATAout 14<
+32 Gnd(5V) Gnd(5V)
+
+
+ Number of pins !   Color !  Signal
+------------------!-------------!--------------
+     16 ! yellow !  Data IN
+     16 ! blue !  Data OUT
+      8 ! orange !  Address
+      8 ! gray !  Control
+------------------!-------------!-------------- 
