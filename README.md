@@ -10,7 +10,7 @@
 - https://iopscience.iop.org/article/10.1088/0022-3735/21/12/005
 
 ## University of Bonn 
-Institute of Applied Physics
+Institute of Applied Physics (IAP)
 - https://www.iap.uni-bonn.de/
 
 ## Further information
