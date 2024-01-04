@@ -4,7 +4,7 @@
 ### Journal of Physics E Scientific Instruments:
 - Title: Real-time data acquisition system for laser and radio frequency spectroscopy
 - Authors: Thomas Brenner, Stephanus Büttgenbach, Thomas Fabula and Wolfgang Rupprecht
-- Published: under licence by IOP Publishing Ltd
+- Published under licence by IOP Publishing Ltd.
 - Journal of Physics E: Scientific Instruments, Volume 21, Number 12
 
 ### Citation: T Brenner et al 1988 J. Phys. E: Sci. Instrum. 21 1150
