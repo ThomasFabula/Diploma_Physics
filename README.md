@@ -1,7 +1,7 @@
 # Diploma_Physics
 
 ## Diploma Thesis in Physics 
-### Journal of Physics E Scientific Instruments:
+### Journal of Physics E Scientific Instruments
 - Title: Real-time data acquisition system for laser and radio frequency spectroscopy
 - Authors: Thomas Brenner, Stephanus Büttgenbach, Thomas Fabula and Wolfgang Rupprecht
 - Published under licence by IOP Publishing Ltd.
@@ -13,6 +13,9 @@
 ## University of Bonn 
 - Institute of Applied Physics (IAP): https://www.iap.uni-bonn.de/
 - Hochschulrechenzentrum (HRZ): https://www.hrz.uni-bonn.de/de
+- Helmholtz-Institut für Strahlen- und Kernphysik: https://www.hiskp.uni-bonn.de
+- Fachgruppe Physik/Astronomie: https://www.physik-astro.uni-bonn.de/de
+- Mathematisch-Naturwissenschaftliche Fakultät: https://www.mnf.uni-bonn.de/de
 
 ## Further information
 - https://tfconsult.com/rechner-gesteuerte-spektroskopie/
