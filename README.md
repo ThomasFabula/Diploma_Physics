@@ -13,9 +13,9 @@
 ## University of Bonn 
 - Institute of Applied Physics (IAP): https://www.iap.uni-bonn.de/
 - Hochschul-Rechen-Zentrum (HRZ): https://www.hrz.uni-bonn.de/de
-- Helmholtz-Institut für Strahlen- und Kernphysik: https://www.hiskp.uni-bonn.de
+- Helmholtz-Institut für Strahlen- und Kernphysik (HISK): https://www.hiskp.uni-bonn.de
 - Fachgruppe Physik/Astronomie: https://www.physik-astro.uni-bonn.de/de
-- Mathematisch-Naturwissenschaftliche Fakultät: https://www.mnf.uni-bonn.de/de
+- Mathematisch-Naturwissenschaftliche Fakultät (MNF): https://www.mnf.uni-bonn.de/de
 
 ## Further information
 - https://tfconsult.com/rechner-gesteuerte-spektroskopie/
