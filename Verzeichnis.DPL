@@ -11,20 +11,20 @@ ASCII			American Standard Commitee for Information Interchange
 
 B
 
-B				Byte (= 8 Bit)
-Baud				Bit / s
+B				  Byte (= 8 Bit)
+Baud			Bit / s
 BCD				Binary Coded Decimal
-BIOS				Basic Input Output System
+BIOS			Basic Input Output System
 
 
 C
 
 CENTRONICS		Parallelschnittstelle (8 Bit)
-CIO				Counter-Input/Output
+CIO  				Counter-Input/Output
 CMOS				Complementary MOS
 CP/M				Control-Program for Microcomputers
 CPU 				Central Processing Unit
-CTC				Counter-Timer-Circuit
+CTC	  			Counter-Timer-Circuit
 
 
 D
@@ -49,8 +49,8 @@ EPROM			Erasable PROM
 F
 
 FIFO				First-In-First-Out
-FIO				FIFO Input/Output-Baustein 
-FLOPS			Floating-Point Operations per Second
+FIO			  	FIFO Input/Output-Baustein 
+FLOPS		  	Floating-Point Operations per Second
 
 
 G
@@ -60,19 +60,19 @@ GPIB				General-Purpose Interface-Bus
 
 H
 
-HC				High-Speed CMOS
-HP				Hewlett & Packard
-HP-IB			HP Interface-Bus
+HC			  	High-Speed CMOS
+HP			  	Hewlett & Packard
+HP-IB		  	HP Interface-Bus
 
 
 I
 
-IBM				International Business Machines
-ICE				In-Circuit-Emulator
-IEC				siehe IEEE-488
-IEEE				Institute of Electrical & Electronic	 				Engineers 
-IEEE-488			Norm für Meßgeräteanschlüße
-IOB				Input/Output-Bus (Interfacebus)
+IBM				  International Business Machines
+ICE			  	In-Circuit-Emulator
+IEC			  	siehe IEEE-488
+IEEE				Institute of Electrical & Electronic Engineers 
+IEEE-488	  Norm für Meßgeräteanschlüße
+IOB				  Input/Output-Bus (Interfacebus)
 
 
 J
@@ -102,7 +102,7 @@ N
 
 NEC				Nippon Electric Company
 NMI				Non-Maskable Interrupt
-NMOS				N-Kanal MOS
+NMOS			N-Kanal MOS
 
 O
 OP				Operationsverstärker
@@ -113,7 +113,7 @@ P
 PC				Personal Computer
 PIO				Parallel-Input/Output
 PPI				Peripheral Parallel Interface
-PROM				Programmable ROM
+PROM			Programmable ROM
 
 
 Q
@@ -122,7 +122,7 @@ Q
 R
 
 RAM				Random Access Memory
-RLL				Aufzeichnungsverfahren mit erhöhter 				Speicherdichte (Reduced Leaving Length)
+RLL				Aufzeichnungsverfahren mit erhöhter Speicherdichte (Reduced Leaving Length)
 ROM				Read Only Memory
 RS232			Norm für serielle Datenübertragung
 RTC				Real Time Clock
@@ -132,7 +132,7 @@ S
 
 SIO				Serial Input/Output
 SMD				Surface Mounted Device
-SRAM				Static RAM
+SRAM			Static RAM
 STI				Serial-Timer-Interruptcontroller
 
 
@@ -148,7 +148,7 @@ V
 
 V20				8088 kompatibler CMOS-Mikroprozessor
 VFC				Voltage-to-Frequency-Converter
-VLSI				Very Large Scale Integration
+VLSI			Very Large Scale Integration
 
 
 W
