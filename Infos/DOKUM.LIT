@@ -5,7 +5,7 @@
           ******************************
 
 
-Diese Datei enthält die vorhandene Literatur zu den einzelnen
+Diese Datei enthÃ¤lt die vorhandene Literatur zu den einzelnen
 Software- & Hardware-Produkten (Erweiterungskarten, Maus, etc...)
 des  PC-XT kompatiblen (Messwerterfassungs-) Systems, sowie des
 Z80 - ECB - Messwerterfassungssystems der Firma j&k.
@@ -19,7 +19,7 @@ PC - Literatur :    (Stand : 13.9.87)
 
  -  AutoCAD  Version 1.3
 
- -  Auto-LISP  Version 1.1 Manual fr ab AutoCAD Version 2.18
+ -  Auto-LISP  Version 1.1 Manual fÂr ab AutoCAD Version 2.18
 
  -  mc-Autorouter Ariadne Ver. 2.0
 
@@ -52,13 +52,14 @@ PC - Literatur :    (Stand : 13.9.87)
  -  Professional FORTRAN  ProFort  # 1
 
  -  Professional FORTRAN  ProFort  # 2
- -  FSD : FullScreenDebugger Version 1.0 (=AFD)
+
+ -  FSD : FullScreenDebugger Version 1.0 (=AFD)
 
  -  IBM PC  Technical Manual
 
  -  IBM PC-XT  Technical Manual & Hardware
 
- -  PC-XT  Technische Unterlagen und Schaltpläne
+ -  PC-XT  Technische Unterlagen und SchaltplÃ¤ne
 
  -  Epson FX Printer Manual
 
@@ -82,9 +83,9 @@ PC - Literatur :    (Stand : 13.9.87)
 
  -  Lattice :  C-Compiler, Version 2.1 & C-Food Sources
 
- -  Lattice :  C-Sprite, Debugger fr den C-Compiler
+ -  Lattice :  C-Sprite, Debugger fÂr den C-Compiler
 
- -  Pfix86Plus Debugger (fr C-, Pascal-, FORTRAN-Compiler)
+ -  Pfix86Plus Debugger (fÂr C-, Pascal-, FORTRAN-Compiler)
 
  -  Fastback : schnelles Backup-programm (Harddisk->Floppy)
 
@@ -102,12 +103,13 @@ PC - Literatur :    (Stand : 13.9.87)
 
 
 
-Z80 - Literatur :
+
+Z80 - Literatur :
 =================
 
  -  Z80-System Ordner: j&k-Beschreibungen der einzelnen Hardwarekomponenten
 
- -  Digital Research : CP/M Version 3.0 (4 Bände)
+ -  Digital Research : CP/M Version 3.0 (4 BÃ¤nde)
 
  -  Micropro : WORDSTAR 3.00
 
@@ -115,4 +117,4 @@ PC - Literatur :    (Stand : 13.9.87)
 
  -  DR  Z80-Linker  L80
 
- -  Turbo-Pascal Version 2.00 für Z80-System
+ -  Turbo-Pascal Version 2.00 fÃ¼r Z80-System
