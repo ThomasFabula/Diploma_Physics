@@ -19,7 +19,7 @@ BIOS			Basic Input Output System
 
 C
 
-CENTRONICS		Parallelschnittstelle (8 Bit)
+CENTRONICS	Parallelschnittstelle (8 Bit)
 CIO  				Counter-Input/Output
 CMOS				Complementary MOS
 CP/M				Control-Program for Microcomputers
@@ -29,13 +29,13 @@ CTC	  			Counter-Timer-Circuit
 
 D
 
-DART				Dual Asynchronous Receiver Transmitter
+DART			Dual Asynchronous Receiver Transmitter
 DAS				Data-Acquisition-System
 DIL				Dual-In-Line
 DIP				DIL-Package
 DOS				Disk Operating System
 DPR				Dual-Port-RAM (= Zweitor-Speicher)
-DRAM				Dynamic RAM
+DRAM			Dynamic RAM
 DTL				Diode-Transistor-Logic
 
 
@@ -162,5 +162,5 @@ Y
 
 Z
 
-Z80				Zilog Mikroprozessor (8 Bit)
+Z80				Zilog Mikroprozessor (8 Bit CPU)
 Z8038			Zilog FIO
