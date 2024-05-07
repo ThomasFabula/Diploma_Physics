@@ -1,9 +1,9 @@
 program display_fluodata;
 
 
-{$I typedef.sys}          { System unabhaengige Typendefinitionen     }
-{$I graphix.sys}          { System abhaengige Definitionen & Routinen }
-{$I kernel.sys}           { System unabhaengige Support Routinen      }
+{$I typedef.sys}          { System-unabhaengige Typendefinitionen     }
+{$I graphix.sys}          { System-abhaengige Definitionen & Routinen }
+{$I kernel.sys}           { System-unabhaengige Support Routinen      }
 
 
 var  fil             : file of byte;
