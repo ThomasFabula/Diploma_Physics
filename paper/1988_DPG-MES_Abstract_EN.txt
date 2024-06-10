@@ -15,10 +15,9 @@ by an autonomous subsystem (Z80-ECB). A time asynchronous computer coupling of t
 hardware FIFOs allows fastest data transfer rates in the MHz range. 
 
 A standardized interface I/O bus (IOB) allows the connection of various measurement modules to the experiment. 
-measurement modules to the experiment. 
 
 The data acquisition system was successfully used for the polarization spectroscopic measurement of the 
-hyperfine structure (Hfs) and isotopic shift (IS) of zircon in a hollow cathode gas Hollow cathode gas discharge.
+hyperfine structure (Hfs) and isotopic shift (IS) of zircon in a hollow cathode gas discharge.
 
 
 * Research Institute of the Research Society for Precision Instrumentation, Microtechnology and 
