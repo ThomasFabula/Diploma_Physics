@@ -124,3 +124,4 @@ high-frequency decade driver (BCD, 10 bits in parallel), 8 single-bit
 IN (Instrumentation Amplifier), 8 single-bit OUT cards.
 
 An extension e.g. by A/D- or D/A-converter boards is possible at any time.
+
