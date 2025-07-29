@@ -24,4 +24,5 @@
 - https://tfconsult.com/physik-diplom/
 - https://tfconsult.com/echtzeit-messwerterfassung/
 - https://tfconsult.com/diplom-kolloquium/
-- https://tfconsult.com/echtzeit-datenanalyse/ 
+- https://tfconsult.com/echtzeit-datenanalyse/
+- https://www.google.de/books/edition/Verhandlungen_der_Deutschen_Physikalisch/NiJWAAAAYAAJ?hl=de&gbpv=1&bsq=dr.+thomas+fabula&dq=dr.+thomas+fabula&printsec=frontcover
